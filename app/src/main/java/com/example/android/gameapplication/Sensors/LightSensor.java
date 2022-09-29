@@ -15,11 +15,20 @@ public class LightSensor implements SensorEventListener{
     private Sensor lightSensor;
     private float[] mLight;
 
+    /**
+     * @author Changwen Li
+     * @description light sensor constructor
+     * @param context usually gained from "this" in main activity
+     */
     public LightSensor(Context context) {
         mContext = context;
         enableSensor();
     }
 
+    /**
+     * @author Changwen Li
+     * @description Enable sensor. It is possible that the hardware does NOT support the sensors.
+     * */
     public void enableSensor() {
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         lightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -34,6 +43,10 @@ public class LightSensor implements SensorEventListener{
                 SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    /**
+     * @author Changwen Li
+     * @description disable sensors. Remember to do it when exiting/destroying current app.
+     * */
     public void disableSensor() {
         if (mSensorManager != null) {
             mSensorManager.unregisterListener(this);
@@ -46,6 +59,10 @@ public class LightSensor implements SensorEventListener{
 
     }
 
+    /**
+     * @author Changwen Li
+     * @description detect sensor signal change, post the changed value in event bus.
+     * */
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor == null) {

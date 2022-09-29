@@ -20,11 +20,21 @@ public class OrientationSensor implements SensorEventListener {
     private float[] mGravity;
     private float[] mGeomagnetic;
 
+    /**
+     * @author Changwen Li
+     * @description orientation sensor constructor
+     * @param context usually gained from "this" in main activity
+     */
     public OrientationSensor(Context context) {
         mContext = context;
         enableSensor();
     }
 
+    /**
+     * @author Changwen Li
+     * @description Enable sensor. It is possible that the hardware does NOT support the sensors.
+     * Two sensors are used (TYPE_ACCELEROMETER & TYPE_MAGNETIC_FIELD)
+     * */
     public void enableSensor() {
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -45,6 +55,10 @@ public class OrientationSensor implements SensorEventListener {
                 SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    /**
+     * @author Changwen Li
+     * @description disable sensors. Remember to do it when exiting/destroying current app.
+     * */
     public void disableSensor() {
         if (mSensorManager != null) {
             mSensorManager.unregisterListener(this);
@@ -57,6 +71,10 @@ public class OrientationSensor implements SensorEventListener {
 
     }
 
+    /**
+     * @author Changwen Li
+     * @description detect sensor signal change, post the changed value in event bus.
+     * */
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor == null) {

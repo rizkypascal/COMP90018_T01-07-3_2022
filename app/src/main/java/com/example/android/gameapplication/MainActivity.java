@@ -98,12 +98,22 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    /**
+     * @author Changwen Li
+     * @description Please get the value of changed sensor signal here. You may change the name of function.
+     * @param OrientationEvent see OrientationMessage.java
+     * */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void orientationUpdate(OrientationMessage OrientationEvent) { // place to get sensor value from orientation
 //        orientationValue.setText(String.valueOf(OrientationEvent.getOrientations()[2]));
         Log.d("[Subscription]" , "Orientations: " + String.valueOf(OrientationEvent.getOrientations()[2]));
     }
 
+    /**
+     * @author Changwen Li
+     * @description Please get the value of changed sensor signal here. You may change the name of function.
+     * @param LightEvent see LightMessage.java
+     * */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void lightUpdate(LightMessage LightEvent) { // place to get sensor value from light
 //        lightValue.setText(String.valueOf(LightEvent.getLight()[0]));
