@@ -6,10 +6,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-<<<<<<< HEAD
-=======
 import android.util.Log;
->>>>>>> PoC/Sensors
 import android.view.View;
 
 import androidx.navigation.NavController;
