@@ -6,6 +6,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -18,14 +19,29 @@ import com.example.android.gameapplication.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import com.example.android.gameapplication.Sensors.OrientationMessage;
+import com.example.android.gameapplication.Sensors.OrientationSensor;
+import com.example.android.gameapplication.Sensors.LightMessage;
+import com.example.android.gameapplication.Sensors.LightSensor;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    OrientationSensor orientationSensor;
+    LightSensor lightSensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /** Init sensor variables*/
+        orientationSensor = new OrientationSensor(this);
+        lightSensor = new LightSensor(this);
+        EventBus.getDefault().register(this);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -73,4 +89,25 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        orientationSensor.disableSensor();
+        lightSensor.disableSensor();
+        super.onDestroy();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void orientationUpdate(OrientationMessage OrientationEvent) { // place to get sensor value from orientation
+//        orientationValue.setText(String.valueOf(OrientationEvent.getOrientations()[2]));
+        Log.d("[Subscription]" , "Orientations: " + String.valueOf(OrientationEvent.getOrientations()[2]));
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void lightUpdate(LightMessage LightEvent) { // place to get sensor value from light
+//        lightValue.setText(String.valueOf(LightEvent.getLight()[0]));
+        Log.d("[Subscription]", "Light: " + String.valueOf(LightEvent.getLight()[0]));
+    }
+
 }
