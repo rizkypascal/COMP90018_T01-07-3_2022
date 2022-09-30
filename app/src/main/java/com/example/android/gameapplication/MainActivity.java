@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-    OrientationSensor orientationSensor;
-    LightSensor lightSensor;
+    private OrientationSensor orientationSensor;
+    private LightSensor lightSensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
         orientationSensor.disableSensor();
-        lightSensor.disableSensor();
+        // lightSensor.disableSensor();
         super.onDestroy();
     }
 
@@ -118,6 +118,6 @@ public class MainActivity extends AppCompatActivity {
     public void lightUpdate(LightMessage LightEvent) { // place to get sensor value from light
 //        lightValue.setText(String.valueOf(LightEvent.getLight()[0]));
         Log.d("[Subscription]", "Light: " + String.valueOf(LightEvent.getLight()[0]));
+        lightSensor.disableSensor();
     }
-
 }
