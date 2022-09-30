@@ -7,19 +7,25 @@ package com.example.android.gameapplication;
  */
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import com.example.android.gameapplication.GameClasses.Jumper;
 import com.example.android.gameapplication.Sensors.OrientationMessage;
 import com.example.android.gameapplication.Sensors.OrientationSensor;
 
 public class GameActivity extends AppCompatActivity {
 
     private OrientationSensor orientationSensor;
+    private Jumper jumper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,16 @@ public class GameActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
 
         setContentView(R.layout.activity_game);
+        // get game activity
+        ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.game_activity);
+
+        //get screen size
+        DisplayMetrics metrics = this.getResources().getDisplayMetrics();
+        Integer width = metrics.widthPixels;
+
+        // initialize jumper
+        jumper = new Jumper(this,100,100,100,width,R.drawable.jumperone);
+        constraintLayout.addView(jumper);
     }
 
     @Override
@@ -48,6 +64,8 @@ public class GameActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void orientationUpdate(OrientationMessage OrientationEvent) { // place to get sensor value from orientation
         Log.d("[Subscription]" , "Orientations: " + String.valueOf(OrientationEvent.getOrientations()[2]));
+        Float moveX = 50*OrientationEvent.getOrientations()[2];
+        jumper.move(moveX,0f);
     }
 
 

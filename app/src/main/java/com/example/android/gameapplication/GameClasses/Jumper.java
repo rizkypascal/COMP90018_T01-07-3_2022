@@ -1,14 +1,23 @@
 package com.example.android.gameapplication.GameClasses;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.example.android.gameapplication.R;
+
 /**
  * @author Tony Shu
  * @date 30/09/2022
  * @desc main character that the player controls
  */
-public class Jumper
+public class Jumper extends View
 {
-    private Float posX;
-    private Float posY;
+    private Integer posX;
+    private Integer posY;
     private Float speedX;
     private Float speedY;
     private Float accX; // acceleration on X axis
@@ -16,19 +25,21 @@ public class Jumper
     private Enum status;
     private Integer score; // can be stored in game activity instead
     private Boolean alive;
-    private Float radius; // size of jumper
+    private Integer radius; // size of jumper
+    private Drawable jumper; // image resource
+    Rect imageBounds; // jumper image is drawn based on this rectangle size
+    private Integer screenSize;
 
-    public Jumper(Float posX, Float posY, Float speedX, Float speedY, Float accX, Float accY, Enum status, Integer score, Boolean alive, Float radius) {
+
+    public Jumper(Context context, Integer posX, Integer posY,Integer radius ,Integer screenSize,Integer imageID) {
+        super(context);
         this.posX = posX;
         this.posY = posY;
-        this.speedX = speedX;
-        this.speedY = speedY;
-        this.accX = accX;
-        this.accY = accY;
-        this.status = status;
-        this.score = score;
-        this.alive = alive;
         this.radius = radius;
+        this.screenSize = screenSize;
+        this.jumper = context.getResources().getDrawable(imageID);
+        this.imageBounds = new Rect(posX-radius,posY-radius,posX+radius, posY+radius);
+        jumper.setBounds(imageBounds);
     }
 
     /**
@@ -38,17 +49,22 @@ public class Jumper
      */
     public void move(Float velocityX, Float velocityY)
     {
-
+        posX += Math.round(velocityX);
     }
+
 
     /**
      *
-     * @param posX draw jumper at X
-     * @param posY draw jumper at Y
+     * @param canvas
      */
-    public void draw(Integer posX, Integer posY)
-    {
-
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        posX = Math.floorMod(posX, screenSize);
+        imageBounds.set(posX-radius,posY-radius,posX+radius, posY+radius);
+        jumper.setBounds(imageBounds);
+        jumper.draw(canvas);
+        invalidate();
     }
 
     /**
@@ -75,19 +91,19 @@ public class Jumper
     }
 
 
-    public Float getPosX() {
+    public Integer getPosX() {
         return posX;
     }
 
-    public void setPosX(Float posX) {
+    public void setPosX(Integer posX) {
         this.posX = posX;
     }
 
-    public Float getPosY() {
+    public Integer getPosY() {
         return posY;
     }
 
-    public void setPosY(Float posY) {
+    public void setPosY(Integer posY) {
         this.posY = posY;
     }
 
@@ -147,11 +163,27 @@ public class Jumper
         this.alive = alive;
     }
 
-    public Float getRadius() {
+    public Integer getRadius() {
         return radius;
     }
 
-    public void setRadius(Float radius) {
+    public void setRadius(Integer radius) {
         this.radius = radius;
+    }
+
+    public Drawable getJumper() {
+        return jumper;
+    }
+
+    public void setJumper(Drawable jumper) {
+        this.jumper = jumper;
+    }
+
+    public Rect getImageBounds() {
+        return imageBounds;
+    }
+
+    public void setImageBounds(Rect imageBounds) {
+        this.imageBounds = imageBounds;
     }
 }
