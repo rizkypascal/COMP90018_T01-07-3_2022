@@ -18,6 +18,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import com.example.android.gameapplication.GameClasses.Board;
 import com.example.android.gameapplication.GameClasses.Jumper;
 import com.example.android.gameapplication.Sensors.OrientationMessage;
 import com.example.android.gameapplication.Sensors.OrientationSensor;
@@ -26,6 +27,7 @@ public class GameActivity extends AppCompatActivity {
 
     private OrientationSensor orientationSensor;
     private Jumper jumper;
+    private Board board1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,9 @@ public class GameActivity extends AppCompatActivity {
         // initialize jumper
         jumper = new Jumper(this,100,100,100,width,R.drawable.jumperone);
         constraintLayout.addView(jumper);
+
+        board1 = new Board(this,200,400,400,width,R.drawable.basic_board);
+        constraintLayout.addView(board1);
     }
 
     @Override
@@ -66,6 +71,8 @@ public class GameActivity extends AppCompatActivity {
         Log.d("[Subscription]" , "Orientations: " + String.valueOf(OrientationEvent.getOrientations()[2]));
         Float moveX = 50*OrientationEvent.getOrientations()[2];
         jumper.move(moveX,0f);
+        board1.move(20f,0f);
+
     }
 
 
