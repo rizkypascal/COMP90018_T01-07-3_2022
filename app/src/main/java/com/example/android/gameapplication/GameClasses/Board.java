@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -15,17 +16,17 @@ import com.example.android.gameapplication.R;
  */
 public class Board extends View
 {
-    private Integer posX;
-    private Integer posY;
-    private Integer width; // length of the board
-    private Enum status;
-    private Integer score; // can be stored in game activity instead
-    private Integer height = 70;
-    private Drawable boardDrawable; // image resource
+    protected Integer posX;
+    protected Integer moveDrection;
+    protected Integer posY;
+    protected Integer width; // length of the board
+    protected Enum status;
+    protected Integer height = 70;
+    protected Drawable boardDrawable; // image resource
     Rect imageBounds; // jumper image is drawn based on this rectangle size
-    private Integer screenSize;
+    protected Integer screenSize;
 
-    private String boardType;
+    protected String boardType;
 
 
     public Board(Context context, Integer posX, Integer posY , Integer width,Integer screenSize,Integer imageID) {
@@ -43,7 +44,8 @@ public class Board extends View
         this.screenSize = screenSize;
         this.boardDrawable = context.getResources().getDrawable(imageID);
         this.imageBounds = new Rect(posX-width/2,posY-this.height/2,posX+width/2, posY+this.height/2);
-        boardDrawable.setBounds(imageBounds);
+        this.boardDrawable.setBounds(imageBounds);
+        this.moveDrection = 1;
     }
 
     /**
@@ -53,8 +55,19 @@ public class Board extends View
      */
     public void move(Float velocityX, Float velocityY)
     {
-        posX += Math.round(velocityX);
-        posY += Math.round(velocityY);
+        Integer nextX = Math.round(velocityX * this.moveDrection) + posX;
+        Log.d("Board", "move: " + this.posX);
+        if (nextX >= screenSize - this.width/2){
+            this.moveDrection = -1;
+        }
+        else if (nextX <= this.width/2){
+            this.moveDrection = 1;
+            this.posX = this.width/2;
+        }
+        else{
+            this.posX = nextX;
+        }
+        this.posY += Math.round(velocityY);
     }
 
 
@@ -65,10 +78,9 @@ public class Board extends View
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        posX = Math.floorMod(posX, screenSize);
         this.imageBounds = new Rect(posX-this.width/2,posY-this.height/2,posX+this.width/2, posY+this.height/2);
-        boardDrawable.setBounds(this.imageBounds);
-        boardDrawable.draw(canvas);
+        this.boardDrawable.setBounds(this.imageBounds);
+        this.boardDrawable.draw(canvas);
         invalidate();
     }
 

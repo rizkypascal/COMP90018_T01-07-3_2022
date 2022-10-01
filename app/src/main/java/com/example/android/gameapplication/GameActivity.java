@@ -20,6 +20,9 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import com.example.android.gameapplication.GameClasses.Board;
 import com.example.android.gameapplication.GameClasses.Jumper;
+import com.example.android.gameapplication.GameClasses.OneTimeBoard;
+import com.example.android.gameapplication.GameClasses.SpringBoard;
+import com.example.android.gameapplication.GameClasses.StaticBoard;
 import com.example.android.gameapplication.Sensors.OrientationMessage;
 import com.example.android.gameapplication.Sensors.OrientationSensor;
 
@@ -49,7 +52,7 @@ public class GameActivity extends AppCompatActivity {
         jumper = new Jumper(this,100,100,100,width,R.drawable.jumperone);
         constraintLayout.addView(jumper);
 
-        board1 = new Board(this,200,400,400,width,R.drawable.basic_board);
+        board1 = new SpringBoard(this,500,400,400,width,R.drawable.basic_board);
         constraintLayout.addView(board1);
     }
 
