@@ -50,9 +50,9 @@ public class OrientationSensor implements SensorEventListener {
         else Log.v("sensor..", "Sensor TYPE_MAGNETIC_FIELD supported");
 
         mSensorManager.registerListener(this, accelerometer,
-                SensorManager.SENSOR_DELAY_NORMAL);
+                SensorManager.SENSOR_DELAY_GAME);
         mSensorManager.registerListener(this, magnetometer,
-                SensorManager.SENSOR_DELAY_NORMAL);
+                SensorManager.SENSOR_DELAY_GAME);
     }
 
     /**
