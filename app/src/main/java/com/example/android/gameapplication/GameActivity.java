@@ -52,7 +52,7 @@ public class GameActivity extends AppCompatActivity {
         jumper = new Jumper(this,100,100,100,width,R.drawable.jumperone);
         constraintLayout.addView(jumper);
 
-        board1 = new SpringBoard(this,500,400,400,width,R.drawable.basic_board);
+        board1 = new SpringBoard(this,500,400,250,width,R.drawable.basic_board);
         constraintLayout.addView(board1);
     }
 
@@ -74,7 +74,7 @@ public class GameActivity extends AppCompatActivity {
         Log.d("[Subscription]" , "Orientations: " + String.valueOf(OrientationEvent.getOrientations()[2]));
         Float moveX = 50*OrientationEvent.getOrientations()[2];
         jumper.move(moveX,0f);
-        board1.move(20f,0f);
+        board1.move(10f,0f);
 
     }
 

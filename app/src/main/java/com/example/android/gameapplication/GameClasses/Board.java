@@ -21,7 +21,7 @@ public class Board extends View
     protected Integer posY;
     protected Integer width; // length of the board
     protected Enum status;
-    protected Integer height = 70;
+    protected Integer height = 50;
     protected Drawable boardDrawable; // image resource
     Rect imageBounds; // jumper image is drawn based on this rectangle size
     protected Integer screenSize;
