@@ -47,14 +47,6 @@ public class ListAdapter extends ArrayAdapter<ListTuple> {
             viewHolder = (ViewHolderUserScore) view.getTag();
         }
 
-//        Set onClick listener - method 2
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getContext(), ((ViewHolder) view.getTag()).text.getText(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
         viewHolder.element0.setText(listTuple.getElement0());
         viewHolder.element1.setText(listTuple.getElement1());
 

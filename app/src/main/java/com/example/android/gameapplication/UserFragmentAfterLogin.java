@@ -25,10 +25,6 @@ public class UserFragmentAfterLogin extends Fragment {
     private ListView listView;
     private TextView textLoginInfo, userRank;
 
-
-
-    int duration = Toast.LENGTH_SHORT;
-
     // set variables, interface for communication between activity & fragment, fragment & fragment
     private String user_name="";
     private GameFragment.SendMessages sendMessages;

@@ -11,42 +11,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.ButterKnife;
 
-
-
-
-
-
-
-
-import android.content.Intent;
-import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.util.Log;
-import android.view.View;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.android.gameapplication.databinding.ActivityMainBinding;
-
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import com.example.android.gameapplication.Sensors.LightMessage;
 import com.example.android.gameapplication.Sensors.LightSensor;
-
-
-
 
 
 public class MainActivity extends AppCompatActivity implements GameFragment.SendMessages, UserFragment.SendMessages{
@@ -144,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
         Log.d("MainActivity", "Receive data: "+msg);
     }
 
+    //todo: Arthur dark mode...
     /**
      * @author Changwen Li
      * @desc Please get the value of changed sensor signal here. You may change the name of function.

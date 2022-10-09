@@ -1,12 +1,8 @@
 package com.example.android.gameapplication.ListContent;
 
 
-// UserScore class contains score and date
-// With automatically generated Setter and Getter
 public class ListTuple {
-    // fruitImage to store the resource id if fruit image
     private String element0;
-    // fruitName to store the string of fruit name
     private String element1;
 
     public ListTuple(String score, String date) {

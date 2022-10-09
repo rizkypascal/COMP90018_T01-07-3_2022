@@ -83,12 +83,6 @@ public class UserFragment extends Fragment {
         String password_temp = signInPasswordValue.getText().toString();
         if (CheckLogin(username_temp, password_temp)){
             user_name = username_temp;
-//            textLoginInfo.setText("You have signed in as "+user_name);
-//
-//            String union = GetUnion(user_name);
-//            if (union!=""){
-//                unionInfo.setText("You are a member of union: "+union);
-//            }
             sendMessages.iAmMSG(user_name);
             UserFragmentAfterLogin userFragment = new UserFragmentAfterLogin();
             activity.getSupportFragmentManager()
