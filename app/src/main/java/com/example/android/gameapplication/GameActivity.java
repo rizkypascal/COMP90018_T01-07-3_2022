@@ -19,6 +19,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import com.example.android.gameapplication.GameClasses.Board;
+import com.example.android.gameapplication.GameClasses.CollisionUtils;
 import com.example.android.gameapplication.GameClasses.Jumper;
 import com.example.android.gameapplication.GameClasses.OneTimeBoard;
 import com.example.android.gameapplication.GameClasses.SpringBoard;
@@ -49,10 +50,10 @@ public class GameActivity extends AppCompatActivity {
         Integer width = metrics.widthPixels;
 
         // initialize jumper
-        jumper = new Jumper(this,100,100,100,width,R.drawable.jumperone);
+        jumper = new Jumper(this,100,500,100,10f,width,R.drawable.jumperone);
         constraintLayout.addView(jumper);
 
-        board1 = new SpringBoard(this,500,400,250,width,R.drawable.basic_board);
+        board1 = new StaticBoard(this,500,1500,250,width,R.drawable.basic_board);
         constraintLayout.addView(board1);
     }
 
@@ -73,7 +74,14 @@ public class GameActivity extends AppCompatActivity {
     public void orientationUpdate(OrientationMessage OrientationEvent) { // place to get sensor value from orientation
         Log.d("[Subscription]" , "Orientations: " + String.valueOf(OrientationEvent.getOrientations()[2]));
         Float moveX = 50*OrientationEvent.getOrientations()[2];
-        jumper.move(moveX,0f);
+        jumper.move(moveX,10f);
+
+        //not a good solution, as collision detection should be done within the context class
+        if(CollisionUtils.JumperBoardCollision(jumper,board1))
+        {
+            jumper.setSpeedY(20f);
+        }
+
         board1.move(10f,0f);
 
     }

@@ -121,4 +121,10 @@ public class Board extends View
     public Drawable getboard() {
         return this.boardDrawable;
     }
+
+    public Integer getBoardHeight() { return this.height; }
+
+    public Integer getXLeft() { return posX-this.width/2; }
+
+    public Integer getXRight() { return posX+this.width/2; }
 }

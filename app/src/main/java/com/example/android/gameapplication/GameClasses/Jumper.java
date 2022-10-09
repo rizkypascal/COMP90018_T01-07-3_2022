@@ -31,11 +31,12 @@ public class Jumper extends View
     private Integer screenSize;
 
 
-    public Jumper(Context context, Integer posX, Integer posY,Integer radius ,Integer screenSize,Integer imageID) {
+    public Jumper(Context context, Integer posX, Integer posY,Integer radius,Float speedY,Integer screenSize,Integer imageID) {
         super(context);
         this.posX = posX;
         this.posY = posY;
         this.radius = radius;
+        this.speedY = speedY;
         this.screenSize = screenSize;
         this.jumper = context.getResources().getDrawable(imageID);
         this.imageBounds = new Rect(posX-radius,posY-radius,posX+radius, posY+radius);
@@ -50,6 +51,15 @@ public class Jumper extends View
     public void move(Float velocityX, Float velocityY)
     {
         posX += Math.round(velocityX);
+        if(this.speedY>=0)
+        {
+            posY += Math.round(velocityY-this.speedY);
+        }
+        else {
+            posY += Math.round(velocityY);
+        }
+
+
     }
 
 
@@ -64,6 +74,11 @@ public class Jumper extends View
         imageBounds.set(posX-radius,posY-radius,posX+radius, posY+radius);
         jumper.setBounds(imageBounds);
         jumper.draw(canvas);
+        //speed on y axis is decreasing continuously
+        //if falls onto a board (CollisionUtils.JumperBoardCollision),
+        //then the speed is reassigned with a new positive value
+        // ideally the new value is 20
+        this.speedY -= 0.1f;
         invalidate();
     }
 
