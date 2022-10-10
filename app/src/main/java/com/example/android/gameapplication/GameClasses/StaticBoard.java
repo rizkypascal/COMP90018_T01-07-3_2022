@@ -12,7 +12,6 @@ public class StaticBoard extends Board{
     @Override
     public void move(Float velocityX, Float velocityY)
     {
-        // do nothing
-        velocityX = 0f;
+        this.posY += Math.round(velocityY);
     }
 }

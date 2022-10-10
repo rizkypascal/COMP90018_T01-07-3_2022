@@ -13,7 +13,6 @@ public class FakeBoard extends Board{
         @Override
         public void move(Float velocityX, Float velocityY)
         {
-            // do nothing ?
-            velocityX = velocityX;
+            this.posY += Math.round(velocityY);
         }
 }
