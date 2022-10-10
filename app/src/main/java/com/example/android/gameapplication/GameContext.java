@@ -13,6 +13,7 @@ import com.example.android.gameapplication.GameClasses.Board;
 import com.example.android.gameapplication.GameClasses.CollisionUtils;
 import com.example.android.gameapplication.GameClasses.Jumper;
 import com.example.android.gameapplication.GameClasses.StaticBoard;
+import com.example.android.gameapplication.GameClasses.Status;
 import com.example.android.gameapplication.Sensors.OrientationMessage;
 import com.example.android.gameapplication.Sensors.OrientationSensor;
 
@@ -156,9 +157,10 @@ public class GameContext extends View implements Runnable{
 
         // not a good solution, as collision detection should be done within the context class
         for (Board bar : boards){
-            if(CollisionUtils.JumperBoardCollision(jumper,bar))
+            if(CollisionUtils.JumperBoardCollision(jumper,bar) && jumper.getStatus().equals(Status.movingDown))
             {
                 jumper.setSpeedY(20f);
+                jumper.setStatus(Status.movingUp);
             }
             bar.move(10f,0f);
         }

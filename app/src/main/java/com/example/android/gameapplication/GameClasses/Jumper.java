@@ -51,13 +51,12 @@ public class Jumper extends View
     public void move(Float velocityX, Float velocityY)
     {
         posX += Math.round(velocityX);
-        if(this.speedY>=0)
+        posY += Math.round(velocityY-this.speedY);
+        if (velocityY > this.speedY)
         {
-            posY += Math.round(velocityY-this.speedY);
+            this.status = Status.movingDown;
         }
-        else {
-            posY += Math.round(velocityY);
-        }
+
 
 
     }

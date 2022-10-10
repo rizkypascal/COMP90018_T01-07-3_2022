@@ -6,6 +6,6 @@ package com.example.android.gameapplication.GameClasses;
  * @desc Jumper status
  */
 public enum Status {
-    LIVE,
-    DIE
+    movingUp,
+    movingDown
 }
