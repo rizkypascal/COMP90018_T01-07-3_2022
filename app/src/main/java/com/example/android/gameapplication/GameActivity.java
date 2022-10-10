@@ -65,5 +65,17 @@ public class GameActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameContext.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gameContext.resume();
+    }
+
 
 }

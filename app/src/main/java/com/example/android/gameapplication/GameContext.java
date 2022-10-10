@@ -23,12 +23,12 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GameContext extends View{
+public class GameContext extends View implements Runnable{
 
     private OrientationSensor orientationSensor;
+    private Thread thread;
     private boolean isPlaying, isUpdate = true;
     public static int screenX, screenY;
-    private Paint paint;
 
     public ArrayList<Board> boards;
     public Jumper jumper;
@@ -56,16 +56,24 @@ public class GameContext extends View{
         Log.i("generate","Game view");
     }
 
+
+    @Override
+    public void run() {
+        while (isPlaying){
+            Log.i("i","is playing");
+            checkJumper();
+        }
+    }
+
     /**
      *
      * @param canvas
      */
     @Override
     public void onDraw(Canvas canvas) {
-        //super.onDraw(canvas);
-        Log.i("jumper loc","reach "+jumper.getPosY()+" screen" + screenY);
+        super.onDraw(canvas);
+//        Log.i("jumper loc","reach "+jumper.getPosY()+" screen" + screenY);
         jumper.draw(canvas);
-        isPlaying = checkJumper();
         for (Board board : boards){
             board.draw(canvas);
         }
@@ -79,7 +87,6 @@ public class GameContext extends View{
         int y = startY;
         int x = width/5;
         while (y > 0){
-
             Board bar = new StaticBoard(getContext(),
                     x * random.nextInt(5),y,250,width,
                     R.drawable.basic_board);
@@ -90,16 +97,17 @@ public class GameContext extends View{
         return newboards;
     }
 
-    private Boolean checkJumper(){
+    private void checkJumper(){
         if (jumper.getPosY()*2 < screenY){
             Log.i("reminder","reach "+jumper.getPosY()+" screen" + screenY);
-            jumper.setPosY(jumper.getPosY()+screenY/2);
+            // jumper.setPosY(jumper.getPosY()+screenY/2);
             update();
         }
         if (jumper.getPosY() < screenY){
-            return false;
+            jumper.setPosY(0);
+            // isPlaying = false
         }
-        return true;
+        // isPlaying = true;
     }
 
     private void update () {
@@ -142,7 +150,7 @@ public class GameContext extends View{
      * */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void orientationUpdate(OrientationMessage OrientationEvent) { // place to get sensor value from orientation
-        Log.d("[Subscription]" , "Orientations: " + String.valueOf(OrientationEvent.getOrientations()[2]));
+        //Log.d("[Subscription]" , "Orientations: " + String.valueOf(OrientationEvent.getOrientations()[2]));
         Float moveX = 50*OrientationEvent.getOrientations()[2];
         jumper.move(moveX,10f);
 
@@ -157,7 +165,20 @@ public class GameContext extends View{
 
     }
 
+    public void resume () {
+        isPlaying = true;
+        thread = new Thread(this);
+        thread.start();
+    }
 
+    public void pause () {
 
+        try {
+            isPlaying = false;
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
