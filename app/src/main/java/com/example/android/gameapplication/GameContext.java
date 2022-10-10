@@ -65,6 +65,16 @@ public class GameContext extends View implements Runnable{
         }
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.i("reminder","reach "+event.getY()+" screen" + screenY);
+        if (event.getY()*2 < screenY){
+            Log.i("i", "1/2");
+            update ();
+        }
+        return false;
+    }
+
     /**
      *
      * @param canvas
@@ -99,12 +109,12 @@ public class GameContext extends View implements Runnable{
 
     private void checkJumper(){
         if (jumper.getPosY()*2 < screenY){
-            Log.i("reminder","reach "+jumper.getPosY()+" screen" + screenY);
-            // jumper.setPosY(jumper.getPosY()+screenY/2);
-            update();
+//            Log.i("reminder","reach "+jumper.getPosY()+" screen" + screenY);
+//            // jumper.setPosY(jumper.getPosY()+screenY/2);
+//            update();
         }
         if (jumper.getPosY() < screenY){
-            jumper.setPosY(0);
+            //jumper.setPosY(0);
             // isPlaying = false
         }
         // isPlaying = true;
@@ -131,16 +141,6 @@ public class GameContext extends View implements Runnable{
         Log.i("reminder","finish update");
         this.isPlaying = true;
 
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        Log.i("reminder","reach "+event.getY()+" screen" + screenY);
-        if (event.getY()*2 < screenY){
-            Log.i("i", "1/2");
-            update ();
-        }
-        return false;
     }
 
     /**
