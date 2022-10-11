@@ -28,13 +28,12 @@ public class GameContext extends View implements Runnable{
 
     private OrientationSensor orientationSensor;
     private Thread thread;
-    private boolean isPlaying, isUpdate = true;
+    private boolean isPlaying = true;
+    private boolean isUpdate = false;
     public static int screenX, screenY;
 
     public ArrayList<Board> boards;
     public Jumper jumper;
-
-    private GameActivity activity;
 
     public GameContext(Context contest, int screenX, int screenY) {
         super(contest);
@@ -48,6 +47,7 @@ public class GameContext extends View implements Runnable{
 
         // random generate the boards for full screen
         this.boards = random_generate(screenY, screenX);
+
         int initBoardX = boards.get(0).getPosX();
         int initBoardY = boards.get(0).getPosY();
         Log.i("generate","initLoc"+initBoardX+"Y"+initBoardY);
@@ -63,6 +63,9 @@ public class GameContext extends View implements Runnable{
         while (isPlaying){
             Log.i("i","is playing");
             checkJumper();
+            if (isUpdate){
+                update();
+            }
         }
     }
 
@@ -86,7 +89,9 @@ public class GameContext extends View implements Runnable{
 //        Log.i("jumper loc","reach "+jumper.getPosY()+" screen" + screenY);
         jumper.draw(canvas);
         for (Board board : boards){
-            board.draw(canvas);
+            if (board.getPosY() > 0 & board.getPosY() < screenY){
+                board.draw(canvas);
+            }
         }
         invalidate();
 
@@ -97,14 +102,17 @@ public class GameContext extends View implements Runnable{
         Random random = new Random();
         int y = startY;
         int x = width/5;
-        while (y > 0){
+        int i = 0;
+        while (i < 200){
             Board bar = new StaticBoard(getContext(),
                     x * random.nextInt(5),y,250,width,
                     R.drawable.basic_board);
             newboards.add(bar);
 //            Log.i(String.valueOf(bar.y),String.valueOf(bar.height));
             y -= bar.getBoardHeight()*3*(random.nextInt(2)+1);
+            i += 1;
         }
+
         return newboards;
     }
 
@@ -122,26 +130,10 @@ public class GameContext extends View implements Runnable{
     }
 
     private void update () {
-        this.isPlaying = false;
-        // update the bars downward half screen
-
         for (Board board : boards){
-            board.setPosY(board.getPosY()+screenY/2);
+            board.move(0f,20f);
         }
-        Log.i("i","update bar");
-
-        // remove the bar with y out of screen
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            boards.removeIf(board -> board.getPosY() > screenY);
-        }
-
-        Log.i("i","remove bar");
-
-        // random generate the bars for half screen on top
-        boards.addAll(random_generate(screenY/2, screenX));
-        Log.i("reminder","finish update");
-        this.isPlaying = true;
-
+        isUpdate = false;
     }
 
     /**
@@ -159,10 +151,11 @@ public class GameContext extends View implements Runnable{
         for (Board bar : boards){
             if(CollisionUtils.JumperBoardCollision(jumper,bar) && jumper.getStatus().equals(Status.movingDown))
             {
+                isUpdate = true;
                 jumper.setSpeedY(20f);
                 jumper.setStatus(Status.movingUp);
+                break;
             }
-            bar.move(10f,0f);
         }
 
     }
