@@ -89,15 +89,15 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                     gameFragment.fragmentReceiveMsg(user_name);
                     return true;
                 }
-                case R.id.navigation_: {
-                    Log.d("Navigation", "union clicked.");
-                    GameToolsFragment gameToolsFragment = new GameToolsFragment();
+                case R.id.navigation_game_tools: {
+                    Log.d("Navigation", "game tools clicked.");
+                    GameToolsSelectionFragment gameToolsSelectionFragment = new GameToolsSelectionFragment();
                     getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.layout_fragment, gameToolsFragment)
+                            .replace(R.id.layout_fragment, gameToolsSelectionFragment)
                             .addToBackStack(null)
                             .commit();
-                    gameToolsFragment.fragmentReceiveMsg(user_name);
+                    gameToolsSelectionFragment.fragmentReceiveMsg(user_name);
                     return true;
                 }
 

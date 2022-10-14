@@ -3,10 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+=======
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/border.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_in_game_tools.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_union.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_user.xml" value="0.1" />
+>>>>>>> Stashed changes
         <entry key="app/src/main/res/layout/activity_game.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_item_selection.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11170212765957446" />
@@ -24,6 +33,7 @@
         <entry key="app/src/main/res/layout/item_selection.xml" value="0.11119554204660588" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.40284576416015627" />
         <entry key="app/src/main/res/layout/list_selected_item.xml" value="0.27924346923828125" />
+<<<<<<< Updated upstream
 =======
         <entry key="..\:/Users/clark/Desktop/Unimelb/COMP90018/COMP90018_T01-07-3_2022/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1005" />
         <entry key="..\:/Users/clark/Desktop/Unimelb/COMP90018/COMP90018_T01-07-3_2022/app/src/main/res/layout/activity_game.xml" value="0.24583333333333332" />
@@ -32,6 +42,9 @@
         <entry key="..\:/Users/clark/Desktop/Unimelb/COMP90018/COMP90018_T01-07-3_2022/app/src/main/res/layout/fragment_first.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/clark/Desktop/Unimelb/COMP90018/COMP90018_T01-07-3_2022/app/src/main/res/layout/fragment_second.xml" value="0.264" />
 >>>>>>> GameBase
+=======
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+>>>>>>> Stashed changes
       </map>
     </option>
   </component>

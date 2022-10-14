@@ -1,28 +1,18 @@
 package com.example.android.gameapplication;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.android.gameapplication.specialitems.Items;
-import com.example.android.gameapplication.specialitems.SelectedItemsAdapter;
-
-import java.util.ArrayList;
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link GameToolsFragment#newInstance} factory method to
+ * Use the {@link GameToolsSelectionFragment#newInstance} factory method to
  * create an instance of this fragment.
+ *
  */
-public class GameToolsFragment extends Fragment {
-
-    private FragmentItemBinding binding;
+public class GameToolsSelectionFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,26 +23,26 @@ public class GameToolsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public GameToolsFragment() {
-        // Required empty public constructor
-    }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GameToolsFragment.
+     * @return A new instance of fragment GameToolsSelectionFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GameToolsFragment newInstance(String param1, String param2) {
-        GameToolsFragment fragment = new GameToolsFragment();
+    public static GameToolsSelectionFragment newInstance(String param1, String param2) {
+        GameToolsSelectionFragment fragment = new GameToolsSelectionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public GameToolsSelectionFragment() {
+        // Required empty public constructor
     }
 
     @Override
@@ -68,16 +58,6 @@ public class GameToolsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentItemBinding.inflate(inflater, container, false);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
-        SelectedItemsAdapter adapter = new SelectedItemsAdapter(new ArrayList<Items>(),null,  getContext());
-        binding.setSelectedItemsAdapter(adapter);
-        binding.itemRv.setLayoutManager(layoutManager);
-        return binding.getRoot();
-    }
-
-    public void updateSelectedItemsAdapter(Items i) {
-        SelectedItemsAdapter adapter = binding.getSelectedItemsAdapter();
-        adapter.updateSelectedItems(i);
+        return inflater.inflate(R.layout.fragment_game_tools, container, false);
     }
 }

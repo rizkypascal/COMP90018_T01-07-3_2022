@@ -2,21 +2,16 @@ package com.example.android.gameapplication.specialitems;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.gameapplication.BR;
-import com.example.android.gameapplication.ItemFragment;
+import com.example.android.gameapplication.GameToolsFragment;
 import com.example.android.gameapplication.R;
 import com.example.android.gameapplication.databinding.ActivityItemSelectionBinding;
-import com.example.android.gameapplication.databinding.ListItemBinding;
 
 import java.util.List;
 
@@ -24,9 +19,9 @@ public class SpecialItemsAdapter extends RecyclerView.Adapter<SpecialItemsAdapte
 
     private List<Items> items;
     private Context context;
-    private ItemFragment f;
+    private GameToolsFragment f;
 
-    public SpecialItemsAdapter(List<Items> items, ItemFragment f, Context context){
+    public SpecialItemsAdapter(List<Items> items, GameToolsFragment f, Context context){
         this.items = items;
         this.context = context;
         this.f = f;

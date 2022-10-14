@@ -1,12 +1,6 @@
 package com.example.android.gameapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,8 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.android.gameapplication.databinding.ActivityItemSelectionBinding;
-import com.example.android.gameapplication.databinding.FragmentItemBinding;
 import com.example.android.gameapplication.specialitems.ClearMonsters;
 import com.example.android.gameapplication.specialitems.FlyItems;
 import com.example.android.gameapplication.specialitems.ItemName;
@@ -25,7 +17,6 @@ import com.example.android.gameapplication.specialitems.SpecialItemsAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +29,7 @@ public class ItemSelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityItemSelectionBinding.inflate(getLayoutInflater());
-        ItemFragment f = (ItemFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_view);
+        GameToolsFragment f = (GameToolsFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_view);
 
         SpecialItemsAdapter adapter = new SpecialItemsAdapter(getItems(), f, this);
         binding.setSpecialItemsAdapter(adapter);
