@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameActivity">
+    tools:context=".GameActivity"
+    android:id="@+id/game_activity">
 
     <fragment
         android:id="@+id/fragment_item_container_view"
@@ -16,5 +17,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="179dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background"
+        tools:layout_editor_absoluteX="-24dp"
+        tools:layout_editor_absoluteY="-16dp"
+        tools:ignore="ContentDescription"/>
+>>>>>>> GameBase
 
 </androidx.constraintlayout.widget.ConstraintLayout>

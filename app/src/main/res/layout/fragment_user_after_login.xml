@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UserFragmentAfterLogin">
+
+    <TextView
+        android:id="@+id/textLoginInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="You have not signed in yet"
+        android:textColor="#111111"
+        android:textSize="20sp">
+    </TextView>
+
+
+
+
+    <TextView
+        android:id="@+id/personalScoresLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Your best scores:"
+        android:textColor="#111111"
+        android:textSize="20sp">
+    </TextView>
+
+    <ListView
+        android:id="@+id/personal_score_list_view"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"/>
+
+    <TextView
+        android:id="@+id/worldScoresLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="World's best scores"
+        android:textColor="#111111"
+        android:textSize="20sp">
+    </TextView>
+
+    <ListView
+        android:id="@+id/world_score_list_view"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"/>
+
+    <TextView
+        android:id="@+id/userRank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your world rank is: over 10000"
+        android:textColor="#111111"
+        android:textSize="20sp">
+    </TextView>
+
+
+
+
+
+</LinearLayout>
