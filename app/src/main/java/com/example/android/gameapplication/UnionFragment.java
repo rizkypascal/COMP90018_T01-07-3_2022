@@ -41,7 +41,7 @@ public class UnionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_game_tools, container, false);
+        View view = inflater.inflate(R.layout.fragment_union, container, false);
         unbinder = ButterKnife.bind(this, view);
 
         return view;

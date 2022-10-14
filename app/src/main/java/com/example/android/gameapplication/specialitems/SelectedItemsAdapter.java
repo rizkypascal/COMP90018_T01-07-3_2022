@@ -10,19 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.gameapplication.BR;
 import com.example.android.gameapplication.GameToolsFragment;
+import com.example.android.gameapplication.GameToolsSelectionFragment;
 import com.example.android.gameapplication.R;
+import com.example.android.gameapplication.databinding.ListSelectedItemBinding;
 
 import java.util.List;
 
 public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdapter.ViewHolder> implements ItemClickListener {
 
     private List<Items> items;
-    private Context context;
-    private GameToolsFragment f;
+    private GameToolsSelectionFragment f;
 
-    public SelectedItemsAdapter(List<Items> items, GameToolsFragment f, Context context){
+    public SelectedItemsAdapter(List<Items> items, GameToolsSelectionFragment f){
         this.items = items;
-        this.context = context;
         this.f = f;
     }
 
@@ -54,6 +54,7 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
     @Override
     public void deleteItemFromSelectedItems(Items i) {
         items.remove(i);
+        f.setTextItemsFull("");
         notifyDataSetChanged();
     }
 
@@ -65,15 +66,27 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
                 if(items.get(j).getImage() == i.getImage())
                 {
                     duplicateItem++;
+                    f.setTextItemsFull("Duplicate items detected!");
                     break;
                 }
             }
 
             if(duplicateItem == 0) {
                 items.add(i);
+                if(items.size() >= 3){
+                    f.setTextItemsFull("You have picked all items");
+                } else {
+                    f.setTextItemsFull("");
+                }
                 notifyDataSetChanged();
             }
+        } else {
+            f.setTextItemsFull("You have picked all items");
         }
+    }
+
+    public List<Items> getItems(){
+        return items;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

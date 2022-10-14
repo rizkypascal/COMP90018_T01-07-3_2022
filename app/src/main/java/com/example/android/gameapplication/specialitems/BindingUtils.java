@@ -5,8 +5,6 @@ import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
-import org.w3c.dom.Text;
-
 public class BindingUtils {
     @BindingAdapter("itemText")
     public static void setItemText(TextView view, Items i){

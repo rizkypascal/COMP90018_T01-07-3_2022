@@ -1,10 +1,30 @@
 package com.example.android.gameapplication;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.android.gameapplication.specialitems.ClearMonsters;
+import com.example.android.gameapplication.specialitems.FlyItems;
+import com.example.android.gameapplication.specialitems.ItemName;
+import com.example.android.gameapplication.specialitems.Items;
+import com.example.android.gameapplication.specialitems.Reborn;
+import com.example.android.gameapplication.specialitems.SpecialItemsAdapter;
+import com.example.android.gameapplication.databinding.FragmentGameToolsSelectionBinding;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,50 +34,69 @@ import android.view.ViewGroup;
  */
 public class GameToolsSelectionFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GameToolsSelectionFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static GameToolsSelectionFragment newInstance(String param1, String param2) {
-        GameToolsSelectionFragment fragment = new GameToolsSelectionFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public GameToolsSelectionFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private FragmentGameToolsSelectionBinding binding;
+    private GameToolsFragment f;
+    private Bundle savedState = null;
+    private MainActivity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game_tools, container, false);
+        binding = FragmentGameToolsSelectionBinding.inflate(getLayoutInflater());
+        f = (GameToolsFragment) getChildFragmentManager().findFragmentById(R.id.fragment_container_view);
+        activity = (MainActivity) getActivity();
+        if(savedInstanceState != null && savedState == null) {
+            savedState = savedInstanceState.getBundle("fulltext");
+        }
+        if(savedState != null) {
+            binding.textItemsFull.setText(savedState.getCharSequence("fulltext"));
+        }
+        savedState = null;
+
+        SpecialItemsAdapter adapter = new SpecialItemsAdapter(getItems(), f);
+        binding.setSpecialItemsAdapter(adapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        binding.itemSelectionRv.setLayoutManager(layoutManager);
+
+        return binding.getRoot();
+    }
+
+    private ArrayList<Items> getItems(){
+        ArrayList<Items> items = new ArrayList<>();
+
+        items.add(new FlyItems(ItemName.COPTER));
+        items.add(new FlyItems(ItemName.ROCKET));
+        items.add(new ClearMonsters());
+        items.add(new Reborn());
+        return items;
+    }
+
+    public void setTextItemsFull(String text){
+        binding.textItemsFull.setText(text);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if(activity.getItems().size() >= 3){
+            savedState = saveState();
+        }
+    }
+
+    private Bundle saveState() { /* called either from onDestroyView() or onSaveInstanceState() */
+        Bundle state = new Bundle();
+        state.putCharSequence("fulltext", binding.textItemsFull.getText());
+        return state;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        /* If onDestroyView() is called first, we can use the previously savedState but we can't call saveState() anymore */
+        /* If onSaveInstanceState() is called first, we don't have savedState, so we need to call saveState() */
+        /* => (?:) operator inevitable! */
+        outState.putBundle("fulltext", (savedState != null) ? savedState : saveState());
     }
 }

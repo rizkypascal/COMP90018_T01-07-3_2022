@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".UnionFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="selectedItemsAdapter"
+            type="com.example.android.gameapplication.specialitems.SelectedItemsAdapter" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".GameToolsFragment"
+        android:id="@+id/gameToolsConstraint">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/item_rv"
+            android:layout_width="260dp"
+            android:layout_height="90dp"
+            android:adapter="@{selectedItemsAdapter}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/border"/>
 
-    <TextView
-        android:id="@+id/welcomeInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
-        android:text="UNION to be done"
-        android:textColor="#111111"
-        android:textSize="20sp">
-    </TextView>
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

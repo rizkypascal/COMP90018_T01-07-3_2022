@@ -11,19 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.gameapplication.BR;
 import com.example.android.gameapplication.GameToolsFragment;
 import com.example.android.gameapplication.R;
-import com.example.android.gameapplication.databinding.ActivityItemSelectionBinding;
+import com.example.android.gameapplication.databinding.ListItemBinding;
 
 import java.util.List;
 
 public class SpecialItemsAdapter extends RecyclerView.Adapter<SpecialItemsAdapter.ViewHolder> implements ItemClickListener {
 
     private List<Items> items;
-    private Context context;
     private GameToolsFragment f;
 
-    public SpecialItemsAdapter(List<Items> items, GameToolsFragment f, Context context){
+    public SpecialItemsAdapter(List<Items> items, GameToolsFragment f){
         this.items = items;
-        this.context = context;
         this.f = f;
     }
 

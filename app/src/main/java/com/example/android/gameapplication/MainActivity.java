@@ -6,7 +6,10 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
+import com.example.android.gameapplication.databinding.ActivityMainBinding;
+import com.example.android.gameapplication.specialitems.Items;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.ButterKnife;
@@ -17,11 +20,16 @@ import org.greenrobot.eventbus.ThreadMode;
 import com.example.android.gameapplication.Sensors.LightMessage;
 import com.example.android.gameapplication.Sensors.LightSensor;
 
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity implements GameFragment.SendMessages, UserFragment.SendMessages{
     private String user_name = "";
     public BottomNavigationView navView;
     private LightSensor lightSensor;
+    private ActivityMainBinding binding;
+    private GameToolsSelectionFragment gameToolsSelectionFragment;
+    private List<Items> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +38,19 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
         lightSensor = new LightSensor(this);
         EventBus.getDefault().register(this);
 
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // Setting for Navigation Bar
         navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.getMenu().findItem(R.id.navigation_game).setChecked(true); // set the initial selected icon to be the one in middle
 
-
+        if(savedInstanceState != null){
+            gameToolsSelectionFragment = (GameToolsSelectionFragment) getSupportFragmentManager().getFragment(savedInstanceState, "gameToolsSelectionFragment");
+        } else {
+            gameToolsSelectionFragment = new GameToolsSelectionFragment();
+        }
         // Setting for Fragments
         GameFragment gameFragment = new GameFragment();
         getSupportFragmentManager()
@@ -45,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                 .replace(R.id.layout_fragment, gameFragment)
                 .addToBackStack(null)
                 .commit();
-        ButterKnife.bind(this);
         gameFragment.fragmentReceiveMsg(user_name);
     }
 
@@ -91,13 +103,11 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                 }
                 case R.id.navigation_game_tools: {
                     Log.d("Navigation", "game tools clicked.");
-                    GameToolsSelectionFragment gameToolsSelectionFragment = new GameToolsSelectionFragment();
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.layout_fragment, gameToolsSelectionFragment)
                             .addToBackStack(null)
                             .commit();
-                    gameToolsSelectionFragment.fragmentReceiveMsg(user_name);
                     return true;
                 }
 
@@ -124,5 +134,21 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
         Log.d("[Subscription]", "Light: " + String.valueOf(LightEvent.getLight()[0]));
         EventBus.getDefault().unregister(this);
         lightSensor.disableSensor();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //Save the fragment's instance
+        getSupportFragmentManager().putFragment(outState, "gameToolsSelectionFragment", gameToolsSelectionFragment);
+    }
+
+    public void setItems(List<Items> i) {
+        items = i;
+    }
+
+    public List<Items> getItems() {
+        return items;
     }
 }

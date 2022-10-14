@@ -11,6 +11,4 @@ public class Reborn extends Items{
         setImage(R.drawable.reborn);
         setName("Reborn");
     }
-
-
 }
