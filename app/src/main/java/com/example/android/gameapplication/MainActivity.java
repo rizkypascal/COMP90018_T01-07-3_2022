@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.android.gameapplication.Sensors.OrientationMessage;
+import com.example.android.gameapplication.Sensors.OrientationSensor;
 import com.example.android.gameapplication.databinding.ActivityMainBinding;
 import com.example.android.gameapplication.specialitems.Items;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         /** Init sensor variables*/
+        orientationSensor = new OrientationSensor(this);
         lightSensor = new LightSensor(this);
         EventBus.getDefault().register(this);
 
@@ -119,6 +122,12 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
 
     // receive data form fragments
     @Override
+    public void iAmMSG(String msg) {
+        user_name = msg;
+        Log.d("MainActivity", "Receive data: "+msg);
+    }
+
+    @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
         orientationSensor.disableSensor();
@@ -146,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void lightUpdate(LightMessage LightEvent) { // place to get sensor value from light
         Log.d("[Subscription]", "Light: " + String.valueOf(LightEvent.getLight()[0]));
+        EventBus.getDefault().unregister(this);
         lightSensor.disableSensor();
     }
 
@@ -155,5 +165,11 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
 
     public List<Items> getItems() {
         return items;
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        getSupportFragmentManager().putFragment(outState, "gameToolsSelectionFragment", gameToolsSelectionFragment);
     }
 }
