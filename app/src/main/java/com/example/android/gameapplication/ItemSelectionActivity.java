@@ -10,14 +10,20 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.android.gameapplication.databinding.ActivityItemSelectionBinding;
 import com.example.android.gameapplication.databinding.FragmentItemBinding;
+import com.example.android.gameapplication.specialitems.ClearMonsters;
 import com.example.android.gameapplication.specialitems.FlyItems;
+import com.example.android.gameapplication.specialitems.ItemName;
 import com.example.android.gameapplication.specialitems.Items;
+import com.example.android.gameapplication.specialitems.Reborn;
 import com.example.android.gameapplication.specialitems.SpecialItemsAdapter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -39,6 +45,15 @@ public class ItemSelectionActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         binding.itemSelectionRv.setLayoutManager(layoutManager);
 
+        binding.playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), GameActivity.class);
+                EventBus.getDefault().postSticky(f);
+                startActivity(i);
+            }
+        });
+
         View view = binding.getRoot();
         setContentView(view);
     }
@@ -46,8 +61,10 @@ public class ItemSelectionActivity extends AppCompatActivity {
     private ArrayList<Items> getItems(){
         ArrayList<Items> items = new ArrayList<>();
 
-        items.add(new Items(R.drawable.copter, "Helicopter"));
-        items.add(new Items(R.drawable.rocket, "Rocket"));
+        items.add(new FlyItems(ItemName.COPTER));
+        items.add(new FlyItems(ItemName.ROCKET));
+        items.add(new ClearMonsters());
+        items.add(new Reborn());
         return items;
     }
 

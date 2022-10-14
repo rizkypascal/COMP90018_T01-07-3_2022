@@ -14,7 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.android.gameapplication.databinding.FragmentItemBinding;
+import com.example.android.gameapplication.specialitems.ClearMonsters;
+import com.example.android.gameapplication.specialitems.FlyItems;
 import com.example.android.gameapplication.specialitems.Items;
+import com.example.android.gameapplication.specialitems.Reborn;
 import com.example.android.gameapplication.specialitems.SelectedItemsAdapter;
 import com.example.android.gameapplication.specialitems.SpecialItemsAdapter;
 
@@ -74,9 +77,8 @@ public class ItemFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentItemBinding.inflate(inflater, container, false);
-        Bundle args = getArguments();
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
-        SelectedItemsAdapter adapter = new SelectedItemsAdapter(new ArrayList<>(),null,  getContext());
+        SelectedItemsAdapter adapter = new SelectedItemsAdapter(new ArrayList<Items>(),null,  getContext());
         binding.setSelectedItemsAdapter(adapter);
         binding.itemRv.setLayoutManager(layoutManager);
         return binding.getRoot();

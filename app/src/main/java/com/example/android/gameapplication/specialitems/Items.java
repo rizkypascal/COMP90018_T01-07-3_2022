@@ -9,6 +9,9 @@ public class Items {
         this.name = name;
     }
 
+    public Items() {
+    }
+
     public int getImage() {
         return image;
     }

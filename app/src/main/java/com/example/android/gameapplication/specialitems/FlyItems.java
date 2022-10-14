@@ -1,11 +1,26 @@
 package com.example.android.gameapplication.specialitems;
 
+import com.example.android.gameapplication.R;
+
 public class FlyItems extends Items{
     private double height;
     private double movedHeight;
 
-    public FlyItems(int image, String name) {
-        super(image, name);
+    public FlyItems(ItemName name) {
+        switch (name){
+            case COPTER:
+                setImage(R.drawable.copter);
+                setName("Helicopter");
+                height = 100;
+                movedHeight = 0;
+                break;
+            case ROCKET:
+                setImage(R.drawable.rocket);
+                setName("Rocket");
+                height = 200;
+                movedHeight = 0;
+                break;
+        }
     }
 
     public double getMovedHeight() {
