@@ -29,7 +29,6 @@ public class GameContext extends View implements Runnable{
     private OrientationSensor orientationSensor;
     private Thread thread;
     private boolean isPlaying = true;
-    private boolean isUpdate = false;
     public static int screenX, screenY;
 
     public ArrayList<Board> boards;
@@ -63,9 +62,7 @@ public class GameContext extends View implements Runnable{
         while (isPlaying){
             Log.i("i","is playing");
             checkJumper();
-            if (isUpdate){
-                update();
-            }
+            update();
         }
     }
 
@@ -130,10 +127,12 @@ public class GameContext extends View implements Runnable{
     }
 
     private void update () {
-        for (Board board : boards){
-            board.move(0f,20f);
+        if (jumper.getStatus() == Status.movingUp){
+            float vy = jumper.getSpeedY();
+            for (Board board : boards){
+                board.move(0f,vy);
+            }
         }
-        isUpdate = false;
     }
 
     /**
@@ -151,7 +150,6 @@ public class GameContext extends View implements Runnable{
         for (Board bar : boards){
             if(CollisionUtils.JumperBoardCollision(jumper,bar) && jumper.getStatus().equals(Status.movingDown))
             {
-                isUpdate = true;
                 jumper.setSpeedY(20f);
                 jumper.setStatus(Status.movingUp);
                 break;
