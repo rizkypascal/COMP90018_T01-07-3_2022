@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter;
 /**
  * @Author: Rizky Paskalis Totong
  * @Date: 30/09/22
+ * @Desc: Enable the layout to automatically adjusted when bound
  */
 public class BindingUtils {
     @BindingAdapter("itemText")

@@ -158,14 +158,27 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
         lightSensor.disableSensor();
     }
 
+    /**
+     * This set method is utilized by Game Tools Fragments
+     * @param gameTools
+     */
     public void setItems(List<GameTools> gameTools) {
         this.gameTools = gameTools;
     }
 
+    /**
+     * The return object is used on Game Tools Fragments
+     * @return gameTools
+     */
     public List<GameTools> getGameTools() {
         return gameTools;
     }
 
+    /**
+     * Prepate to save the fragment state
+     * in case the application is not on screen
+     * @param outState
+     */
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);

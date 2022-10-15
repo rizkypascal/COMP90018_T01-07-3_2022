@@ -62,6 +62,7 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
         notifyDataSetChanged();
     }
 
+
     public void updateSelectedItems(GameTools gameToolsParams){
         int duplicateItem = 0;
         if(gameTools.size() < 3)
