@@ -4,18 +4,18 @@
 
     <data>
         <variable
-            name="item"
-            type="com.example.android.gameapplication.specialitems.Items" />
+            name="gameTools"
+            type="com.example.android.gameapplication.game_tools.GameTools" />
         <variable
-            name="itemListener"
-            type="com.example.android.gameapplication.specialitems.ItemClickListener" />
+            name="clickListener"
+            type="com.example.android.gameapplication.game_tools.GameToolsClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:onClick="@{() -> itemListener.deleteItemFromSelectedItems(item)}"
+        android:onClick="@{() -> clickListener.deleteItemFromSelectedGameTools(gameTools)}"
         >
 
         <pl.droidsonroids.gif.GifImageView
@@ -25,7 +25,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            app:itemSelectedImage="@{item}"
+            app:itemSelectedImage="@{gameTools}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

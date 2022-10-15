@@ -1,4 +1,4 @@
-package com.example.android.gameapplication.specialitems;
+package com.example.android.gameapplication.game_tools;
 
 import com.example.android.gameapplication.R;
 
@@ -10,10 +10,12 @@ class Monsters{
 }
 
 /**
+ * @Author: Rizky Paskalis Totong
+ * @Date: 30/09/22
  * assume there is a monster count in the game
  * the function is simply to set count to 0
  */
-public class ClearMonsters extends Items {
+public class ClearMonsters extends GameTools {
     public ClearMonsters(int image, String name) {
         super(image, name);
     }

@@ -2,7 +2,6 @@ package com.example.android.gameapplication;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,27 +10,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.android.gameapplication.specialitems.Items;
-import com.example.android.gameapplication.specialitems.SelectedItemsAdapter;
+import com.example.android.gameapplication.game_tools.GameTools;
+import com.example.android.gameapplication.game_tools.SelectedGameToolsAdapter;
 import com.example.android.gameapplication.databinding.FragmentGameToolsBinding;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link GameToolsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * @Author: Rizky Paskalis Totong
+ * @Date: 02/10/22
  */
 public class GameToolsFragment extends Fragment {
 
-    private List<Items> items;
+    private List<GameTools> gameTools;
     private FragmentGameToolsBinding binding;
-    private SelectedItemsAdapter adapter;
+    private SelectedGameToolsAdapter adapter;
     private MainActivity activity;
-    private GameToolsSelectionFragment f;
+    private GameToolsSelectionFragment fragment;
 
+    /**
+     * Inflate the view with View Binding
+     * Get the current Activity to get the current selected tools
+     * Set an adapter to generate list of selected game tools
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return binding.getRoot()
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,23 +45,30 @@ public class GameToolsFragment extends Fragment {
         binding = FragmentGameToolsBinding.inflate(inflater, container, false);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         activity = (MainActivity) getActivity();
-        f = (GameToolsSelectionFragment) getParentFragment();
-        if(activity.getItems() == null) {
-            items = new ArrayList<Items>();
+        fragment = (GameToolsSelectionFragment) getParentFragment();
+        if(activity.getGameTools() == null) {
+            gameTools = new ArrayList<GameTools>();
         } else {
-            items = activity.getItems();
+            gameTools = activity.getGameTools();
         }
-        adapter = new SelectedItemsAdapter(items, f);
-        binding.setSelectedItemsAdapter(adapter);
+        adapter = new SelectedGameToolsAdapter(gameTools, fragment);
+        binding.setSelectedGameToolsAdapter(adapter);
         binding.itemRv.setLayoutManager(layoutManager);
         return binding.getRoot();
     }
 
-    public void updateSelectedItemsAdapter(Items i) {
-        adapter = binding.getSelectedItemsAdapter();
-        adapter.updateSelectedItems(i);
+    /**
+     * This method will be called in GameToolsAdapter
+     * @param gameTools
+     */
+    public void updateSelectedItemsAdapter(GameTools gameTools) {
+        adapter = binding.getSelectedGameToolsAdapter();
+        adapter.updateSelectedItems(gameTools);
     }
 
+    /**
+     * Store the fragment state when replaced
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();

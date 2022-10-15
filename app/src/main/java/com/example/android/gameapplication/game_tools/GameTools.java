@@ -1,15 +1,19 @@
-package com.example.android.gameapplication.specialitems;
+package com.example.android.gameapplication.game_tools;
 
-public class Items {
+/**
+ * @Author: Rizky Paskalis Totong
+ * @Date: 30/09/22
+ */
+public class GameTools {
     private int image;
     private String name;
 
-    public Items(int image, String name){
+    public GameTools(int image, String name){
         this.image = image;
         this.name = name;
     }
 
-    public Items() {
+    public GameTools() {
     }
 
     public int getImage() {

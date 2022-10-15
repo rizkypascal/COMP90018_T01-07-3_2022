@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="selectedItemsAdapter"
-            type="com.example.android.gameapplication.specialitems.SelectedItemsAdapter" />
+            name="selectedGameToolsAdapter"
+            type="com.example.android.gameapplication.game_tools.SelectedGameToolsAdapter" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:id="@+id/item_rv"
             android:layout_width="260dp"
             android:layout_height="90dp"
-            android:adapter="@{selectedItemsAdapter}"
+            android:adapter="@{selectedGameToolsAdapter}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

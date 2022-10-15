@@ -2,49 +2,51 @@ package com.example.android.gameapplication;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.android.gameapplication.specialitems.ClearMonsters;
-import com.example.android.gameapplication.specialitems.FlyItems;
-import com.example.android.gameapplication.specialitems.ItemName;
-import com.example.android.gameapplication.specialitems.Items;
-import com.example.android.gameapplication.specialitems.Reborn;
-import com.example.android.gameapplication.specialitems.SpecialItemsAdapter;
+import com.example.android.gameapplication.game_tools.GameTools;
+import com.example.android.gameapplication.game_tools.GameToolsAdapter;
+import com.example.android.gameapplication.game_tools.ClearMonsters;
+import com.example.android.gameapplication.game_tools.FlyItems;
+import com.example.android.gameapplication.game_tools.GameToolsName;
+import com.example.android.gameapplication.game_tools.Reborn;
 import com.example.android.gameapplication.databinding.FragmentGameToolsSelectionBinding;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link GameToolsSelectionFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
+ * @Author: Rizky Paskalis Totong
+ * @Date: 02/10/22
  */
 public class GameToolsSelectionFragment extends Fragment {
 
     private FragmentGameToolsSelectionBinding binding;
-    private GameToolsFragment f;
+    private GameToolsFragment fragment;
     private Bundle savedState = null;
     private MainActivity activity;
 
+    /**
+     * Inflate the view with View Binding
+     * Initiate and show new GameToolsFragment
+     * Get the current Activity to get the current selected tools
+     * Set an adapter to generate list of available game tools
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return binding.getRoot()
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentGameToolsSelectionBinding.inflate(getLayoutInflater());
-        f = (GameToolsFragment) getChildFragmentManager().findFragmentById(R.id.fragment_container_view);
+        fragment = (GameToolsFragment) getChildFragmentManager().findFragmentById(R.id.fragment_container_view);
         activity = (MainActivity) getActivity();
         if(savedInstanceState != null && savedState == null) {
             savedState = savedInstanceState.getBundle("fulltext");
@@ -54,43 +56,64 @@ public class GameToolsSelectionFragment extends Fragment {
         }
         savedState = null;
 
-        SpecialItemsAdapter adapter = new SpecialItemsAdapter(getItems(), f);
-        binding.setSpecialItemsAdapter(adapter);
+        GameToolsAdapter adapter = new GameToolsAdapter(getGameTools(), fragment);
+        binding.setGameToolsAdapter(adapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.itemSelectionRv.setLayoutManager(layoutManager);
 
         return binding.getRoot();
     }
 
-    private ArrayList<Items> getItems(){
-        ArrayList<Items> items = new ArrayList<>();
+    /**
+     * This method statically set the items to be set in GameToolsAdapter
+     * TODO -> maybe call from the database
+     * @return items
+     */
+    private ArrayList<GameTools> getGameTools(){
+        ArrayList<GameTools> gameTools = new ArrayList<>();
 
-        items.add(new FlyItems(ItemName.COPTER));
-        items.add(new FlyItems(ItemName.ROCKET));
-        items.add(new ClearMonsters());
-        items.add(new Reborn());
-        return items;
+        gameTools.add(new FlyItems(GameToolsName.COPTER));
+        gameTools.add(new FlyItems(GameToolsName.ROCKET));
+        gameTools.add(new ClearMonsters());
+        gameTools.add(new Reborn());
+        return gameTools;
     }
 
+    /**
+     * This method is called in SelectedGameToolsAdapter
+     * @param text
+     */
     public void setTextItemsFull(String text){
         binding.textItemsFull.setText(text);
     }
 
+    /**
+     * Store the fragment state when replaced
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
 
-        if(activity.getItems().size() >= 3){
+        if(activity.getGameTools().size() >= 3){
             savedState = saveState();
         }
     }
 
+    /**
+     * Save the state in the bundle when onDestroyView called
+     * @return state as Bundle
+     */
     private Bundle saveState() { /* called either from onDestroyView() or onSaveInstanceState() */
         Bundle state = new Bundle();
         state.putCharSequence("fulltext", binding.textItemsFull.getText());
         return state;
     }
 
+    /**
+     * This method has condition, use Bundle from class if savedState is not null
+     * Otherwise generate another bundle
+     * @param outState -> Store the state in the given Bundle
+     */
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

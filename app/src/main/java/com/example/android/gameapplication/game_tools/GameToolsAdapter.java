@@ -1,6 +1,5 @@
-package com.example.android.gameapplication.specialitems;
+package com.example.android.gameapplication.game_tools;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -15,14 +14,20 @@ import com.example.android.gameapplication.databinding.ListItemBinding;
 
 import java.util.List;
 
-public class SpecialItemsAdapter extends RecyclerView.Adapter<SpecialItemsAdapter.ViewHolder> implements ItemClickListener {
+/**
+ * @Author: Rizky Paskalis Totong
+ * @Date: 01/10/22
+ * This adapter used to show the current available Game Tools
+ * Current listener -> update SelectedGameToolsAdapter when a tool is tapped
+ */
+public class GameToolsAdapter extends RecyclerView.Adapter<GameToolsAdapter.ViewHolder> implements GameToolsClickListener {
 
-    private List<Items> items;
-    private GameToolsFragment f;
+    private List<GameTools> gameTools;
+    private GameToolsFragment fragment;
 
-    public SpecialItemsAdapter(List<Items> items, GameToolsFragment f){
-        this.items = items;
-        this.f = f;
+    public GameToolsAdapter(List<GameTools> gameTools, GameToolsFragment fragment){
+        this.gameTools = gameTools;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -34,15 +39,15 @@ public class SpecialItemsAdapter extends RecyclerView.Adapter<SpecialItemsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Items i = items.get(position);
-        holder.binding.setVariable(BR.item, i);
+        GameTools i = gameTools.get(position);
+        holder.binding.setVariable(BR.gameTools, i);
         holder.binding.executePendingBindings();
-        holder.binding.setItemListener(this);
+        holder.binding.setClickListener(this);
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return gameTools.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -53,12 +58,13 @@ public class SpecialItemsAdapter extends RecyclerView.Adapter<SpecialItemsAdapte
         }
     }
 
-    public void addItemToSelectedItems(Items i){
-        f.updateSelectedItemsAdapter(i);
+    @Override
+    public void addItemToSelectedGameTools(GameTools gameToolsParams){
+        fragment.updateSelectedItemsAdapter(gameToolsParams);
     }
 
     @Override
-    public void deleteItemFromSelectedItems(Items i) {
+    public void deleteItemFromSelectedGameTools(GameTools i) {
 
     }
 }

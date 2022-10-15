@@ -1,4 +1,4 @@
-package com.example.android.gameapplication.Sensors;
+package com.example.android.gameapplication.sensors;
 
 import android.content.Context;
 import android.hardware.Sensor;

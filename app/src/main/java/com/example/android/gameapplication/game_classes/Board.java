@@ -1,4 +1,4 @@
-package com.example.android.gameapplication.GameClasses;
+package com.example.android.gameapplication.game_classes;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -6,9 +6,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-
-import com.example.android.gameapplication.R;
 
 /**
  * @author Runzhe Hua
