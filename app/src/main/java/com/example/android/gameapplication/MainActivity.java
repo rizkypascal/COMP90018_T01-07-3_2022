@@ -47,11 +47,13 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.getMenu().findItem(R.id.navigation_game).setChecked(true); // set the initial selected icon to be the one in middle
 
+        // Initialize the Game Tools Fragment to help locally store state
         if(savedInstanceState != null){
             gameToolsSelectionFragment = (GameToolsSelectionFragment) getSupportFragmentManager().getFragment(savedInstanceState, "gameToolsSelectionFragment");
         } else {
             gameToolsSelectionFragment = new GameToolsSelectionFragment();
         }
+
         // Setting for Fragments
         GameFragment gameFragment = new GameFragment();
         getSupportFragmentManager()
