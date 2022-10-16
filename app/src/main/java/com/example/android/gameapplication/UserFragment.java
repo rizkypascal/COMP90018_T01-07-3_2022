@@ -1,6 +1,8 @@
 package com.example.android.gameapplication;
 
 import android.content.Context;
+import android.media.MediaParser;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,7 +69,6 @@ public class UserFragment extends Fragment {
         signUpPasswordValue0 = view.findViewById(R.id.signUpPasswordValue0);
         signUpPasswordValue1 = view.findViewById(R.id.signUpPasswordValue1);
         textLoginInfo = view.findViewById(R.id.textLoginInfo);
-        unionInfo = view.findViewById(R.id.unionInfo);
         unbinder = ButterKnife.bind(this, view);
         activity = (MainActivity) getActivity();
         context = activity.getApplicationContext();
@@ -82,6 +85,8 @@ public class UserFragment extends Fragment {
         String username_temp = signInNameValue.getText().toString();
         String password_temp = signInPasswordValue.getText().toString();
         if (CheckLogin(username_temp, password_temp)){
+            MediaPlayer mp = MediaPlayer.create(activity, R.raw.vista);
+            mp.start();
             user_name = username_temp;
             sendMessages.iAmMSG(user_name);
             UserFragmentAfterLogin userFragment = new UserFragmentAfterLogin();
@@ -91,7 +96,9 @@ public class UserFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
             userFragment.fragmentReceiveMsg(user_name);
-
+        }else {
+            MediaPlayer mp = MediaPlayer.create(activity, R.raw.erro);
+            mp.start();
         }
     }
 
@@ -102,6 +109,11 @@ public class UserFragment extends Fragment {
         String password_temp0 = signUpPasswordValue0.getText().toString();
         String password_temp1 = signUpPasswordValue1.getText().toString();
         if (CheckRegister(username_temp, password_temp0, password_temp1)){
+            MediaPlayer mp = MediaPlayer.create(activity, R.raw.winxp);
+            mp.start();
+        }else {
+            MediaPlayer mp = MediaPlayer.create(activity, R.raw.erro);
+            mp.start();
         }
     }
 
@@ -145,7 +157,7 @@ public class UserFragment extends Fragment {
             PopToast("Confirmed password is empty!");
             return false;
         }
-        else if(password0!=password1){
+        else if(!Objects.equals(password0,password1)){
             PopToast("Password and confirmed password aren't identical!");
             return false;
         }

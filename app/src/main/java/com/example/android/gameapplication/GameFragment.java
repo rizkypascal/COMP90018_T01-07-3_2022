@@ -2,6 +2,7 @@ package com.example.android.gameapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -82,6 +83,9 @@ public class GameFragment extends Fragment {
     void SignInUpButtonOnClick(){
         Log.d("GameFragment", "SignInUpButton clicked.");
         if (signInUpButton.getText().toString()=="LOG OUT"){
+            MediaPlayer mp = MediaPlayer.create(activity, R.raw.winxpshutdown);
+            mp.start();
+
             user_name = "";
             textLoginInfo.setText("You have not signed in yet");
             Log.d("GameFragment", "send msg: "+user_name);
