@@ -6,10 +6,9 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.android.gameapplication.game_tools.GameTools;
-import com.example.android.gameapplication.sensors.OrientationMessage;
-import com.example.android.gameapplication.sensors.OrientationSensor;
 import com.example.android.gameapplication.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -29,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     private ActivityMainBinding binding;
     private GameToolsSelectionFragment gameToolsSelectionFragment;
     private List<GameTools> gameTools;
-    private OrientationSensor orientationSensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,21 +126,10 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
-        orientationSensor.disableSensor();
-        // lightSensor.disableSensor();
+        lightSensor.disableSensor();
         super.onDestroy();
     }
 
-    /**
-     * @author Changwen Li
-     * @description Please get the value of changed sensor signal here. You may change the name of function.
-     * @param OrientationEvent see OrientationMessage.java
-     * */
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void orientationUpdate(OrientationMessage OrientationEvent) { // place to get sensor value from orientation
-//        orientationValue.setText(String.valueOf(OrientationEvent.getOrientations()[2]));
-        Log.d("[Subscription]" , "Orientations: " + String.valueOf(OrientationEvent.getOrientations()[2]));
-    }
 
     //todo: Arthur dark mode...
     /**
@@ -153,6 +140,10 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void lightUpdate(LightMessage LightEvent) { // place to get sensor value from light
         Log.d("[Subscription]", "Light: " + String.valueOf(LightEvent.getLight()[0]));
+        Log.d("[Subscription]", String.valueOf(AppCompatDelegate.getDefaultNightMode()));
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        // todo: Rizky: when the night mode is set to be different from OS's, tool selection will crash...
+        // todo: arthur: test the appropriate threshold for light/dark.
         EventBus.getDefault().unregister(this);
         lightSensor.disableSensor();
     }
