@@ -29,6 +29,9 @@ public class GameContext extends View implements Runnable{
     private OrientationSensor orientationSensor;
     private Thread thread;
     private boolean isPlaying = true;
+    private boolean isUpdate = false;
+    private int beginY = 0;
+
     public static int screenX, screenY;
 
     public ArrayList<Board> boards;
@@ -60,9 +63,9 @@ public class GameContext extends View implements Runnable{
     @Override
     public void run() {
         while (isPlaying){
-            Log.i("i","is playing");
-            checkJumper();
-            update();
+            if (isUpdate){
+                update();
+            }
         }
     }
 
@@ -100,7 +103,7 @@ public class GameContext extends View implements Runnable{
         int y = startY;
         int x = width/5;
         int i = 0;
-        while (i < 200){
+        while (i < 300){
             Board bar = new StaticBoard(getContext(),
                     x * random.nextInt(5),y,250,width,
                     R.drawable.basic_board);
@@ -127,10 +130,22 @@ public class GameContext extends View implements Runnable{
     }
 
     private void update () {
-        if (jumper.getStatus() == Status.movingUp){
-            float vy = jumper.getSpeedY();
+        float speed = jumper.getSpeedY();
+        if (speed < 10.0 & speed > 9.0){
+            isUpdate = false;
+            Log.i("i", "=0");
+            int rangeY = beginY - jumper.getPosY();
             for (Board board : boards){
-                board.move(0f,vy);
+                int change = 0;
+                int before = board.getPosY();
+                while (change < rangeY){
+                    Log.i("i", "change:"+change);
+                    board.move(0f, 20f);
+                    int after = board.getPosY() - before;
+                    Log.i("i", "before:"+before);
+                    Log.i("i", "after:"+board.getPosY());
+                    change += after;
+                }
             }
         }
     }
@@ -150,6 +165,8 @@ public class GameContext extends View implements Runnable{
         for (Board bar : boards){
             if(CollisionUtils.JumperBoardCollision(jumper,bar) && jumper.getStatus().equals(Status.movingDown))
             {
+                beginY = jumper.getPosY();
+                isUpdate = true;
                 jumper.setSpeedY(20f);
                 jumper.setStatus(Status.movingUp);
                 break;
