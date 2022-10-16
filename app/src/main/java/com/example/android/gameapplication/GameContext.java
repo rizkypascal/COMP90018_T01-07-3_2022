@@ -31,6 +31,7 @@ public class GameContext extends View implements Runnable{
     private boolean isPlaying = true;
     private boolean isUpdate = false;
     private int initialBoards = 200;
+    private int widthRatio = 5;
 
     public static int screenX, screenY;
 
@@ -98,20 +99,25 @@ public class GameContext extends View implements Runnable{
 
     }
 
-    private ArrayList<Board> random_generate(int startY, int width){
+    private ArrayList<Board> random_generate(int startY, int screenX){
         ArrayList<Board> newboards = new ArrayList<>();
         Random random = new Random();
         int y = startY;
-        int x = width/5;
+        int width = screenX/widthRatio;
+        int lastX = -1;
         int i = 0;
         while (i < initialBoards){
-            Board bar = new StaticBoard(getContext(),
-                    x * random.nextInt(5),y,250,width,
-                    R.drawable.basic_board);
+            int posX = width * random.nextInt(widthRatio);
+            while (posX == lastX){
+                posX = width * random.nextInt(widthRatio);
+            }
+            Board bar = new StaticBoard(getContext(), posX, y, width,
+                    screenX, R.drawable.basic_board);
             newboards.add(bar);
 //            Log.i(String.valueOf(bar.y),String.valueOf(bar.height));
             y -= bar.getBoardHeight()*3*(random.nextInt(2)+1);
             i += 1;
+            lastX = bar.getPosX();
         }
 
         return newboards;
