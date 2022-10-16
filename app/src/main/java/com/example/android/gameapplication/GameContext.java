@@ -30,7 +30,7 @@ public class GameContext extends View implements Runnable{
     private Thread thread;
     private boolean isPlaying = true;
     private boolean isUpdate = false;
-    private int beginY = 0;
+    private int initialBoards = 200;
 
     public static int screenX, screenY;
 
@@ -86,7 +86,7 @@ public class GameContext extends View implements Runnable{
 //        Log.i("jumper loc","reach "+jumper.getPosY()+" screen" + screenY);
         jumper.draw(canvas);
         for (Board board : boards){
-            if (jumper.getStatus() == Status.movingUp){
+            if (jumper.getStatus() == Status.movingUp & jumper.getPosY() < screenY/2){
                 Log.i("i","speed: "+ jumper.getSpeedY());
                 board.move(0f,jumper.getSpeedY());
             }
@@ -104,7 +104,7 @@ public class GameContext extends View implements Runnable{
         int y = startY;
         int x = width/5;
         int i = 0;
-        while (i < 20){
+        while (i < initialBoards){
             Board bar = new StaticBoard(getContext(),
                     x * random.nextInt(5),y,250,width,
                     R.drawable.basic_board);
@@ -166,7 +166,6 @@ public class GameContext extends View implements Runnable{
         for (Board bar : boards){
             if(CollisionUtils.JumperBoardCollision(jumper,bar) && jumper.getStatus().equals(Status.movingDown))
             {
-                beginY = jumper.getPosY();
                 jumper.setSpeedY(20f);
                 jumper.setStatus(Status.movingUp);
                 break;
