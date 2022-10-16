@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                     Log.d("Navigation", "game tools clicked.");
                     getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.layout_fragment, gameToolsSelectionFragment)
+                            .replace(R.id.layout_fragment, gameToolsSelectionFragment, "gameToolsSelection")
                             .addToBackStack(null)
                             .commit();
                     return true;
@@ -181,6 +181,9 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        getSupportFragmentManager().putFragment(outState, "gameToolsSelectionFragment", gameToolsSelectionFragment);
+        GameToolsSelectionFragment fragment = (GameToolsSelectionFragment) getSupportFragmentManager().findFragmentByTag("gameToolsSelection");
+        if(fragment != null) {
+            getSupportFragmentManager().putFragment(outState, "gameToolsSelectionFragment", gameToolsSelectionFragment);
+        }
     }
 }
