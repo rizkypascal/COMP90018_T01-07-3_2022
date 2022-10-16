@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".UnionFragment">
 
-
     <TextView
         android:id="@+id/welcomeInfo"
         android:layout_width="wrap_content"
@@ -18,8 +17,4 @@
         android:textColor="#111111"
         android:textSize="20sp">
     </TextView>
-
-
-
-
 </LinearLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="gameToolsAdapter"
+            type="com.example.android.gameapplication.game_tools.GameToolsAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".GameToolsSelectionFragment">
+
+        <TextView
+            android:id="@+id/textPickItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="Pick Max 3 Items"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/item_selection_rv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/item_selection_rv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adapter="@{gameToolsAdapter}"
+            android:background="@drawable/border"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textPickItems" />
+
+        <TextView
+            android:id="@+id/textItemsFull"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="@+id/fragment_container_view"
+            app:layout_constraintTop_toBottomOf="@id/item_selection_rv" />
+
+        <fragment
+            android:id="@+id/fragment_container_view"
+            android:name="com.example.android.gameapplication.GameToolsFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/textItemsFull"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteX="179dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

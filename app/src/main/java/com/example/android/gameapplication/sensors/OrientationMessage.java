@@ -1,4 +1,4 @@
-package com.example.android.gameapplication.Sensors;
+package com.example.android.gameapplication.sensors;
 
 public class OrientationMessage {
     /**
