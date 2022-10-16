@@ -1,4 +1,4 @@
-package com.example.android.gameapplication.Sensors;
+package com.example.android.gameapplication.sensors;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -6,8 +6,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
-
-import org.greenrobot.eventbus.EventBus;
 
 public class LightSensor implements SensorEventListener{
     private Context mContext;
@@ -73,7 +71,7 @@ public class LightSensor implements SensorEventListener{
 
         if (mLight != null) {
 //            Log.v("[onSensorChanged]", ": Light lux" + String.valueOf(mLight[0]));
-            EventBus.getDefault().post(new LightMessage(mLight));
+//            EventBus.getDefault().post(new LightMessage(mLight));
         }
     }
 }
