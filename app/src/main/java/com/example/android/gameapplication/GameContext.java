@@ -63,9 +63,7 @@ public class GameContext extends View implements Runnable{
     @Override
     public void run() {
         while (isPlaying){
-            if (isUpdate){
-                update();
-            }
+            update();
         }
     }
 
@@ -74,9 +72,8 @@ public class GameContext extends View implements Runnable{
         Log.i("reminder","reach "+event.getY()+" screen" + screenY);
         if (event.getY()*2 < screenY){
             Log.i("i", "1/2");
-            update ();
         }
-        return false;
+        return true;
     }
 
     /**
@@ -89,6 +86,10 @@ public class GameContext extends View implements Runnable{
 //        Log.i("jumper loc","reach "+jumper.getPosY()+" screen" + screenY);
         jumper.draw(canvas);
         for (Board board : boards){
+            if (jumper.getStatus() == Status.movingUp){
+                Log.i("i","speed: "+ jumper.getSpeedY());
+                board.move(0f,jumper.getSpeedY());
+            }
             if (board.getPosY() > 0 & board.getPosY() < screenY){
                 board.draw(canvas);
             }
@@ -103,7 +104,7 @@ public class GameContext extends View implements Runnable{
         int y = startY;
         int x = width/5;
         int i = 0;
-        while (i < 300){
+        while (i < 20){
             Board bar = new StaticBoard(getContext(),
                     x * random.nextInt(5),y,250,width,
                     R.drawable.basic_board);
@@ -130,24 +131,24 @@ public class GameContext extends View implements Runnable{
     }
 
     private void update () {
-        float speed = jumper.getSpeedY();
-        if (speed < 10.0 & speed > 9.0){
-            isUpdate = false;
-            Log.i("i", "=0");
-            int rangeY = beginY - jumper.getPosY();
-            for (Board board : boards){
-                int change = 0;
-                int before = board.getPosY();
-                while (change < rangeY){
-                    Log.i("i", "change:"+change);
-                    board.move(0f, 20f);
-                    int after = board.getPosY() - before;
-                    Log.i("i", "before:"+before);
-                    Log.i("i", "after:"+board.getPosY());
-                    change += after;
-                }
-            }
-        }
+//        float speed = jumper.getSpeedY();
+//        if (speed < 10.0 & speed > 9.0){
+//            //isUpdate = false;
+//            Log.i("i", "=0");
+//            int rangeY = beginY - jumper.getPosY();
+//            for (Board board : boards){
+//                int change = 0;
+//                int before = board.getPosY();
+//                while (change < rangeY){
+//                    Log.i("i", "change:"+change);
+//                    board.move(0f, 20f);
+//                    int after = board.getPosY() - before;
+//                    Log.i("i", "before:"+before);
+//                    Log.i("i", "after:"+board.getPosY());
+//                    change += after;
+//                }
+//            }
+//        }
     }
 
     /**
@@ -166,7 +167,6 @@ public class GameContext extends View implements Runnable{
             if(CollisionUtils.JumperBoardCollision(jumper,bar) && jumper.getStatus().equals(Status.movingDown))
             {
                 beginY = jumper.getPosY();
-                isUpdate = true;
                 jumper.setSpeedY(20f);
                 jumper.setStatus(Status.movingUp);
                 break;
