@@ -14,7 +14,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
         android:text="UNION to be done"
-        android:textColor="#111111"
         android:textSize="20sp">
     </TextView>
 </LinearLayout>

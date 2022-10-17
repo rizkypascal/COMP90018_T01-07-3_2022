@@ -6,6 +6,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.android.gameapplication.game_tools.GameTools;
 import com.example.android.gameapplication.databinding.ActivityMainBinding;
@@ -35,8 +36,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
         lightSensor = new LightSensor(this);
         EventBus.getDefault().register(this);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
 
         // Setting for Navigation Bar
         navView = findViewById(R.id.nav_view);
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                 .replace(R.id.layout_fragment, gameFragment)
                 .addToBackStack(null)
                 .commit();
+
         gameFragment.fragmentReceiveMsg(user_name);
     }
 
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                     Log.d("Navigation", "game tools clicked.");
                     getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.layout_fragment, gameToolsSelectionFragment)
+                            .replace(R.id.layout_fragment, gameToolsSelectionFragment, "gameToolsSelection")
                             .addToBackStack(null)
                             .commit();
                     return true;
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
-        // lightSensor.disableSensor();
+        lightSensor.disableSensor();
         super.onDestroy();
     }
 
@@ -139,6 +140,10 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void lightUpdate(LightMessage LightEvent) { // place to get sensor value from light
         Log.d("[Subscription]", "Light: " + String.valueOf(LightEvent.getLight()[0]));
+        Log.d("[Subscription]", String.valueOf(AppCompatDelegate.getDefaultNightMode()));
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        // todo: Rizky: when the night mode is set to be different from OS's, tool selection will crash...
+        // todo: arthur: test the appropriate threshold for light/dark.
         EventBus.getDefault().unregister(this);
         lightSensor.disableSensor();
     }
@@ -167,6 +172,9 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        getSupportFragmentManager().putFragment(outState, "gameToolsSelectionFragment", gameToolsSelectionFragment);
+        GameToolsSelectionFragment fragment = (GameToolsSelectionFragment) getSupportFragmentManager().findFragmentByTag("gameToolsSelection");
+        if(fragment != null) {
+            getSupportFragmentManager().putFragment(outState, "gameToolsSelectionFragment", gameToolsSelectionFragment);
+        }
     }
 }

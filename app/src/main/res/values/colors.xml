@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="blue_unimelb">#3F51B5</color>
+    <color name="blue_dark_unimelb">#303F9F</color>
+    <color name="light_dark_unimelb">#C5CAE9</color>
+    <color name="amber">#FFC107</color>
+    <color name="amber_dark">#FFA000</color>
+    <color name="amber_light">#FFECB3</color>
+
 </resources>
