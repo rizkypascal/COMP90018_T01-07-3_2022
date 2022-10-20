@@ -2,6 +2,7 @@ package com.example.android.gameapplication.game_tools;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -39,6 +40,7 @@ public class GameToolsAdapter extends RecyclerView.Adapter<GameToolsAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        gameTools.get(position).setPosition(position);
         GameTools i = gameTools.get(position);
         holder.binding.setVariable(BR.gameTools, i);
         holder.binding.executePendingBindings();
@@ -50,6 +52,16 @@ public class GameToolsAdapter extends RecyclerView.Adapter<GameToolsAdapter.View
         return gameTools.size();
     }
 
+    /**
+     * this method is called from SelectedGameToolsAdapter
+     * to update this available game tools box quantity
+     * @param gameToolsParams
+     */
+    public void updateQuantity(GameTools gameToolsParams) {
+        gameTools.get(gameToolsParams.getPosition()).setQuantity(gameToolsParams.getQuantity());
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ListItemBinding binding;
         public ViewHolder(ListItemBinding binding){
@@ -58,13 +70,29 @@ public class GameToolsAdapter extends RecyclerView.Adapter<GameToolsAdapter.View
         }
     }
 
+    /**
+     * this method accesses selected game tools box
+     * to add item in the box
+     * @param gameToolsParams
+     */
     @Override
     public void addItemToSelectedGameTools(GameTools gameToolsParams){
-        fragment.updateSelectedItemsAdapter(gameToolsParams);
+        if(gameToolsParams.getQuantity() > 0){
+            fragment.updateSelectedItemsAdapter(gameToolsParams);
+            notifyDataSetChanged();
+        }
     }
 
     @Override
     public void deleteItemFromSelectedGameTools(GameTools i) {
 
+    }
+
+    /**
+     * this method is accessible to fragments or activities
+     * @return gameTools
+     */
+    public List<GameTools> getItems(){
+        return gameTools;
     }
 }

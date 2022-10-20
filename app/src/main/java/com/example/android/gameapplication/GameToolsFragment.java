@@ -46,10 +46,12 @@ public class GameToolsFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         activity = (MainActivity) getActivity();
         fragment = (GameToolsSelectionFragment) getParentFragment();
+
+        // initialize game tools from activity
         if(activity.getGameTools() == null) {
             gameTools = new ArrayList<GameTools>();
         } else {
-            gameTools = activity.getGameTools();
+            gameTools = activity.getSelectedGameToolsGameTools();
         }
         adapter = new SelectedGameToolsAdapter(gameTools, fragment);
         binding.setSelectedGameToolsAdapter(adapter);
@@ -72,6 +74,6 @@ public class GameToolsFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        activity.setItems(adapter.getItems());
+        activity.setSelectedGameTools(adapter.getItems());
     }
 }

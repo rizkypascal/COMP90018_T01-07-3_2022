@@ -9,6 +9,7 @@ package com.example.android.gameapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,10 +21,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import com.example.android.gameapplication.game_classes.Board;
-import com.example.android.gameapplication.game_classes.CollisionUtils;
-import com.example.android.gameapplication.game_classes.Jumper;
-import com.example.android.gameapplication.game_classes.StaticBoard;
+import com.example.android.gameapplication.games.Board;
+import com.example.android.gameapplication.games.CollisionUtils;
+import com.example.android.gameapplication.games.Jumper;
+import com.example.android.gameapplication.games.StaticBoard;
 import com.example.android.gameapplication.sensors.OrientationMessage;
 import com.example.android.gameapplication.sensors.OrientationSensor;
 

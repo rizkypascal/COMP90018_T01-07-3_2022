@@ -1,4 +1,4 @@
-package com.example.android.gameapplication.game_classes;
+package com.example.android.gameapplication.games;
 
 import android.content.Context;
 import android.graphics.Canvas;

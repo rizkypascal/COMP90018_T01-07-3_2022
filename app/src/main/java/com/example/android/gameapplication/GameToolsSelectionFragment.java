@@ -1,5 +1,7 @@
 package com.example.android.gameapplication;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,7 @@ import com.example.android.gameapplication.game_tools.Reborn;
 import com.example.android.gameapplication.databinding.FragmentGameToolsSelectionBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: Rizky Paskalis Totong
@@ -27,9 +30,12 @@ import java.util.ArrayList;
 public class GameToolsSelectionFragment extends Fragment {
 
     private FragmentGameToolsSelectionBinding binding;
+    private List<GameTools> gameTools;
     private GameToolsFragment fragment;
+    private GameToolsAdapter adapter;
     private Bundle savedState = null;
     private MainActivity activity;
+    private SharedPreferences sharedPref;
 
     /**
      * Inflate the view with View Binding
@@ -48,6 +54,8 @@ public class GameToolsSelectionFragment extends Fragment {
         binding = FragmentGameToolsSelectionBinding.inflate(getLayoutInflater());
         fragment = (GameToolsFragment) getChildFragmentManager().findFragmentById(R.id.fragment_container_view);
         activity = (MainActivity) getActivity();
+
+        // get saved instance when the activity is destroyed
         if(savedInstanceState != null && savedState == null) {
             savedState = savedInstanceState.getBundle("fulltext");
         }
@@ -56,7 +64,14 @@ public class GameToolsSelectionFragment extends Fragment {
         }
         savedState = null;
 
-        GameToolsAdapter adapter = new GameToolsAdapter(getGameTools(), fragment);
+        // initialize game tools
+        if(activity.getGameTools() == null) {
+            gameTools = getGameTools();
+        } else {
+            gameTools = activity.getGameTools();
+        }
+
+        adapter = new GameToolsAdapter(gameTools, fragment);
         binding.setGameToolsAdapter(adapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.itemSelectionRv.setLayoutManager(layoutManager);
@@ -72,11 +87,27 @@ public class GameToolsSelectionFragment extends Fragment {
     private ArrayList<GameTools> getGameTools(){
         ArrayList<GameTools> gameTools = new ArrayList<>();
 
-        gameTools.add(new FlyItems(GameToolsName.COPTER));
-        gameTools.add(new FlyItems(GameToolsName.ROCKET));
-        gameTools.add(new ClearMonsters());
-        gameTools.add(new Reborn());
+        /**
+         * Retrieve data for tool quantity from SharedPreferences
+         */
+        sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+
+        int toolDefaultQuantity = getResources().getInteger(R.integer.tool_default_quantity);
+        gameTools.add(new FlyItems(GameToolsName.COPTER, sharedPref.getInt(String.valueOf(R.string.copter), toolDefaultQuantity)));
+        gameTools.add(new FlyItems(GameToolsName.ROCKET, sharedPref.getInt(String.valueOf(R.string.rocket), toolDefaultQuantity)));
+        gameTools.add(new ClearMonsters(sharedPref.getInt(String.valueOf(R.string.clear_monsters), toolDefaultQuantity)));
+        gameTools.add(new Reborn(sharedPref.getInt(String.valueOf(R.string.reborn), toolDefaultQuantity)));
         return gameTools;
+    }
+
+    /**
+     * called from SelectedGameToolsAdapter
+     * to update text quantity on each game tool
+     * @param gameTools
+     */
+    public void updateTextQuantity(GameTools gameTools){
+        adapter = binding.getGameToolsAdapter();
+        adapter.updateQuantity(gameTools);
     }
 
     /**
@@ -94,9 +125,12 @@ public class GameToolsSelectionFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
 
-        if(activity.getGameTools().size() >= 3){
+        //just to update text, nothing to do with GameTools
+        if(activity.getSelectedGameToolsGameTools().size() >= 3){
             savedState = saveState();
         }
+
+        activity.setGameTools(adapter.getItems());
     }
 
     /**

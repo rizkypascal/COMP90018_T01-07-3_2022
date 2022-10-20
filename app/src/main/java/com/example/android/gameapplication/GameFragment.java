@@ -2,6 +2,7 @@ package com.example.android.gameapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.android.gameapplication.game_tools.GameTools;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,6 +81,21 @@ public class GameFragment extends Fragment {
         else PopToast("You are playing as user "+user_name);
 
         startActivity(new Intent(context, GameActivity.class));
+
+        /**
+         * storing game tools quantity locally after game started
+         */
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        for(GameTools gameTools : activity.getGameTools()){
+            editor.putInt(gameTools.getCodeName(), gameTools.getQuantity());
+        }
+        editor.apply();
+
+        //reset the selected game tools box on the GameToolsFragment
+        activity.setSelectedGameTools(new ArrayList<GameTools>());
+
         //TODO: tony or arthur: need passing msg of user account
     }
 
