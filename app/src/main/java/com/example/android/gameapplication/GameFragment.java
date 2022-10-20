@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.android.gameapplication.game_tools.GameTools;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -90,6 +92,7 @@ public class GameFragment extends Fragment {
             editor.putInt(gameTools.getCodeName(), gameTools.getQuantity());
         }
         editor.apply();
+        activity.setSelectedGameTools(new ArrayList<GameTools>());
 
         //TODO: tony or arthur: need passing msg of user account
     }
