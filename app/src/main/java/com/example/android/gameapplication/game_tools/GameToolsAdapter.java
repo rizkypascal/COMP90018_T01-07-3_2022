@@ -52,6 +52,11 @@ public class GameToolsAdapter extends RecyclerView.Adapter<GameToolsAdapter.View
         return gameTools.size();
     }
 
+    /**
+     * this method is called from SelectedGameToolsAdapter
+     * to update this available game tools box quantity
+     * @param gameToolsParams
+     */
     public void updateQuantity(GameTools gameToolsParams) {
         gameTools.get(gameToolsParams.getPosition()).setQuantity(gameToolsParams.getQuantity());
         notifyDataSetChanged();
@@ -65,6 +70,11 @@ public class GameToolsAdapter extends RecyclerView.Adapter<GameToolsAdapter.View
         }
     }
 
+    /**
+     * this method accesses selected game tools box
+     * to add item in the box
+     * @param gameToolsParams
+     */
     @Override
     public void addItemToSelectedGameTools(GameTools gameToolsParams){
         if(gameToolsParams.getQuantity() > 0){
@@ -78,6 +88,10 @@ public class GameToolsAdapter extends RecyclerView.Adapter<GameToolsAdapter.View
 
     }
 
+    /**
+     * this method is accessible to fragments or activities
+     * @return gameTools
+     */
     public List<GameTools> getItems(){
         return gameTools;
     }

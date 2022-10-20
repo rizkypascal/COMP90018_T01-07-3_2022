@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     }
 
     /**
-     * Prepate to save the fragment state
+     * Prepare to save the fragment state
      * in case the application is not on screen
      * @param outState
      */
@@ -181,10 +181,18 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
         }
     }
 
+    /**
+     * This set method is utilized by Game Tools Selection Fragments
+     * @return gameTools
+     */
     public List<GameTools> getGameTools() {
         return gameTools;
     }
 
+    /**
+     * This set method is utilized by Game Tools Selection Fragments
+     * @param gameTools
+     */
     public void setGameTools(List<GameTools> gameTools) {
         this.gameTools = gameTools;
     }

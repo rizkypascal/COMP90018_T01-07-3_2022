@@ -54,6 +54,8 @@ public class GameToolsSelectionFragment extends Fragment {
         binding = FragmentGameToolsSelectionBinding.inflate(getLayoutInflater());
         fragment = (GameToolsFragment) getChildFragmentManager().findFragmentById(R.id.fragment_container_view);
         activity = (MainActivity) getActivity();
+
+        // get saved instance when the activity is destroyed
         if(savedInstanceState != null && savedState == null) {
             savedState = savedInstanceState.getBundle("fulltext");
         }
@@ -62,6 +64,7 @@ public class GameToolsSelectionFragment extends Fragment {
         }
         savedState = null;
 
+        // initialize game tools
         if(activity.getGameTools() == null) {
             gameTools = getGameTools();
         } else {
@@ -97,6 +100,11 @@ public class GameToolsSelectionFragment extends Fragment {
         return gameTools;
     }
 
+    /**
+     * called from SelectedGameToolsAdapter
+     * to update text quantity on each game tool
+     * @param gameTools
+     */
     public void updateTextQuantity(GameTools gameTools){
         adapter = binding.getGameToolsAdapter();
         adapter.updateQuantity(gameTools);

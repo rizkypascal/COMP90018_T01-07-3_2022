@@ -92,6 +92,8 @@ public class GameFragment extends Fragment {
             editor.putInt(gameTools.getCodeName(), gameTools.getQuantity());
         }
         editor.apply();
+
+        //reset the selected game tools box on the GameToolsFragment
         activity.setSelectedGameTools(new ArrayList<GameTools>());
 
         //TODO: tony or arthur: need passing msg of user account

@@ -46,6 +46,8 @@ public class GameToolsFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         activity = (MainActivity) getActivity();
         fragment = (GameToolsSelectionFragment) getParentFragment();
+
+        // initialize game tools from activity
         if(activity.getGameTools() == null) {
             gameTools = new ArrayList<GameTools>();
         } else {

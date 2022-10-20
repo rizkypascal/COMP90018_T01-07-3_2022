@@ -55,6 +55,11 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
 
     }
 
+    /**
+     * remove game tools from selected game tools box
+     * increase the quantity of the available game tools box
+     * @param gameToolsParams
+     */
     @Override
     public void deleteItemFromSelectedGameTools(GameTools gameToolsParams) {
         gameTools.remove(gameToolsParams);
@@ -64,21 +69,30 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
         notifyDataSetChanged();
     }
 
-
+    /**
+     * this method called to update selected game tools box
+     * @param gameToolsParams
+     */
     public void updateSelectedItems(GameTools gameToolsParams){
         int duplicateItem = 0;
         if(gameTools.size() < 3)
         {
             for(int j = 0; j < gameTools.size(); j++) {
+                /**
+                 * ensure that the tool cannot be chose more than once
+                 */
                 if(gameTools.get(j).getImage() == gameToolsParams.getImage())
                 {
                     duplicateItem++;
-
                     fragment.setTextItemsFull("Duplicate items detected!");
                     break;
                 }
             }
 
+            /**
+             * add the tool to the selected game tools box
+             * reduce the quantity of available game tools box
+             */
             if(duplicateItem == 0) {
                 gameTools.add(gameToolsParams);
                 if(gameTools.size() >= 3){
@@ -95,6 +109,10 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
         }
     }
 
+    /**
+     * this method is accessible to fragments or activities
+     * @return gameTools
+     */
     public List<GameTools> getItems(){
         return gameTools;
     }
