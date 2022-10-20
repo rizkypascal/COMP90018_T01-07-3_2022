@@ -16,6 +16,11 @@ public class BindingUtils {
         view.setText(i.getName());
     }
 
+    @BindingAdapter("itemQuantity")
+    public static void setItemQuantity(TextView view, GameTools i){
+        view.setText(""+i.getQuantity());
+    }
+
     @BindingAdapter("itemImage")
     public static void setItemImage(ImageView view, GameTools i){
         view.setImageResource(i.getImage());

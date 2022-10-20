@@ -10,21 +10,23 @@ public class FlyItems extends GameTools {
     private double height;
     private double movedHeight;
 
-    public FlyItems(GameToolsName name) {
+    public FlyItems(GameToolsName name, int quantity) {
         switch (name){
             case COPTER:
                 setImage(R.drawable.copter);
                 setName("Helicopter");
+                setCodeName(String.valueOf(R.string.copter));
                 height = 100;
-                movedHeight = 0;
                 break;
             case ROCKET:
                 setImage(R.drawable.rocket);
                 setName("Rocket");
+                setCodeName(String.valueOf(R.string.rocket));
                 height = 200;
-                movedHeight = 0;
                 break;
         }
+        setQuantity(quantity);
+        movedHeight = 0;
     }
 
     public double getMovedHeight() {

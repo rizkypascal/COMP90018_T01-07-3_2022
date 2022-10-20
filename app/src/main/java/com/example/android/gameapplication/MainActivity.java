@@ -1,5 +1,7 @@
 package com.example.android.gameapplication;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     private LightSensor lightSensor;
     private ActivityMainBinding binding;
     private GameToolsSelectionFragment gameToolsSelectionFragment;
+    private List<GameTools> selectedGameTools;
     private List<GameTools> gameTools;
 
     @Override
@@ -152,16 +155,16 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
      * This set method is utilized by Game Tools Fragments
      * @param gameTools
      */
-    public void setItems(List<GameTools> gameTools) {
-        this.gameTools = gameTools;
+    public void setSelectedGameTools(List<GameTools> gameTools) {
+        this.selectedGameTools = gameTools;
     }
 
     /**
      * The return object is used on Game Tools Fragments
      * @return gameTools
      */
-    public List<GameTools> getGameTools() {
-        return gameTools;
+    public List<GameTools> getSelectedGameToolsGameTools() {
+        return selectedGameTools;
     }
 
     /**
@@ -176,5 +179,13 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
         if(fragment != null) {
             getSupportFragmentManager().putFragment(outState, "gameToolsSelectionFragment", gameToolsSelectionFragment);
         }
+    }
+
+    public List<GameTools> getGameTools() {
+        return gameTools;
+    }
+
+    public void setGameTools(List<GameTools> gameTools) {
+        this.gameTools = gameTools;
     }
 }

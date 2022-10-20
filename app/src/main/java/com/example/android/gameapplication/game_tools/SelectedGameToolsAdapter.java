@@ -58,6 +58,8 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
     @Override
     public void deleteItemFromSelectedGameTools(GameTools gameToolsParams) {
         gameTools.remove(gameToolsParams);
+        gameToolsParams.setQuantity(gameToolsParams.getQuantity() + 1);
+        fragment.updateTextQuantity(gameToolsParams);
         fragment.setTextItemsFull("");
         notifyDataSetChanged();
     }
@@ -71,6 +73,7 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
                 if(gameTools.get(j).getImage() == gameToolsParams.getImage())
                 {
                     duplicateItem++;
+
                     fragment.setTextItemsFull("Duplicate items detected!");
                     break;
                 }
@@ -83,6 +86,8 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
                 } else {
                     fragment.setTextItemsFull("");
                 }
+                gameToolsParams.setQuantity(gameToolsParams.getQuantity() - 1);
+                fragment.updateTextQuantity(gameToolsParams);
                 notifyDataSetChanged();
             }
         } else {

@@ -3,7 +3,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
         <variable
             name="gameTools"
@@ -34,14 +33,24 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
+            android:id="@+id/item_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:itemQuantity="@{gameTools}"
+            app:layout_constraintStart_toEndOf="@+id/item_image"
+            app:layout_constraintTop_toTopOf="@+id/item_image"
+            app:layout_constraintBottom_toBottomOf="@+id/item_image" />
+
+        <TextView
             android:id="@+id/item_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:itemText="@{gameTools}"
-            app:layout_constraintStart_toEndOf="@+id/item_image"
-            app:layout_constraintTop_toTopOf="@+id/item_image"
-            app:layout_constraintBottom_toBottomOf="@+id/item_image" />
+            app:layout_constraintStart_toEndOf="@+id/item_quantity"
+            app:layout_constraintTop_toTopOf="@+id/item_quantity"
+            app:layout_constraintBottom_toBottomOf="@+id/item_quantity" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -11,4 +11,9 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="start_game">Start Game</string>
+
+    <string name="copter">copter</string>
+    <string name="rocket">rocket</string>
+    <string name="clear_monsters">clear_monsters</string>
+    <string name="reborn">reborn</string>
 </resources>
