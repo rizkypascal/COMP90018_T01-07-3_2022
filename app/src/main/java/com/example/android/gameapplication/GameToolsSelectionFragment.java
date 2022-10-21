@@ -124,12 +124,10 @@ public class GameToolsSelectionFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         //just to update text, nothing to do with GameTools
         if(activity.getSelectedGameToolsGameTools().size() >= 3){
             savedState = saveState();
         }
-
         activity.setGameTools(adapter.getItems());
     }
 

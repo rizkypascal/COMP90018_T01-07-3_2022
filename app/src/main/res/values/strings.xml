@@ -12,8 +12,10 @@
 
     <string name="start_game">Start Game</string>
 
+    <!-- Strings used for game tools -->
     <string name="copter">copter</string>
     <string name="rocket">rocket</string>
     <string name="clear_monsters">clear_monsters</string>
     <string name="reborn">reborn</string>
+    <string name="game_tools_instruction">Tap the tool image (Max 3 tools)</string>
 </resources>

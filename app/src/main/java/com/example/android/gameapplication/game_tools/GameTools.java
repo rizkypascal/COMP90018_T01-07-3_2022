@@ -1,11 +1,13 @@
 package com.example.android.gameapplication.game_tools;
 
+import java.io.Serializable;
+
 /**
  * @Author: Rizky Paskalis Totong
  * @Date: 30/09/22
  * @Desc: Parent class to all Game Tools objects
  */
-public class GameTools {
+public class GameTools implements Serializable {
     private int image;
     private int quantity;
     private int position;

@@ -24,10 +24,12 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
 
     private List<GameTools> gameTools;
     private GameToolsSelectionFragment fragment;
+    private String activityName;
 
-    public SelectedGameToolsAdapter(List<GameTools> gameTools, GameToolsSelectionFragment fragment){
+    public SelectedGameToolsAdapter(List<GameTools> gameTools, GameToolsSelectionFragment fragment, String activityName){
         this.gameTools = gameTools;
         this.fragment = fragment;
+        this.activityName = activityName;
     }
 
     @NonNull
@@ -63,14 +65,22 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
     @Override
     public void deleteItemFromSelectedGameTools(GameTools gameToolsParams) {
         gameTools.remove(gameToolsParams);
-        gameToolsParams.setQuantity(gameToolsParams.getQuantity() + 1);
-        fragment.updateTextQuantity(gameToolsParams);
-        fragment.setTextItemsFull("");
+
+        /**
+         * if this adapter called from MainActivity
+         * it modifies the fragment for selecting game tools
+         */
+        if(activityName == "MainActivity") {
+            gameToolsParams.setQuantity(gameToolsParams.getQuantity() + 1);
+            fragment.updateTextQuantity(gameToolsParams);
+            fragment.setTextItemsFull("");
+        }
         notifyDataSetChanged();
     }
 
     /**
      * this method called to update selected game tools box
+     * from GameToolsAdapter
      * @param gameToolsParams
      */
     public void updateSelectedItems(GameTools gameToolsParams){
