@@ -35,7 +35,7 @@ public class Bullet extends View
 
     public void move(Float velocityY)
     {
-        posY += Math.round(velocityY);
+        posY -= Math.round(velocityY);
 
     }
 
@@ -46,5 +46,13 @@ public class Bullet extends View
         bullet.setBounds(imageBounds);
         bullet.draw(canvas);
         invalidate();
+    }
+
+    public Integer getPosY() {
+        return posY;
+    }
+
+    public void setPosY(Integer posY) {
+        this.posY = posY;
     }
 }

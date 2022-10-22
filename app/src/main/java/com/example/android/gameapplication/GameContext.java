@@ -65,8 +65,6 @@ public class GameContext extends View implements Runnable{
         Monster monster = new Monster(getContext(), 500, 500,150, MonsterType.EXAM);
         this.monsters.add(monster);
 
-        Bullet bullet = new Bullet(getContext(),600,600,70);
-        bullets.add(bullet);
 
         int initBoardX = boards.get(0).getPosX();
         int initBoardY = boards.get(0).getPosY();
@@ -87,11 +85,21 @@ public class GameContext extends View implements Runnable{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.i("reminder","reach "+event.getY()+" screen" + screenY);
-        if (event.getY()*2 < screenY){
-            Log.i("i", "1/2");
+        switch (event.getAction())
+        {
+            case MotionEvent.ACTION_UP:
+                bullets.add(jumper.shoot(getContext(),70));
+                break;
+            case MotionEvent.ACTION_DOWN:
+                bullets.add(jumper.shoot(getContext(),70));
+                break;
+            case MotionEvent.ACTION_MOVE:
+                bullets.add(jumper.shoot(getContext(),70));
+                break;
+
         }
-        return true;
+
+        return false;
     }
 
     /**
@@ -125,8 +133,14 @@ public class GameContext extends View implements Runnable{
         if(bullets.size()>0)
         {
             for (Bullet bullet: bullets) {
-                bullet.draw(canvas);
+                if(bullet.getPosY()>0)
+                {
+                    bullet.draw(canvas);
+                }
+                bullet.move(10f);
             }
+
+
         }
 
         invalidate();

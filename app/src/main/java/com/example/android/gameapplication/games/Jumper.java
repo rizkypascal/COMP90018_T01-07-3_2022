@@ -104,9 +104,9 @@ public class Jumper extends View
         this.score += newScore;
     }
 
-    public void shoot()
+    public Bullet shoot(Context context,Integer size)
     {
-
+        return new Bullet(context,this.posX+this.radius/3,this.posY,size);
     }
 
 
