@@ -1,4 +1,4 @@
-package com.example.android.gameapplication.GameClasses;
+package com.example.android.gameapplication.games;
 
 /**
  * @author Tony Shu

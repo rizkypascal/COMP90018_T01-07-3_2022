@@ -17,8 +17,10 @@ import com.example.android.gameapplication.game_tools.GameTools;
 import com.example.android.gameapplication.games.Board;
 import com.example.android.gameapplication.games.CollisionUtils;
 import com.example.android.gameapplication.games.Jumper;
+import com.example.android.gameapplication.games.MonsterType;
 import com.example.android.gameapplication.games.StaticBoard;
 import com.example.android.gameapplication.games.Status;
+import com.example.android.gameapplication.games.Monster;
 import com.example.android.gameapplication.sensors.OrientationMessage;
 import com.example.android.gameapplication.sensors.OrientationSensor;
 
@@ -44,6 +46,7 @@ public class GameContext extends View implements Runnable{
 
     public ArrayList<Board> boards;
     public Jumper jumper;
+    public ArrayList<Monster> monsters = new ArrayList<>();
 
     public GameContext(Context contest, int screenX, int screenY) {
         super(contest);
@@ -57,6 +60,8 @@ public class GameContext extends View implements Runnable{
 
         // random generate the boards for full screen
         this.boards = random_generate(screenY, screenX);
+        Monster monster = new Monster(getContext(), 500, 500,150, MonsterType.EXAM);
+        this.monsters.add(monster);
 
         int initBoardX = boards.get(0).getPosX();
         int initBoardY = boards.get(0).getPosY();
@@ -102,6 +107,13 @@ public class GameContext extends View implements Runnable{
             }
             if (board.getPosY() > 0 & board.getPosY() < screenY){
                 board.draw(canvas);
+            }
+        }
+
+        if(monsters.size()>0)
+        {
+            for (Monster monster: monsters) {
+                monster.draw(canvas);
             }
         }
         invalidate();

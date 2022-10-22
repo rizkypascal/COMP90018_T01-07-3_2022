@@ -1,4 +1,4 @@
-package com.example.android.gameapplication.GameClasses;
+package com.example.android.gameapplication.games;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -21,12 +21,12 @@ public class Monster extends View {
     private Rect imageBounds;
     private Drawable monster;
 
-    public Monster(Context context, Integer posX, Integer posY, Integer size, Boolean alive, MonsterType monsterType) {
+    public Monster(Context context, Integer posX, Integer posY, Integer size, MonsterType monsterType) {
         super(context);
         this.posX = posX;
         this.posY = posY;
         this.size = size;
-        this.alive = alive;
+        this.alive = true;
         this.imageBounds = new Rect(posX-size,posY-size,posX+size, posY+size);
         switch (monsterType){
             case EXAM:
