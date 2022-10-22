@@ -6,6 +6,7 @@ package com.example.android.gameapplication;
  @desc control game activity
  */
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -72,6 +73,13 @@ public class GameActivity extends AppCompatActivity {
         transaction = manager.beginTransaction();
         transaction.add(R.id.game_tool_fragment, gameToolsFragment, "game_activity_game_tools");
         transaction.commit();
+
+        int uiOptions = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        getWindow().getDecorView().setSystemUiVisibility(uiOptions);
+        ActionBar supportActionBar = getSupportActionBar();
+        supportActionBar.hide();
 
     }
 
