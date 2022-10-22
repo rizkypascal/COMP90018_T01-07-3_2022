@@ -41,7 +41,6 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
 
     private GameContext gameContext;
-    private OrientationSensor orientationSensor;
     private int screenX, screenY = 0;
     private FragmentTransaction transaction;
     private List<GameTools> gameTools;
@@ -122,7 +121,6 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
-        //orientationSensor.disableSensor();
         super.onDestroy();
     }
 
