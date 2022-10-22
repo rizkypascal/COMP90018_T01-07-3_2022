@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_user"
+        android:icon="@drawable/ic_user"
+        android:title="USER" />
+
+    <item
+        android:id="@+id/navigation_game"
+        android:icon="@drawable/ic_game"
+        android:title="GAME" />
+
+    <item
+        android:id="@+id/navigation_game_tools"
+        android:icon="@drawable/ic_in_game_tools"
+        android:title="GAME TOOLS" />
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_recycler"-->
+<!--        android:icon="@drawable/recycler_view_demo"-->
+<!--        android:title="Recycler View0" />-->
+
+</menu>
