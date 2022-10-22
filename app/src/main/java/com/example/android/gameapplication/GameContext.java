@@ -5,10 +5,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.android.gameapplication.game_tools.GameTools;
 import com.example.android.gameapplication.games.Board;
 import com.example.android.gameapplication.games.CollisionUtils;
 import com.example.android.gameapplication.games.Jumper;
@@ -22,6 +27,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GameContext extends View implements Runnable{
@@ -86,6 +92,7 @@ public class GameContext extends View implements Runnable{
         super.onDraw(canvas);
 //        Log.i("jumper loc","reach "+jumper.getPosY()+" screen" + screenY);
         jumper.draw(canvas);
+
         for (Board board : boards){
             if (jumper.getStatus() == Status.movingUp & jumper.getPosY() < screenY/2){
                 Log.i("i","speed: "+ jumper.getSpeedY());
