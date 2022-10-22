@@ -122,7 +122,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
-        orientationSensor.disableSensor();
+        //orientationSensor.disableSensor();
         super.onDestroy();
     }
 
