@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.android.gameapplication.ListContent.ListAdapter;
-import com.example.android.gameapplication.ListContent.ListTuple;
+import com.example.android.gameapplication.list_content.ListAdapter;
+import com.example.android.gameapplication.list_content.ListTuple;
 
 import java.util.ArrayList;
 

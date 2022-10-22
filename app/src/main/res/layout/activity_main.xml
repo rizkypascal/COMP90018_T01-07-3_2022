@@ -5,6 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -28,8 +29,13 @@
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bottom_nav_background"
+        android:elevation="8dp"
+        app:itemIconTint="@drawable/bottom_nav_color_selector"
         android:layout_alignParentBottom="true"
-        android:background="?android:attr/windowBackground"
         app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>

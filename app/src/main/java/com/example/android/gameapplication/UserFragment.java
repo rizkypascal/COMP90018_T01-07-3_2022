@@ -1,6 +1,7 @@
 package com.example.android.gameapplication;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.android.gameapplication.database.Database;
+
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +37,7 @@ public class UserFragment extends Fragment {
     Button signUpButton;
 
     private EditText signInNameValue, signInPasswordValue, signUpNameValue, signUpPasswordValue0, signUpPasswordValue1;
-    private TextView textLoginInfo, unionInfo;
+    private TextView textLoginInfo;
 
     private MainActivity activity;
     private Context context;
@@ -39,6 +47,7 @@ public class UserFragment extends Fragment {
     // set variables, interface for communication between activity & fragment, fragment & fragment
     private String user_name="";
     private GameFragment.SendMessages sendMessages;
+    private Database database;
 
     @Override
     public void onAttach(Context context) {
@@ -65,14 +74,13 @@ public class UserFragment extends Fragment {
         signUpPasswordValue0 = view.findViewById(R.id.signUpPasswordValue0);
         signUpPasswordValue1 = view.findViewById(R.id.signUpPasswordValue1);
         textLoginInfo = view.findViewById(R.id.textLoginInfo);
-        unionInfo = view.findViewById(R.id.unionInfo);
         unbinder = ButterKnife.bind(this, view);
         activity = (MainActivity) getActivity();
         context = activity.getApplicationContext();
         if (user_name!="") {
             textLoginInfo.setText("You have signed in as "+user_name);
-            unionInfo.setText(GetUnionInfo(user_name));
         }
+        database = new Database(); //TODO: XUEQING may need to re-initiate
         return view;
     }
 
@@ -81,17 +89,27 @@ public class UserFragment extends Fragment {
         Log.d("UserFragment", "signInButton clicked.");
         String username_temp = signInNameValue.getText().toString();
         String password_temp = signInPasswordValue.getText().toString();
-        if (CheckLogin(username_temp, password_temp)){
-            user_name = username_temp;
-            sendMessages.iAmMSG(user_name);
-            UserFragmentAfterLogin userFragment = new UserFragmentAfterLogin();
-            activity.getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.layout_fragment, userFragment)
-                    .addToBackStack(null)
-                    .commit();
-            userFragment.fragmentReceiveMsg(user_name);
-
+        try {
+            if (CheckLogin(username_temp, password_temp)){
+                MediaPlayer mp = MediaPlayer.create(activity, R.raw.vista);
+                mp.start();
+                user_name = username_temp;
+                sendMessages.iAmMSG(user_name);
+                UserFragmentAfterLogin userFragment = new UserFragmentAfterLogin();
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.layout_fragment, userFragment)
+                        .addToBackStack(null)
+                        .commit();
+                userFragment.fragmentReceiveMsg(user_name);
+            }else {
+                MediaPlayer mp = MediaPlayer.create(activity, R.raw.erro);
+                mp.start();
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 
@@ -102,6 +120,11 @@ public class UserFragment extends Fragment {
         String password_temp0 = signUpPasswordValue0.getText().toString();
         String password_temp1 = signUpPasswordValue1.getText().toString();
         if (CheckRegister(username_temp, password_temp0, password_temp1)){
+            MediaPlayer mp = MediaPlayer.create(activity, R.raw.winxp);
+            mp.start();
+        }else {
+            MediaPlayer mp = MediaPlayer.create(activity, R.raw.erro);
+            mp.start();
         }
     }
 
@@ -111,7 +134,7 @@ public class UserFragment extends Fragment {
         unbinder.unbind();
     }
 
-    boolean CheckLogin(String user_name, String password){
+    boolean CheckLogin(String user_name, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         Log.d("UserFragment", "print out username+password: "+user_name+" "+password);
         if (user_name.length()==0){
             PopToast("Username is empty!");
@@ -122,7 +145,11 @@ public class UserFragment extends Fragment {
             return false;
         }
         else{
-            if (UsernameMatchPassword(user_name, password)) {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            messageDigest.update(password.getBytes("UTF-8"));
+            String encodePassword = byte2Hex(messageDigest.digest());
+            Log.d("password", encodePassword+" "+password);
+            if (database.UsernameMatchPassword(user_name, password)) {
                 PopToast("Successfully logged in as "+user_name);
                 Log.d("UserFragment","password username matches");
                 return true;
@@ -145,24 +172,32 @@ public class UserFragment extends Fragment {
             PopToast("Confirmed password is empty!");
             return false;
         }
-        else if(password0!=password1){
+        else if(!Objects.equals(password0,password1)){
             PopToast("Password and confirmed password aren't identical!");
             return false;
         }
         else{
-            if (CheckAddNewAccount(user_name, password0)) {
-                PopToast("Successfully sign up!");
-                return true;
+            try{
+                MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+                messageDigest.update(password0.getBytes("UTF-8"));
+                String encodePassword = byte2Hex(messageDigest.digest());
+                Log.d("password", encodePassword+" "+password0);
+                if (database.CheckAddNewAccount(user_name, password0)) {
+                    PopToast("Successfully sign up!");
+                    return true;
+                }
+                PopToast("Username already exists!");
+                return false;
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+                return false;
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                return false;
             }
-            PopToast("Username already exists!");
-            return false;
         }
     }
 
-    String GetUnionInfo(String username){
-        if (GetUnion(username)=="") return "You are not a member of any union.";
-        else return "You are a member of union: "+GetUnion(username);
-    }
 
     void PopToast(String text){
         Toast toast = Toast.makeText(context, null, duration);
@@ -170,22 +205,18 @@ public class UserFragment extends Fragment {
         toast.show();
     }
 
-
-
-    //TODO: XQ all the following methods need to be re-witten/modified
-    //You may modify them in this file, or implement them in another
-    String GetUnion(String username){
-        return "UnionTest0"; // TODO: XQ please return "" if the user hasn't joined as union.
+    public static String byte2Hex(byte[] bytes) {
+        char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
+        char[] hexChars = new char[bytes.length * 2];
+        for (int j = 0; j < bytes.length; j++) {
+            int v = bytes[j] & 0xFF;
+            hexChars[j * 2] = HEX_ARRAY[v >>> 4];
+            hexChars[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
+        }
+        return new String(hexChars);
     }
 
-    boolean UsernameMatchPassword(String username, String password){
-        return true;
-        //TODO: XQ check if username exist, if password correct. return t/f.
-    }
 
-    boolean CheckAddNewAccount(String username, String password){
-        return true;
-        // TODO: XQ check if the username unique. add it to db and return true if unique
-        // otherwise return false.
-    }
+
+
 }

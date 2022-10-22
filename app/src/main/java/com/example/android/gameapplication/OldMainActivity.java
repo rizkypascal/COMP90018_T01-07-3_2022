@@ -24,8 +24,8 @@ import android.widget.Button;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import com.example.android.gameapplication.Sensors.LightMessage;
-import com.example.android.gameapplication.Sensors.LightSensor;
+import com.example.android.gameapplication.sensors.LightMessage;
+import com.example.android.gameapplication.sensors.LightSensor;
 
 public class OldMainActivity extends AppCompatActivity {
 

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="gameTools"
+            type="com.example.android.gameapplication.game_tools.GameTools" />
+        <variable
+            name="clickListener"
+            type="com.example.android.gameapplication.game_tools.GameToolsClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:onClick="@{() -> clickListener.addItemToSelectedGameTools(gameTools)}"
+        >
+
+        <TextView
+            android:id="@+id/item_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="1"
+            app:itemQuantity="@{gameTools}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:background="@drawable/rounded_textview"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/item_image"
+            android:layout_width="@dimen/item_size"
+            android:layout_height="60dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:itemImage="@{gameTools}"
+            app:layout_constraintBottom_toBottomOf="@id/item_quantity"
+            app:layout_constraintStart_toStartOf="@id/item_quantity"
+            app:layout_constraintTop_toTopOf="@id/item_quantity"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/item_text"
+            android:fontFamily="@font/games_scribble"
+            android:textStyle="bold"
+            android:textSize="26dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="items"
+            app:itemText="@{gameTools}"
+            app:layout_constraintBottom_toBottomOf="@id/item_image"
+            app:layout_constraintStart_toEndOf="@id/item_image"
+            app:layout_constraintTop_toTopOf="@id/item_image"
+
+            app:layout_constraintVertical_bias="0.393" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

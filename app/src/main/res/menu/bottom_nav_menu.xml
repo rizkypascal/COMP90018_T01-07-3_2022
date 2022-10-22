@@ -12,9 +12,9 @@
         android:title="GAME" />
 
     <item
-        android:id="@+id/navigation_union"
-        android:icon="@drawable/ic_union"
-        android:title="UNION" />
+        android:id="@+id/navigation_game_tools"
+        android:icon="@drawable/ic_in_game_tools"
+        android:title="GAME TOOLS" />
 
 <!--    <item-->
 <!--        android:id="@+id/navigation_recycler"-->
