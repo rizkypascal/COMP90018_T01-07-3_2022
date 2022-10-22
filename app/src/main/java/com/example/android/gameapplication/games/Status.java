@@ -7,5 +7,6 @@ package com.example.android.gameapplication.games;
  */
 public enum Status {
     movingUp,
-    movingDown
+    movingDown,
+    stayStill
 }

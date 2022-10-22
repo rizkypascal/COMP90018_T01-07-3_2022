@@ -38,6 +38,7 @@ public class GameContext extends View implements Runnable{
     private boolean isUpdate = false;
     private int initialBoards = 200;
     private int widthRatio = 5;
+    private final float GRAVITY = 10f;
 
     public static int screenX, screenY;
 
@@ -94,9 +95,10 @@ public class GameContext extends View implements Runnable{
         jumper.draw(canvas);
 
         for (Board board : boards){
-            if (jumper.getStatus() == Status.movingUp & jumper.getPosY() < screenY/2){
+            if (jumper.getStatus() == Status.stayStill){
                 Log.i("i","speed: "+ jumper.getSpeedY());
-                board.move(0f,jumper.getSpeedY());
+                Log.i("i","-----------");
+                board.move(0f,(float) jumper.getBoardMove());
             }
             if (board.getPosY() > 0 & board.getPosY() < screenY){
                 board.draw(canvas);
@@ -173,7 +175,7 @@ public class GameContext extends View implements Runnable{
     public void orientationUpdate(OrientationMessage OrientationEvent) { // place to get sensor value from orientation
         //Log.d("[Subscription]" , "Orientations: " + String.valueOf(OrientationEvent.getOrientations()[2]));
         Float moveX = 50*OrientationEvent.getOrientations()[2];
-        jumper.move(moveX,10f);
+        jumper.move(moveX,10f,screenY/2);
 
         // not a good solution, as collision detection should be done within the context class
         for (Board bar : boards){

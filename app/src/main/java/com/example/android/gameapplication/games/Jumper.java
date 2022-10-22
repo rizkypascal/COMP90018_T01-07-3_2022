@@ -26,6 +26,7 @@ public class Jumper extends View
     private Drawable jumper; // image resource
     Rect imageBounds; // jumper image is drawn based on this rectangle size
     private Integer screenSize;
+    private Integer boardMove;
 
 
     public Jumper(Context context, Integer posX, Integer posY,Integer radius,Float speedY,Integer screenSize,Integer imageID) {
@@ -38,6 +39,7 @@ public class Jumper extends View
         this.jumper = context.getResources().getDrawable(imageID);
         this.imageBounds = new Rect(posX-radius,posY-radius,posX+radius, posY+radius);
         jumper.setBounds(imageBounds);
+        boardMove = 0;
     }
 
     /**
@@ -45,10 +47,16 @@ public class Jumper extends View
      * @param velocityY
      * @return
      */
-    public void move(Float velocityX, Float velocityY)
+    public void move(Float velocityX, Float velocityY, Integer thresholdY)
     {
         posX += Math.round(velocityX);
         posY += Math.round(velocityY-this.speedY);
+        if(posY < thresholdY)
+        {
+            this.boardMove = thresholdY - posY;
+            posY = thresholdY;
+            this.status = Status.stayStill;
+        }
         if (velocityY > this.speedY)
         {
             this.status = Status.movingDown;
@@ -196,5 +204,21 @@ public class Jumper extends View
 
     public void setImageBounds(Rect imageBounds) {
         this.imageBounds = imageBounds;
+    }
+
+    public Integer getScreenSize() {
+        return screenSize;
+    }
+
+    public void setScreenSize(Integer screenSize) {
+        this.screenSize = screenSize;
+    }
+
+    public Integer getBoardMove() {
+        return boardMove;
+    }
+
+    public void setBoardMove(Integer boardMove) {
+        this.boardMove = boardMove;
     }
 }
