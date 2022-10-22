@@ -22,12 +22,12 @@ public class Bullet extends View
     private Rect imageBounds;
 
 
-    public Bullet(Context context, Integer posX, Integer posY, Integer size) {
+    public Bullet(Context context,Integer posX, Integer posY, Integer size) {
         super(context);
         this.posX = posX;
         this.posY = posY;
         this.size = size;
-        this.imageBounds = new Rect(posX-size,posY-size,posX+size, posY+size);
+        this.imageBounds = new Rect(posX-size,posY-size,posX, posY+size);
         this.bullet = context.getResources().getDrawable(R.drawable.bullet);
         this.bullet.setBounds(this.imageBounds);
 
@@ -42,7 +42,7 @@ public class Bullet extends View
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        imageBounds.set(posX-size,posY-size,posX+size, posY+size);
+        imageBounds.set(posX-size,posY-size,posX, posY+size);
         bullet.setBounds(imageBounds);
         bullet.draw(canvas);
         invalidate();

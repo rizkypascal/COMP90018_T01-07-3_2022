@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.android.gameapplication.game_tools.GameTools;
 import com.example.android.gameapplication.games.Board;
+import com.example.android.gameapplication.games.Bullet;
 import com.example.android.gameapplication.games.CollisionUtils;
 import com.example.android.gameapplication.games.Jumper;
 import com.example.android.gameapplication.games.MonsterType;
@@ -47,6 +48,7 @@ public class GameContext extends View implements Runnable{
     public ArrayList<Board> boards;
     public Jumper jumper;
     public ArrayList<Monster> monsters = new ArrayList<>();
+    public ArrayList<Bullet> bullets = new ArrayList<>();
 
     public GameContext(Context contest, int screenX, int screenY) {
         super(contest);
@@ -62,6 +64,9 @@ public class GameContext extends View implements Runnable{
         this.boards = random_generate(screenY, screenX);
         Monster monster = new Monster(getContext(), 500, 500,150, MonsterType.EXAM);
         this.monsters.add(monster);
+
+        Bullet bullet = new Bullet(getContext(),600,600,70);
+        bullets.add(bullet);
 
         int initBoardX = boards.get(0).getPosX();
         int initBoardY = boards.get(0).getPosY();
@@ -116,6 +121,14 @@ public class GameContext extends View implements Runnable{
                 monster.draw(canvas);
             }
         }
+
+        if(bullets.size()>0)
+        {
+            for (Bullet bullet: bullets) {
+                bullet.draw(canvas);
+            }
+        }
+
         invalidate();
 
     }
@@ -177,6 +190,8 @@ public class GameContext extends View implements Runnable{
 //            }
 //        }
     }
+
+
 
     /**
      * @author Changwen Li
