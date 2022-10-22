@@ -9,13 +9,13 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.android.gameapplication.GameClasses.Board;
-import com.example.android.gameapplication.GameClasses.CollisionUtils;
-import com.example.android.gameapplication.GameClasses.Jumper;
-import com.example.android.gameapplication.GameClasses.StaticBoard;
-import com.example.android.gameapplication.GameClasses.Status;
-import com.example.android.gameapplication.Sensors.OrientationMessage;
-import com.example.android.gameapplication.Sensors.OrientationSensor;
+import com.example.android.gameapplication.games.Board;
+import com.example.android.gameapplication.games.CollisionUtils;
+import com.example.android.gameapplication.games.Jumper;
+import com.example.android.gameapplication.games.StaticBoard;
+import com.example.android.gameapplication.games.Status;
+import com.example.android.gameapplication.sensors.OrientationMessage;
+import com.example.android.gameapplication.sensors.OrientationSensor;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
