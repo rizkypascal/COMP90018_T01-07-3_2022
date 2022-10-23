@@ -34,4 +34,7 @@
     <string name="warning">警告</string>
     <string name="confirm_exit">您确定要退出吗？</string>
     <string name="confirm_exit_tool">您确定要退出吗？您的工具会减少的</string>
+    <string name="rocket_tool">火箭</string>
+    <string name="clear_monsters_tool">清除怪兽</string>
+    <string name="reborn_tool">重生</string>
 </resources>

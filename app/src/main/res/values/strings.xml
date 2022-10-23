@@ -19,6 +19,9 @@
     <string name="reborn">reborn</string>
     <string name="game_tools_instruction">Tap the tool image (Max 3 tools)</string>
     <string name="helicopter">Helicopter</string>
+    <string name="rocket_tool">Rocket</string>
+    <string name="clear_monsters_tool">Clear Monsters</string>
+    <string name="reborn_tool">Reborn</string>
 
     <!--Strings in fragment game-->
     <string name="play_game">Play Game</string>
