@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="You have not signed in yet"
+        android:text="@string/not_logged_in"
         android:textSize="20sp">
     </TextView>
 
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Already got an account? Sign in here!"
+        android:text="@string/sign_in_here"
         android:textSize="20sp">
     </TextView>
 
@@ -35,13 +35,13 @@
             android:id="@+id/signInNameInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username: "
+            android:text="@string/username_hint"
             android:textSize="20sp">
         </TextView>
 
         <EditText
             android:id="@+id/signInNameValue"
-            android:hint="Please enter your username"
+            android:hint="@string/enter_username"
             android:layout_width="250dp"
             android:layout_height="wrap_content">
         </EditText>
@@ -56,13 +56,13 @@
             android:id="@+id/signInPasswordInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password: "
+            android:text="@string/password_hint"
             android:textSize="20sp">
         </TextView>
 
         <EditText
             android:id="@+id/signInPasswordValue"
-            android:hint="Please enter your password"
+            android:hint="@string/enter_password"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:inputType="textPassword">
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Sign in">
+        android:text="@string/sign_in">
     </androidx.appcompat.widget.AppCompatButton>
 
 
@@ -83,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Haven't got an account? Sign up here!"
+        android:text="@string/sign_up_here"
         android:textSize="20sp">
     </TextView>
 
@@ -96,13 +96,13 @@
             android:id="@+id/signUpNameInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username: "
+            android:text="@string/username_hint"
             android:textSize="20sp">
         </TextView>
 
         <EditText
             android:id="@+id/signUpNameValue"
-            android:hint="Please enter your username"
+            android:hint="@string/enter_username"
             android:layout_width="250dp"
             android:layout_height="wrap_content">
         </EditText>
@@ -117,7 +117,7 @@
             android:id="@+id/signUpPasswordInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password: "
+            android:text="@string/password_hint"
             android:textSize="20sp">
         </TextView>
 
@@ -125,7 +125,7 @@
             android:id="@+id/signUpPasswordValue0"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:hint="Please enter your password"
+            android:hint="@string/enter_password"
             android:inputType="textPassword">
         </EditText>
 
@@ -148,7 +148,7 @@
             android:id="@+id/signUpPasswordValue1"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:hint="Please confirm your password"
+            android:hint="@string/confirm_password"
             android:inputType="textPassword">
         </EditText>
 
@@ -159,7 +159,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Sign up">
+        android:text="@string/sign_up">
     </androidx.appcompat.widget.AppCompatButton>
 
 

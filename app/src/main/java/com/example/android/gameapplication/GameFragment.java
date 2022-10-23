@@ -125,7 +125,8 @@ public class GameFragment extends Fragment {
             mp.start();
 
             user_name = "";
-            textLoginInfo.setText("You have not signed in yet");
+            String message = getString(R.string.not_logged_in);
+            textLoginInfo.setText(message);
             Log.d("GameFragment", "send msg: "+user_name);
             sendMessages.iAmMSG(user_name);
             signInUpButton.setText("SIGN IN/UP");

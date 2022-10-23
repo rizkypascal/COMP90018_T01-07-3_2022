@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:text="You have not signed in yet"
+        android:text="@string/not_logged_in"
         android:textSize="20sp">
     </TextView>
 
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="250dp"
-        android:text="Play Game">
+        android:text="@string/play_game">
     </androidx.appcompat.widget.AppCompatButton>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:text="Sign in/up">
+        android:text="@string/sing_in_up">
     </androidx.appcompat.widget.AppCompatButton>
 
 

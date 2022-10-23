@@ -18,4 +18,26 @@
     <string name="clear_monsters">clear_monsters</string>
     <string name="reborn">reborn</string>
     <string name="game_tools_instruction">Tap the tool image (Max 3 tools)</string>
+    <string name="helicopter">Helicopter</string>
+
+    <!--Strings in fragment game-->
+    <string name="play_game">Play Game</string>
+    <string name="sing_in_up">Sign in/up</string>
+
+    <!--strings for navigator-->
+    <string name="user">USER</string>
+    <string name="game">GAME</string>
+    <string name="game_tools">GAME TOOLS</string>
+
+    <!--strings for tips-->
+    <string name="not_logged_in">You have not logged in yet</string>
+    <string name="sign_in_here">Already got an account? Sign in here!</string>
+    <string name="enter_username">Please enter your username</string>
+    <string name="enter_password">Please enter your password</string>
+    <string name="sign_up_here">Haven\'t got an account? Sign up here!</string>
+    <string name="username_hint">Username: </string>
+    <string name="password_hint">Password: </string>
+    <string name="confirm_password">Please confirm your password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
 </resources>
