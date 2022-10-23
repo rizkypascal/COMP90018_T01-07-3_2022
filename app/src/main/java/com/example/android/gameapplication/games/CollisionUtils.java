@@ -13,7 +13,7 @@ public final class CollisionUtils {
      * @param board
      * @return true if the jumper falls onto the given board, false otherwise.
      */
-    public static Boolean JumperBoardCollision(Jumper jumper,Board board)
+    public static Boolean jumperBoardCollision(Jumper jumper,Board board)
     {
         Integer jumperPosX = jumper.getPosX();
         Integer jumperPosY = jumper.getPosY();
@@ -27,5 +27,24 @@ public final class CollisionUtils {
         }
         return false;
 
+    }
+
+    /**
+     *
+     * @param bullet
+     * @param monster
+     * @return true if the monster got shot, false otherwise
+     */
+    public static Boolean bulletMonsterCollision(Bullet bullet,Monster monster)
+    {
+        Integer bulletPosX = bullet.getPosX();
+        Integer bulletPosY = bullet.getPosY();
+        Integer monsterPosX = monster.getPosX();
+        Integer monsterPosY = monster.getPosY()+monster.getSize();
+        if(bulletPosX>=monsterPosX-monster.getSize()/2 && bulletPosX<=monsterPosX+monster.getSize() && bulletPosY<=monsterPosY)
+        {
+            return true;
+        }
+        return false;
     }
 }

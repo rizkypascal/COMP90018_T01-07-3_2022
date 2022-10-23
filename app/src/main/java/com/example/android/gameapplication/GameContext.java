@@ -62,8 +62,12 @@ public class GameContext extends View implements Runnable{
 
         // random generate the boards for full screen
         this.boards = random_generate(screenY, screenX);
+
+        //some monsters for testing purpose
         Monster monster = new Monster(getContext(), 500, 500,150, MonsterType.EXAM);
         this.monsters.add(monster);
+        Monster monster2 = new Monster(getContext(), 800, 700,150, MonsterType.QUIZ);
+        this.monsters.add(monster2);
 
 
         int initBoardX = boards.get(0).getPosX();
@@ -85,6 +89,7 @@ public class GameContext extends View implements Runnable{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        //jumper shoots a bullet when user touches the screen
         switch (event.getAction())
         {
             case MotionEvent.ACTION_UP:
@@ -112,6 +117,7 @@ public class GameContext extends View implements Runnable{
 //        Log.i("jumper loc","reach "+jumper.getPosY()+" screen" + screenY);
         jumper.draw(canvas);
 
+        //all boards move down if the jumper's status is stayStill
         for (Board board : boards){
             if (jumper.getStatus() == Status.stayStill){
                 Log.i("i","speed: "+ jumper.getSpeedY());
@@ -123,6 +129,7 @@ public class GameContext extends View implements Runnable{
             }
         }
 
+        //draw all monsters
         if(monsters.size()>0)
         {
             for (Monster monster: monsters) {
@@ -130,6 +137,7 @@ public class GameContext extends View implements Runnable{
             }
         }
 
+        //draw all bullets and bullets movement
         if(bullets.size()>0)
         {
             for (Bullet bullet: bullets) {
@@ -140,6 +148,18 @@ public class GameContext extends View implements Runnable{
                 bullet.move(10f);
             }
 
+
+        }
+
+        //detect collision between monsters and bullets
+        for (Bullet bullet: bullets) {
+            for (Monster monster: monsters) {
+                if(CollisionUtils.bulletMonsterCollision(bullet,monster))
+                {
+                    monsters.remove(monster);
+                    break;
+                }
+            }
 
         }
 
@@ -220,7 +240,7 @@ public class GameContext extends View implements Runnable{
 
         // not a good solution, as collision detection should be done within the context class
         for (Board bar : boards){
-            if(CollisionUtils.JumperBoardCollision(jumper,bar) && jumper.getStatus().equals(Status.movingDown))
+            if(CollisionUtils.jumperBoardCollision(jumper,bar) && jumper.getStatus().equals(Status.movingDown))
             {
                 jumper.setSpeedY(20f);
                 jumper.setStatus(Status.movingUp);

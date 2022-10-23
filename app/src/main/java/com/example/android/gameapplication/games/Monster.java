@@ -48,7 +48,7 @@ public class Monster extends View {
     /**
      * @param velocityX
      * @param velocityY
-     * @return
+     * @return monster can move based on the given x and y velocity
      */
     public void move(Float velocityX, Float velocityY)
     {
@@ -63,5 +63,29 @@ public class Monster extends View {
         monster.setBounds(imageBounds);
         monster.draw(canvas);
         invalidate();
+    }
+
+    public Integer getPosX() {
+        return posX;
+    }
+
+    public void setPosX(Integer posX) {
+        this.posX = posX;
+    }
+
+    public Integer getPosY() {
+        return posY;
+    }
+
+    public void setPosY(Integer posY) {
+        this.posY = posY;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
     }
 }
