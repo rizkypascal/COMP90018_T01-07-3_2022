@@ -73,6 +73,7 @@ public class GameActivity extends AppCompatActivity {
         transaction.add(R.id.game_tool_fragment, gameToolsFragment, "game_activity_game_tools");
         transaction.commit();
 
+        //sticky immersive mode for game activity
         int uiOptions = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
