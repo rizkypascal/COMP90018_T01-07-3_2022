@@ -90,13 +90,13 @@ public class GameActivity extends AppCompatActivity {
     public void onBackPressed() {
         String alertMessage = "";
         if(gameTools == null || gameTools.size() == 0){
-            alertMessage = "Are you sure you want to exit?";
+            alertMessage = getString(R.string.confirm_exit);
         } else {
-            alertMessage = "Are you sure you want to exit? Your game tools are already reduced";
+            alertMessage = getString(R.string.confirm_exit_tool);
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
         builder.setMessage(alertMessage);
-        builder.setTitle("Warning");
+        builder.setTitle(getString(R.string.warning));
 
         /**
          * set Cancelable false for when the user clicks

@@ -40,4 +40,8 @@
     <string name="confirm_password">Please confirm your password</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_in">Sign in</string>
+    <string name="play_without_tool">You have not picked any game tools, do you still want to continue?</string>
+    <string name="warning">Warning</string>
+    <string name="confirm_exit">Are you sure you want to exit?</string>
+    <string name="confirm_exit_tool">Are you sure you want to exit? Your game tools are already reduced</string>
 </resources>

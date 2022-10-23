@@ -90,8 +90,8 @@ public class GameFragment extends Fragment {
          */
         if (selectedGameTools == null || selectedGameTools.size() == 0){
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setMessage("You have not picked any game tools, do you still want to continue?");
-            builder.setTitle("Warning");
+            builder.setMessage(getString(R.string.play_without_tool));
+            builder.setTitle(getString(R.string.warning));
             /**
              * set cancelable false for when the user clicks
              * on the outside the Dialog Box then
