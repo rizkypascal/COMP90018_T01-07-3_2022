@@ -26,11 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-<<<<<<< Updated upstream
-        android:text="Your best scores:"
-=======
         android:text="@string/select_faculty"
->>>>>>> Stashed changes
+
         android:textColor="#111111"
         android:textSize="20sp">
     </TextView>
@@ -43,30 +40,17 @@
         android:spinnerMode="dropdown" />
 
 
-<<<<<<< Updated upstream
-    <TextView
-        android:id="@+id/worldScoresLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="World's best scores"
-        android:textColor="#111111"
-        android:textSize="20sp">
-    </TextView>
-=======
->>>>>>> Stashed changes
+
+
 
 
     <TextView
         android:id="@+id/worldScoresLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< Updated upstream
-        android:text="Your world rank is: over 10000"
-=======
+
         android:layout_marginTop="50dp"
         android:text="@string/select_subject"
->>>>>>> Stashed changes
         android:textColor="#111111"
         android:textSize="20sp">
     </TextView>
@@ -87,8 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
-            android:layout_marginLeft="150dp"
-            android:layout_marginRight="150dp"
+            android:layout_centerHorizontal="true"
             android:text="Button" />
     </RelativeLayout>
 
