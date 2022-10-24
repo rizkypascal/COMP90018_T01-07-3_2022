@@ -54,6 +54,9 @@
     <string name="world_rank">您的世界排名为：</string>
     <string name="your_best_score">您的最好分数为：</string>
     <string name="world_best_score">全球最好的分数为：</string>
+    <string name="select_faculty">选择你的faculty</string>
+    <string name="select_subject">选择科目 </string>
+
     <string name="your_world_ranking">您的世界排名为：10000以上</string>
     <string name="play_as_tourist">您以游客身份游玩</string>
     <string name="play_as_user">您以如下账号登录：</string>

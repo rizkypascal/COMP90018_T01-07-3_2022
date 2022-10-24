@@ -26,54 +26,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/select_faculty"
-
+        android:text="@string/your_best_score"
         android:textColor="#111111"
         android:textSize="20sp">
     </TextView>
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:dropDownVerticalOffset="45dp"
-        android:spinnerMode="dropdown" />
-
-
-
-
-
-
+    <ListView
+        android:id="@+id/personal_score_list_view"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"/>
 
     <TextView
         android:id="@+id/worldScoresLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/select_subject"
-
+        android:text="@string/world_best_score"
         android:textColor="#111111"
         android:textSize="20sp">
     </TextView>
 
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:dropDownVerticalOffset="45dp"
-        android:spinnerMode="dropdown" />
+    <ListView
+        android:id="@+id/world_score_list_view"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/userRank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/your_world_ranking"
+        android:textColor="#111111"
+        android:textSize="20sp">
+    </TextView>
 
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:layout_centerHorizontal="true"
-            android:text="Button" />
-    </RelativeLayout>
+
+
+
 
 </LinearLayout>
