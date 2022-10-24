@@ -78,7 +78,7 @@ public class UserFragment extends Fragment {
         activity = (MainActivity) getActivity();
         context = activity.getApplicationContext();
         if (user_name!="") {
-            textLoginInfo.setText(getString(R.string.sign_in_as)+user_name);
+            textLoginInfo.setText(getString(R.string.sign_in_as)+" "+user_name);
         }
         database = new Database(); //TODO: XUEQING may need to re-initiate
         return view;

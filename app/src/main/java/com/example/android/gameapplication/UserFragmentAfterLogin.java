@@ -60,7 +60,7 @@ public class UserFragmentAfterLogin extends Fragment {
         listView.setAdapter(adapterWorldScore);
 
         if (user_name!="") {
-            textLoginInfo.setText(getString(R.string.sign_in_as)+user_name);
+            textLoginInfo.setText(getString(R.string.sign_in_as)+" "+user_name);
             userRank.setText(getString(R.string.world_rank)+String.valueOf(UserRank(user_name)));
         }
 
