@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -47,16 +48,24 @@ public class Jumper extends View
      * @param velocityY
      * @return
      */
-    public void move(Float velocityX, Float velocityY, Integer thresholdY)
+    public void move(Float velocityX, Float velocityY, int upperthreshold, int lowerthreshold)
     {
         posX += Math.round(velocityX);
         posY += Math.round(velocityY-this.speedY);
-        if(posY < thresholdY)
+        if(posY < upperthreshold)
         {
-            this.boardMove = thresholdY - posY;
-            posY = thresholdY;
+            this.boardMove = upperthreshold - posY;
+            posY = upperthreshold;
             this.status = Status.stayStill;
         }
+
+        if(posY > lowerthreshold)
+        {
+            this.boardMove = lowerthreshold - posY;
+            posY = lowerthreshold;
+        }
+
+
         if (velocityY > this.speedY)
         {
             this.status = Status.movingDown;
