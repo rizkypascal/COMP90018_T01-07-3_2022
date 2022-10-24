@@ -18,4 +18,59 @@
     <string name="clear_monsters">clear_monsters</string>
     <string name="reborn">reborn</string>
     <string name="game_tools_instruction">Tap the tool image (Max 3 tools)</string>
+<<<<<<< Updated upstream
+=======
+    <string name="helicopter">Helicopter</string>
+    <string name="rocket_tool">Rocket</string>
+    <string name="clear_monsters_tool">Clear Monsters</string>
+    <string name="reborn_tool">Reborn</string>
+
+    <!--Strings in fragment game-->
+    <string name="play_game">Play Game</string>
+    <string name="sing_in_up">Sign in/up</string>
+
+    <!--strings for navigator-->
+    <string name="user">USER</string>
+    <string name="game">GAME</string>
+    <string name="game_tools">GAME TOOLS</string>
+
+    <!--strings for tips-->
+    <string name="not_logged_in">You have not logged in yet</string>
+    <string name="sign_in_here">Already got an account? Sign in here!</string>
+    <string name="enter_username">Please enter your username</string>
+    <string name="enter_password">Please enter your password</string>
+    <string name="sign_up_here">Haven\'t got an account? Sign up here!</string>
+    <string name="username_hint">Username: </string>
+    <string name="password_hint">Password: </string>
+    <string name="confirm_password">Please confirm your password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
+    <string name="play_without_tool">You have not picked any game tools, do you still want to continue?</string>
+    <string name="warning">Warning</string>
+    <string name="confirm_exit">Are you sure you want to exit?</string>
+    <string name="confirm_exit_tool">Are you sure you want to exit? Your game tools are already reduced</string>
+    <string name="all_tools_picked">You have picked all items</string>
+    <string name="duplicated_tool">"Duplicate items detected!"</string>
+    <string name="empty_string" translatable="false"></string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="sign_in_as">You have signed in as </string>
+    <string name="login_as">Successfully logged in as </string>
+    <string name="something_wrong">Something wrong with username/password!</string>
+    <string name="username_empty">Username is empty!</string>
+    <string name="password_empty">Password is empty!</string>
+    <string name="confirm_empty">Confirmed password is empty!</string>
+    <string name="not_identical">Password and confirmed password aren\'t identical!</string>
+    <string name="sign_up_successful">Successfully sign up!</string>
+    <string name="username_exists">Username already exists!</string>
+    <string name="world_rank">Your world rank is: </string>
+    <string name="your_best_score">Your best scores:</string>
+    <string name="select_faculty">Select the faculty you want to join</string>
+    <string name="select_subject">Select the subject </string>
+    <string name="world_best_score">World\'s best scores</string>
+    <string name="your_world_ranking">Your world rank is: over 10000</string>
+    <string name="play_as_tourist">You are playing as a tourist.</string>
+    <string name="play_as_user">You are playing as user: </string>
+>>>>>>> Stashed changes
 </resources>
