@@ -22,7 +22,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/border"/>
+            android:background="@drawable/border"
+            android:alpha="0.90"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

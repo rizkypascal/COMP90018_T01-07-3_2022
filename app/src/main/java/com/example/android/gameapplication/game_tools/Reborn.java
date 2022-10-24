@@ -11,9 +11,9 @@ public class Reborn extends GameTools {
         super(image, name);
     }
 
-    public Reborn(int quantity){
+    public Reborn(String reborn,int quantity){
         setImage(R.drawable.reborn);
-        setName("Reborn");
+        setName(reborn);
         setCodeName(String.valueOf(R.string.reborn));
         setQuantity(quantity);
     }

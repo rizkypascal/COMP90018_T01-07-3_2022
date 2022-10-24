@@ -33,10 +33,13 @@ public class Bullet extends View
 
     }
 
+    /**
+     *
+     * @param velocityY a bullet only moves on the y axis
+     */
     public void move(Float velocityY)
     {
         posY -= Math.round(velocityY);
-
     }
 
     @Override
@@ -54,5 +57,13 @@ public class Bullet extends View
 
     public void setPosY(Integer posY) {
         this.posY = posY;
+    }
+
+    public Integer getPosX() {
+        return posX;
+    }
+
+    public void setPosX(Integer posX) {
+        this.posX = posX;
     }
 }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/main_bg"
     tools:context=".GameFragment">
 
 
@@ -14,8 +15,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:text="You have not signed in yet"
-        android:textSize="20sp">
+        android:text="@string/not_logged_in"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white">
     </TextView>
 
 
@@ -25,8 +28,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="250dp"
-        android:text="Play Game">
+        android:layout_marginTop="100dp"
+        android:text="@string/play_game"
+        android:bottomRightRadius="10dp"
+        android:bottomLeftRadius="10dp"
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp">
     </androidx.appcompat.widget.AppCompatButton>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -35,10 +42,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:text="Sign in/up">
+        android:text="@string/sing_in_up">
     </androidx.appcompat.widget.AppCompatButton>
 
+    <ImageView
+        android:layout_width="183dp"
+        android:layout_height="202dp"
+        android:layout_marginTop="75dp"
+        android:id="@+id/meme"
 
+        android:src="@drawable/meme">
+
+    </ImageView>
 
 
 

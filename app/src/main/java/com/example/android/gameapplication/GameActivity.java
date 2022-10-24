@@ -73,6 +73,7 @@ public class GameActivity extends AppCompatActivity {
         transaction.add(R.id.game_tool_fragment, gameToolsFragment, "game_activity_game_tools");
         transaction.commit();
 
+        //sticky immersive mode for game activity
         int uiOptions = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
@@ -89,13 +90,13 @@ public class GameActivity extends AppCompatActivity {
     public void onBackPressed() {
         String alertMessage = "";
         if(gameTools == null || gameTools.size() == 0){
-            alertMessage = "Are you sure you want to exit?";
+            alertMessage = getString(R.string.confirm_exit);
         } else {
-            alertMessage = "Are you sure you want to exit? Your game tools are already reduced";
+            alertMessage = getString(R.string.confirm_exit_tool);
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
         builder.setMessage(alertMessage);
-        builder.setTitle("Warning");
+        builder.setTitle(getString(R.string.warning));
 
         /**
          * set Cancelable false for when the user clicks
@@ -104,12 +105,12 @@ public class GameActivity extends AppCompatActivity {
          */
         builder.setCancelable(false);
 
-        builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+        builder.setPositiveButton(getString(R.string.yes), (DialogInterface.OnClickListener) (dialog, which) -> {
             // if user click yes then close this activity
             finish();
         });
 
-        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+        builder.setNegativeButton(getString(R.string.no), (DialogInterface.OnClickListener) (dialog, which) -> {
             // if user click no, user is still remain in this activity
             dialog.cancel();
         });

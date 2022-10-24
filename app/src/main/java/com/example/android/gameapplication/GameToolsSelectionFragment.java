@@ -93,10 +93,14 @@ public class GameToolsSelectionFragment extends Fragment {
         sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
 
         int toolDefaultQuantity = getResources().getInteger(R.integer.tool_default_quantity);
-        gameTools.add(new FlyItems(GameToolsName.COPTER, sharedPref.getInt(String.valueOf(R.string.copter), toolDefaultQuantity)));
-        gameTools.add(new FlyItems(GameToolsName.ROCKET, sharedPref.getInt(String.valueOf(R.string.rocket), toolDefaultQuantity)));
-        gameTools.add(new ClearMonsters(sharedPref.getInt(String.valueOf(R.string.clear_monsters), toolDefaultQuantity)));
-        gameTools.add(new Reborn(sharedPref.getInt(String.valueOf(R.string.reborn), toolDefaultQuantity)));
+        String helicopter = getString(R.string.helicopter);
+        String rocket = getString(R.string.rocket_tool);
+        String clearMonster = getString(R.string.clear_monsters);
+        String reborn = getString(R.string.reborn_tool);
+        gameTools.add(new FlyItems(GameToolsName.COPTER, sharedPref.getInt(String.valueOf(R.string.copter), toolDefaultQuantity),helicopter, rocket));
+        gameTools.add(new FlyItems(GameToolsName.ROCKET, sharedPref.getInt(String.valueOf(R.string.rocket), toolDefaultQuantity),helicopter,rocket));
+        gameTools.add(new ClearMonsters(clearMonster,sharedPref.getInt(String.valueOf(R.string.clear_monsters), toolDefaultQuantity)));
+        gameTools.add(new Reborn(reborn,sharedPref.getInt(String.valueOf(R.string.reborn), toolDefaultQuantity)));
         return gameTools;
     }
 
@@ -114,8 +118,8 @@ public class GameToolsSelectionFragment extends Fragment {
      * This method is called in SelectedGameToolsAdapter
      * @param text
      */
-    public void setTextItemsFull(String text){
-        binding.textItemsFull.setText(text);
+    public void setTextItemsFull(int text){
+        binding.textItemsFull.setText(getString(text));
     }
 
     /**

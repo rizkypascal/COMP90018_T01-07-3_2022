@@ -19,9 +19,9 @@ public class ClearMonsters extends GameTools {
     public ClearMonsters(int image, String name) {
         super(image, name);
     }
-    public ClearMonsters(int quantity){
+    public ClearMonsters(String clearMonster,int quantity){
         setImage(R.drawable.bomb);
-        setName("Clear Monsters");
+        setName(clearMonster);
         setCodeName(String.valueOf(R.string.clear_monsters));
         setQuantity(quantity);
     }

@@ -4,17 +4,17 @@
     <item
         android:id="@+id/navigation_user"
         android:icon="@drawable/ic_user"
-        android:title="USER" />
+        android:title="@string/user" />
 
     <item
         android:id="@+id/navigation_game"
         android:icon="@drawable/ic_game"
-        android:title="GAME" />
+        android:title="@string/game" />
 
     <item
         android:id="@+id/navigation_game_tools"
         android:icon="@drawable/ic_in_game_tools"
-        android:title="GAME TOOLS" />
+        android:title="@string/game_tools" />
 
 <!--    <item-->
 <!--        android:id="@+id/navigation_recycler"-->
