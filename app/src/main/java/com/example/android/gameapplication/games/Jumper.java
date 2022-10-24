@@ -56,8 +56,8 @@ public class Jumper extends View
         if(posY < upperthreshold)
         {
             if(flyMove <= 0f){
-                this.boardMove = thresholdY - posY;
-                posY = thresholdY;
+                this.boardMove = upperthreshold - posY;
+                posY = upperthreshold;
                 status = Status.stayStill;
             }
         }
