@@ -71,7 +71,7 @@ public class GameFragment extends Fragment {
         activity = (MainActivity) getActivity();
         context = activity.getApplicationContext();
         if (user_name!="") {
-            textLoginInfo.setText(getString(R.string.sign_in_as)+user_name);
+            textLoginInfo.setText(getString(R.string.sign_in_as)+" "+user_name);
             signInUpButton.setText(getString(R.string.log_out));
         }
 

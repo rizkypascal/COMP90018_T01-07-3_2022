@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".UserFragment">
+    tools:context=".UserFragment"
+    android:background="@color/blue_dark_unimelb">
 
     <TextView
         android:id="@+id/textLoginInfo"
@@ -14,7 +15,9 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="@string/not_logged_in"
-        android:textSize="20sp">
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:textStyle="bold">
     </TextView>
 
     <TextView
@@ -23,19 +26,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/sign_in_here"
-        android:textSize="20sp">
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textStyle="bold">
+
     </TextView>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:id="@+id/signInNameInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/username_hint"
+            android:textColor="@color/white"
             android:textSize="20sp">
         </TextView>
 
@@ -43,21 +52,25 @@
             android:id="@+id/signInNameValue"
             android:hint="@string/enter_username"
             android:layout_width="250dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray">
         </EditText>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:id="@+id/signInPasswordInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/password_hint"
-            android:textSize="20sp">
+            android:textSize="20sp"
+            android:textColor="@color/white">
         </TextView>
 
         <EditText
@@ -65,7 +78,9 @@
             android:hint="@string/enter_password"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:inputType="textPassword">
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray">
         </EditText>
     </LinearLayout>
 
@@ -84,41 +99,50 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="@string/sign_up_here"
-        android:textSize="20sp">
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:textStyle="bold">
     </TextView>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:id="@+id/signUpNameInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/username_hint"
-            android:textSize="20sp">
+            android:textSize="20sp"
+            android:textColor="@color/white">
         </TextView>
 
         <EditText
             android:id="@+id/signUpNameValue"
             android:hint="@string/enter_username"
+            android:textColorHint="@color/gray"
             android:layout_width="250dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textColor="@color/white">
         </EditText>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:id="@+id/signUpPasswordInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/password_hint"
-            android:textSize="20sp">
+            android:textSize="20sp"
+            android:textColor="@color/white">
         </TextView>
 
         <EditText
@@ -126,7 +150,9 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:hint="@string/enter_password"
-            android:inputType="textPassword">
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray">
         </EditText>
 
     </LinearLayout>
@@ -134,14 +160,16 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:id="@+id/signUpPasswordInfo1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/password_hint"
-            android:textSize="20sp">
+            android:textSize="20sp"
+            android:textColor="@color/white">
         </TextView>
 
         <EditText
@@ -149,7 +177,9 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:hint="@string/confirm_password"
-            android:inputType="textPassword">
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray">
         </EditText>
 
     </LinearLayout>
