@@ -67,7 +67,7 @@ public class GameActivity extends AppCompatActivity {
          */
         Bundle bundle = getIntent().getExtras();
         gameTools = (List<GameTools>) bundle.getSerializable("gameTools");
-        GameToolsFragment gameToolsFragment = new GameToolsFragment();
+        GameToolsFragment gameToolsFragment = new GameToolsFragment(gameContext);
         FragmentManager manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
         transaction.add(R.id.game_tool_fragment, gameToolsFragment, "game_activity_game_tools");
@@ -124,7 +124,6 @@ public class GameActivity extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
-
 
     public List<GameTools> getGameTools() {
         return gameTools;

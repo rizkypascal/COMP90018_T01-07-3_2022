@@ -8,6 +8,5 @@ package com.example.android.gameapplication.game_tools;
 public enum GameToolsName {
     ROCKET,
     COPTER,
-    REBORN,
     CLEAR_MONSTERS
 }

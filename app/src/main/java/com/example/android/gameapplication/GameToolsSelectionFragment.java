@@ -17,7 +17,6 @@ import com.example.android.gameapplication.game_tools.GameToolsAdapter;
 import com.example.android.gameapplication.game_tools.ClearMonsters;
 import com.example.android.gameapplication.game_tools.FlyItems;
 import com.example.android.gameapplication.game_tools.GameToolsName;
-import com.example.android.gameapplication.game_tools.Reborn;
 import com.example.android.gameapplication.databinding.FragmentGameToolsSelectionBinding;
 
 import java.util.ArrayList;
@@ -96,11 +95,15 @@ public class GameToolsSelectionFragment extends Fragment {
         String helicopter = getString(R.string.helicopter);
         String rocket = getString(R.string.rocket_tool);
         String clearMonster = getString(R.string.clear_monsters);
-        String reborn = getString(R.string.reborn_tool);
-        gameTools.add(new FlyItems(GameToolsName.COPTER, sharedPref.getInt(String.valueOf(R.string.copter), toolDefaultQuantity),helicopter, rocket));
-        gameTools.add(new FlyItems(GameToolsName.ROCKET, sharedPref.getInt(String.valueOf(R.string.rocket), toolDefaultQuantity),helicopter,rocket));
+        gameTools.add(new FlyItems(GameToolsName.COPTER, sharedPref.getInt(String.valueOf(R.string.copter), toolDefaultQuantity), helicopter));
+        gameTools.add(new FlyItems(GameToolsName.ROCKET, sharedPref.getInt(String.valueOf(R.string.rocket), toolDefaultQuantity), rocket));
         gameTools.add(new ClearMonsters(clearMonster,sharedPref.getInt(String.valueOf(R.string.clear_monsters), toolDefaultQuantity)));
-        gameTools.add(new Reborn(reborn,sharedPref.getInt(String.valueOf(R.string.reborn), toolDefaultQuantity)));
+        /**
+         * uncomment code below to have unlimited tool quantity (start from 5)
+         */
+//        gameTools.add(new FlyItems(GameToolsName.COPTER, 5, helicopter));
+//        gameTools.add(new FlyItems(GameToolsName.ROCKET, 5,rocket));
+//        gameTools.add(new ClearMonsters(clearMonster, 5));
         return gameTools;
     }
 

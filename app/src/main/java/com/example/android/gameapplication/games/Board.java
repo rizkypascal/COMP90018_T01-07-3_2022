@@ -22,9 +22,7 @@ public class Board extends View
     protected Drawable boardDrawable; // image resource
     Rect imageBounds; // jumper image is drawn based on this rectangle size
     protected Integer screenSize;
-
     protected String boardType;
-
 
     public Board(Context context, Integer posX, Integer posY , Integer width,Integer screenSize,Integer imageID) {
         /*
@@ -64,9 +62,9 @@ public class Board extends View
         else{
             this.posX = nextX;
         }
+
         this.posY += Math.round(velocityY);
     }
-
 
     /**
      *
@@ -105,7 +103,6 @@ public class Board extends View
     public void setPosY(Integer posY) {
         this.posY = posY;
     }
-
 
     public Enum getStatus() {
         return status;

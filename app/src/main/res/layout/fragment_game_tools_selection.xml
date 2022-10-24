@@ -34,8 +34,7 @@
             android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:adapter="@{gameToolsAdapter}"
-            android:alpha="0.90"
-            android:background="@drawable/border"
+            android:background="@drawable/border_white_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textPickItems"
@@ -52,7 +51,7 @@
             app:layout_constraintStart_toStartOf="@+id/fragment_container_view"
             app:layout_constraintTop_toBottomOf="@id/item_selection_rv" />
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_view"
             android:name="com.example.android.gameapplication.GameToolsFragment"
             android:layout_width="wrap_content"
@@ -61,7 +60,8 @@
             app:layout_constraintTop_toBottomOf="@id/textItemsFull"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteX="179dp" />
+            tools:layout_editor_absoluteX="179dp"
+            android:background="@drawable/border_white_color"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

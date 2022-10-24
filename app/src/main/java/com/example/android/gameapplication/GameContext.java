@@ -45,15 +45,15 @@ public class GameContext extends View implements Runnable{
     private final float gravityY = 10f;
     private final int lowerthreshold;
 
-    public static int screenX, screenY;
+    private static int screenX, screenY;
 
-    public ArrayList<Board> boards;
-    public Jumper jumper;
-    public ArrayList<Monster> monsters = new ArrayList<>();
-    public ArrayList<Bullet> bullets = new ArrayList<>();
+    private ArrayList<Board> boards;
+    private Jumper jumper;
+    private ArrayList<Monster> monsters = new ArrayList<>();
+    private ArrayList<Bullet> bullets = new ArrayList<>();
 
-    public GameContext(Context contest, int screenX, int screenY) {
-        super(contest);
+    public GameContext(Context context, int screenX, int screenY) {
+        super(context);
 
         /** Init sensor variables*/
         this.orientationSensor = new OrientationSensor(getContext());
@@ -129,6 +129,10 @@ public class GameContext extends View implements Runnable{
             // boards move down if jumper above 1/2 screen
             if (jumper.getStatus() == Status.stayStill){
                 board.move(0f, (float) jumper.getBoardMove());
+            } else if (jumper.getStatus() == Status.onCopter){
+                board.move(0f,50f);
+            } else if (jumper.getStatus() == Status.onRocket){
+                board.move(0f,80f);
             }
             // boards move ip if jumper below 9/10 screen
             if (jumper.getPosY() >= lowerthreshold){
@@ -158,7 +162,6 @@ public class GameContext extends View implements Runnable{
                 }
                 bullet.move(gravityY);
             }
-
         }
 
         //detect collision between monsters and bullets
@@ -237,8 +240,13 @@ public class GameContext extends View implements Runnable{
                 jumper.setStatus(Status.movingUp);
                 break;
             }
+            //set jumper to have constant speed without changing status
+            else if(jumper.getStatus().equals(Status.onCopter) || jumper.getStatus().equals(Status.onRocket))
+            {
+                jumper.setSpeedY(10f);
+                break;
+            }
         }
-
     }
 
     public void resume () {
@@ -248,7 +256,6 @@ public class GameContext extends View implements Runnable{
     }
 
     public void pause () {
-
         try {
             isPlaying = false;
             thread.join();
@@ -257,4 +264,15 @@ public class GameContext extends View implements Runnable{
         }
     }
 
+    /**
+     * set jumper status outside game context
+     * @param stats
+     */
+    public void setJumperStatus(Status stats){
+        jumper.setStatus(stats);
+        // if using fly items, then set maximum fly move as the fly height threshold
+        if(stats.equals(Status.onRocket) || stats.equals(Status.onCopter)){
+            jumper.setFlyMove(1500f);
+        }
+    }
 }
