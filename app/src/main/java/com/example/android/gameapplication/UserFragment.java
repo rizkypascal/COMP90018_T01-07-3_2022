@@ -78,7 +78,7 @@ public class UserFragment extends Fragment {
         activity = (MainActivity) getActivity();
         context = activity.getApplicationContext();
         if (user_name!="") {
-            textLoginInfo.setText("You have signed in as "+user_name);
+            textLoginInfo.setText(getString(R.string.sign_in_as)+user_name);
         }
         database = new Database(); //TODO: XUEQING may need to re-initiate
         return view;
@@ -137,11 +137,11 @@ public class UserFragment extends Fragment {
     boolean CheckLogin(String user_name, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         Log.d("UserFragment", "print out username+password: "+user_name+" "+password);
         if (user_name.length()==0){
-            PopToast("Username is empty!");
+            PopToast(getString(R.string.username_empty));
             return false;
         }
         else if (password.length()==0){
-            PopToast("Password is empty!");
+            PopToast(getString(R.string.password_empty));
             return false;
         }
         else{
@@ -150,30 +150,30 @@ public class UserFragment extends Fragment {
             String encodePassword = byte2Hex(messageDigest.digest());
             Log.d("password", encodePassword+" "+password);
             if (database.UsernameMatchPassword(user_name, password)) {
-                PopToast("Successfully logged in as "+user_name);
+                PopToast(getString(R.string.login_as)+user_name);
                 Log.d("UserFragment","password username matches");
                 return true;
             }
-            PopToast("Something wrong with username/password!");
+            PopToast(getString(R.string.something_wrong));
             return false;
         }
     }
 
     boolean CheckRegister(String user_name, String password0, String password1){
         if (user_name.length()==0){
-            PopToast("Username is empty!");
+            PopToast(getString(R.string.username_empty));
             return false;
         }
         else if (password0.length()==0){
-            PopToast("Password is empty!");
+            PopToast(getString(R.string.password_empty));
             return false;
         }
         else if (password1.length()==0){
-            PopToast("Confirmed password is empty!");
+            PopToast(getString(R.string.confirm_empty));
             return false;
         }
         else if(!Objects.equals(password0,password1)){
-            PopToast("Password and confirmed password aren't identical!");
+            PopToast(getString(R.string.not_identical));
             return false;
         }
         else{
@@ -183,10 +183,10 @@ public class UserFragment extends Fragment {
                 String encodePassword = byte2Hex(messageDigest.digest());
                 Log.d("password", encodePassword+" "+password0);
                 if (database.CheckAddNewAccount(user_name, password0)) {
-                    PopToast("Successfully sign up!");
+                    PopToast(getString(R.string.sign_up_successful));
                     return true;
                 }
-                PopToast("Username already exists!");
+                PopToast(getString(R.string.username_exists));
                 return false;
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();

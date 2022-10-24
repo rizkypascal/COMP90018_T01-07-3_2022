@@ -73,7 +73,7 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
         if(activityName == "MainActivity") {
             gameToolsParams.setQuantity(gameToolsParams.getQuantity() + 1);
             fragment.updateTextQuantity(gameToolsParams);
-            fragment.setTextItemsFull("");
+            fragment.setTextItemsFull(R.string.empty_string);
         }
         notifyDataSetChanged();
     }
@@ -94,7 +94,7 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
                 if(gameTools.get(j).getImage() == gameToolsParams.getImage())
                 {
                     duplicateItem++;
-                    fragment.setTextItemsFull("Duplicate items detected!");
+                    fragment.setTextItemsFull(R.string.duplicated_tool);
                     break;
                 }
             }
@@ -106,16 +106,16 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
             if(duplicateItem == 0) {
                 gameTools.add(gameToolsParams);
                 if(gameTools.size() >= 3){
-                    fragment.setTextItemsFull("You have picked all items");
+                    fragment.setTextItemsFull(R.string.all_tools_picked);
                 } else {
-                    fragment.setTextItemsFull("");
+                    fragment.setTextItemsFull(R.string.empty_string);
                 }
                 gameToolsParams.setQuantity(gameToolsParams.getQuantity() - 1);
                 fragment.updateTextQuantity(gameToolsParams);
                 notifyDataSetChanged();
             }
         } else {
-            fragment.setTextItemsFull("You have picked all items");
+            fragment.setTextItemsFull(R.string.all_tools_picked);
         }
     }
 

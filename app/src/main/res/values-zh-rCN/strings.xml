@@ -28,8 +28,8 @@
     <string name="username_hint">用户名：</string>
     <string name="password_hint">密码：</string>
     <string name="confirm_password">请确认密码：</string>
-    <string name="sign_up">注册：</string>
-    <string name="sign_in">登录：</string>
+    <string name="sign_up">注册</string>
+    <string name="sign_in">登录</string>
     <string name="play_without_tool">您还未选择任何工具，真的要开始游戏吗？</string>
     <string name="warning">警告</string>
     <string name="confirm_exit">您确定要退出吗？</string>
@@ -37,4 +37,24 @@
     <string name="rocket_tool">火箭</string>
     <string name="clear_monsters_tool">清除怪兽</string>
     <string name="reborn_tool">重生</string>
+    <string name="all_tools_picked">您的工具箱已满</string>
+    <string name="duplicated_tool">你重复选择了工具</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="log_out">登出</string>
+    <string name="sign_in_as">"您的账号为 "</string>
+    <string name="login_as">"成功以如下用户登录 "</string>
+    <string name="something_wrong">用户名/密码不正确！</string>
+    <string name="username_empty">用户名为空！</string>
+    <string name="password_empty">密码为空！</string>
+    <string name="confirm_empty">确认密码为空！</string>
+    <string name="not_identical">密码和确认密码不一致！</string>
+    <string name="sign_up_successful">成功注册！</string>
+    <string name="username_exists">用户名已存在！</string>
+    <string name="world_rank">您的世界排名为：</string>
+    <string name="your_best_score">您的最好分数为：</string>
+    <string name="world_best_score">全球最好的分数为：</string>
+    <string name="your_world_ranking">您的世界排名为：10000以上</string>
+    <string name="play_as_tourist">您以游客身份游玩</string>
+    <string name="play_as_user">您以如下账号登录：</string>
 </resources>

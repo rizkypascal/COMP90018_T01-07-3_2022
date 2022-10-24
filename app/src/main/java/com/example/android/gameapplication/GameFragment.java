@@ -71,8 +71,8 @@ public class GameFragment extends Fragment {
         activity = (MainActivity) getActivity();
         context = activity.getApplicationContext();
         if (user_name!="") {
-            textLoginInfo.setText("You have signed in as "+user_name);
-            signInUpButton.setText("LOG OUT");
+            textLoginInfo.setText(getString(R.string.sign_in_as)+user_name);
+            signInUpButton.setText(getString(R.string.log_out));
         }
 
         return view;
@@ -99,12 +99,12 @@ public class GameFragment extends Fragment {
              */
             builder.setCancelable(false);
 
-            builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+            builder.setPositiveButton(getString(R.string.yes), (DialogInterface.OnClickListener) (dialog, which) -> {
                 // if user click yes then proceed to the game
                 playGame();
             });
 
-            builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+            builder.setNegativeButton(getString(R.string.no), (DialogInterface.OnClickListener) (dialog, which) -> {
                 // if user click no, user is still remain in this activity
                 dialog.cancel();
             });
@@ -163,8 +163,8 @@ public class GameFragment extends Fragment {
      * function to switch activity for the gameplay
      */
     public void playGame(){
-        if (user_name=="") PopToast("You are playing as a tourist.");
-        else PopToast("You are playing as user "+user_name);
+        if (user_name=="") PopToast(getString(R.string.play_as_tourist));
+        else PopToast(getString(R.string.play_as_user)+user_name);
         Bundle bundle = new Bundle();
         bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
         Intent intent = new Intent(context, GameActivity.class);

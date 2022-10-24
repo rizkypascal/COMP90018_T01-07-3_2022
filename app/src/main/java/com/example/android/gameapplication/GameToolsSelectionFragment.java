@@ -118,8 +118,8 @@ public class GameToolsSelectionFragment extends Fragment {
      * This method is called in SelectedGameToolsAdapter
      * @param text
      */
-    public void setTextItemsFull(String text){
-        binding.textItemsFull.setText(text);
+    public void setTextItemsFull(int text){
+        binding.textItemsFull.setText(getString(text));
     }
 
     /**

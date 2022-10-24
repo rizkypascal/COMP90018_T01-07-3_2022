@@ -105,12 +105,12 @@ public class GameActivity extends AppCompatActivity {
          */
         builder.setCancelable(false);
 
-        builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+        builder.setPositiveButton(getString(R.string.yes), (DialogInterface.OnClickListener) (dialog, which) -> {
             // if user click yes then close this activity
             finish();
         });
 
-        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+        builder.setNegativeButton(getString(R.string.no), (DialogInterface.OnClickListener) (dialog, which) -> {
             // if user click no, user is still remain in this activity
             dialog.cancel();
         });
