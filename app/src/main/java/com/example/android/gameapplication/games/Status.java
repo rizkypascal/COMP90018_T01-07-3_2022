@@ -8,5 +8,7 @@ package com.example.android.gameapplication.games;
 public enum Status {
     movingUp,
     movingDown,
-    stayStill
+    stayStill,
+    onRocket,
+    onCopter
 }

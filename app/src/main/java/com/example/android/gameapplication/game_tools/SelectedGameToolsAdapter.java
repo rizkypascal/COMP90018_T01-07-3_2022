@@ -8,9 +8,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.gameapplication.BR;
+import com.example.android.gameapplication.GameContext;
 import com.example.android.gameapplication.GameToolsSelectionFragment;
 import com.example.android.gameapplication.R;
 import com.example.android.gameapplication.databinding.ListSelectedItemBinding;
+import com.example.android.gameapplication.games.Status;
 
 import java.util.List;
 
@@ -25,11 +27,13 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
     private List<GameTools> gameTools;
     private GameToolsSelectionFragment fragment;
     private String activityName;
+    private GameContext gameContext;
 
-    public SelectedGameToolsAdapter(List<GameTools> gameTools, GameToolsSelectionFragment fragment, String activityName){
+    public SelectedGameToolsAdapter(List<GameTools> gameTools, GameToolsSelectionFragment fragment, String activityName, GameContext gameContext){
         this.gameTools = gameTools;
         this.fragment = fragment;
         this.activityName = activityName;
+        this.gameContext = gameContext;
     }
 
     @NonNull
@@ -74,6 +78,17 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
             gameToolsParams.setQuantity(gameToolsParams.getQuantity() + 1);
             fragment.updateTextQuantity(gameToolsParams);
             fragment.setTextItemsFull(R.string.empty_string);
+        }
+        /**
+         * if gameContext is not null
+         * then update the jumper status
+         */
+        else if (gameContext != null) {
+            if(gameToolsParams.getCodeName().equals(String.valueOf(R.string.rocket))){
+                gameContext.setJumperStatus(Status.onRocket);
+            }else if (gameToolsParams.getCodeName().equals(String.valueOf(R.string.copter))){
+                gameContext.setJumperStatus(Status.onCopter);
+            }
         }
         notifyDataSetChanged();
     }
