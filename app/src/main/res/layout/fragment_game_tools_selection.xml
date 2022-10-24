@@ -26,7 +26,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/item_selection_rv"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/white"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/item_selection_rv"
@@ -36,7 +37,8 @@
             android:background="@drawable/border_white_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textPickItems" />
+            app:layout_constraintTop_toBottomOf="@id/textPickItems"
+            />
 
         <TextView
             android:id="@+id/textItemsFull"

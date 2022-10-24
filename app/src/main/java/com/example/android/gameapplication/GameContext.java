@@ -41,7 +41,9 @@ public class GameContext extends View implements Runnable{
     private boolean isUpdate = false;
     private int initialBoards = 200;
     private int widthRatio = 5;
-    private final float GRAVITY = 10f;
+    private final float changeY = 22f;
+    private final float gravityY = 10f;
+    private final int lowerthreshold;
 
     private static int screenX, screenY;
 
@@ -59,6 +61,7 @@ public class GameContext extends View implements Runnable{
 
         this.screenX = screenX;
         this.screenY = screenY;
+        this.lowerthreshold = screenY * 9 / 10;
 
         // random generate the boards for full screen
         this.boards = random_generate(screenY, screenX);
@@ -73,7 +76,7 @@ public class GameContext extends View implements Runnable{
         int initBoardX = boards.get(0).getPosX();
         int initBoardY = boards.get(0).getPosY();
         Log.i("generate","initLoc"+initBoardX+"Y"+initBoardY);
-        this.jumper = new Jumper(getContext(),100,500,100,10f,
+        this.jumper = new Jumper(getContext(),100,500,100,gravityY,
                 screenX, R.drawable.jumperone);
 
         Log.i("generate","Game view");
@@ -83,7 +86,7 @@ public class GameContext extends View implements Runnable{
     @Override
     public void run() {
         while (isPlaying){
-            update();
+            checkJumper();
         }
     }
 
@@ -101,7 +104,6 @@ public class GameContext extends View implements Runnable{
             case MotionEvent.ACTION_MOVE:
                 bullets.add(jumper.shoot(getContext(),70));
                 break;
-
         }
 
         return false;
@@ -117,15 +119,26 @@ public class GameContext extends View implements Runnable{
 //        Log.i("jumper loc","reach "+jumper.getPosY()+" screen" + screenY);
         jumper.draw(canvas);
 
-        //all boards move down if the jumper's status is stayStill, onCopter, and onRocket
+        for (Monster monster : monsters){
+            monster.move(1f, 1f, screenY, screenX);
+            monster.draw(canvas);
+        }
+
+        //all boards move down if the jumper's status is stayStill
         for (Board board : boards){
+            // boards move down if jumper above 1/2 screen
             if (jumper.getStatus() == Status.stayStill){
-                board.move(0f,(float) jumper.getBoardMove());
+                board.move(0f, (float) jumper.getBoardMove());
             } else if (jumper.getStatus() == Status.onCopter){
                 board.move(0f,50f);
             } else if (jumper.getStatus() == Status.onRocket){
                 board.move(0f,80f);
             }
+            // boards move ip if jumper below 9/10 screen
+            if (jumper.getPosY() >= lowerthreshold){
+                board.move(0f, (float) jumper.getBoardMove());
+            }
+
             if (board.getPosY() > 0 & board.getPosY() < screenY){
                 board.draw(canvas);
             }
@@ -147,7 +160,7 @@ public class GameContext extends View implements Runnable{
                 {
                     bullet.draw(canvas);
                 }
-                bullet.move(10f);
+                bullet.move(gravityY);
             }
         }
 
@@ -160,7 +173,6 @@ public class GameContext extends View implements Runnable{
                     break;
                 }
             }
-
         }
 
         invalidate();
@@ -192,37 +204,19 @@ public class GameContext extends View implements Runnable{
     }
 
     private void checkJumper(){
-        if (jumper.getPosY()*2 < screenY){
-//            Log.i("reminder","reach "+jumper.getPosY()+" screen" + screenY);
-//            // jumper.setPosY(jumper.getPosY()+screenY/2);
-//            update();
+
+        if (jumper.getStatus() == Status.movingDown){
+            if (boards.get(0).getPosY() <= 0){
+                isPlaying = false;
+            }
+
+
         }
-        if (jumper.getPosY() < screenY){
-            //jumper.setPosY(0);
-            // isPlaying = false
-        }
-        // isPlaying = true;
+
     }
 
     private void update () {
-//        float speed = jumper.getSpeedY();
-//        if (speed < 10.0 & speed > 9.0){
-//            //isUpdate = false;
-//            Log.i("i", "=0");
-//            int rangeY = beginY - jumper.getPosY();
-//            for (Board board : boards){
-//                int change = 0;
-//                int before = board.getPosY();
-//                while (change < rangeY){
-//                    Log.i("i", "change:"+change);
-//                    board.move(0f, 20f);
-//                    int after = board.getPosY() - before;
-//                    Log.i("i", "before:"+before);
-//                    Log.i("i", "after:"+board.getPosY());
-//                    change += after;
-//                }
-//            }
-//        }
+
     }
 
 
@@ -236,13 +230,13 @@ public class GameContext extends View implements Runnable{
     public void orientationUpdate(OrientationMessage OrientationEvent) { // place to get sensor value from orientation
         //Log.d("[Subscription]" , "Orientations: " + String.valueOf(OrientationEvent.getOrientations()[2]));
         Float moveX = 50*OrientationEvent.getOrientations()[2];
-        jumper.move(moveX,10f,screenY/2);
+        jumper.move(moveX,gravityY,screenY/2, lowerthreshold);
 
         // not a good solution, as collision detection should be done within the context class
         for (Board bar : boards){
             if(CollisionUtils.jumperBoardCollision(jumper,bar) && jumper.getStatus().equals(Status.movingDown))
             {
-                jumper.setSpeedY(20f);
+                jumper.setSpeedY(changeY);
                 jumper.setStatus(Status.movingUp);
                 break;
             }
