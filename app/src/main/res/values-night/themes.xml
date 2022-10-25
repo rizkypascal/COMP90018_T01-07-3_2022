@@ -27,4 +27,13 @@
         <item name="itemIconTint">@drawable/bottom_nav_color_selector_night</item>
     </style>
 
+
+    <style name="userFragmentBgColor" >
+        <item name="android:background">#444444</item>
+    </style>
+
+    <style name="gameActivity" >
+        <item name="android:background">@drawable/background_dark</item>
+    </style>
+
 </resources>

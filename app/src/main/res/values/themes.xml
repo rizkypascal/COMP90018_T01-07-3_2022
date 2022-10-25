@@ -35,4 +35,13 @@
         <item name="itemIconTint">@drawable/bottom_nav_color_selector</item>
     </style>
 
+    <style name="userFragmentBgColor" >
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="gameActivity" >
+        <item name="android:background">@drawable/background</item>
+    </style>
+
+
 </resources>
