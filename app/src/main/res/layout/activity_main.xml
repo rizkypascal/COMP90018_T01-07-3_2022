@@ -25,17 +25,21 @@
         <!--android:orientation="vertical"-->
         <!--/>-->
 
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/nav_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginLeft="8dp"-->
+<!--        android:layout_marginRight="8dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:background="@drawable/bottom_nav_background"-->
+<!--        android:elevation="8dp"-->
+<!--        app:itemIconTint="@drawable/bottom_nav_color_selector"-->
+<!--        app:menu="@menu/bottom_nav_menu" />-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/bottom_nav_background"
-        android:elevation="8dp"
-        app:itemIconTint="@drawable/bottom_nav_color_selector"
+        style="@style/navigation_bar"
         app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>
