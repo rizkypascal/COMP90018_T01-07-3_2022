@@ -1,12 +1,15 @@
 package com.example.android.gameapplication;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -128,13 +131,12 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
 
     @Override
     protected void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        lightSensor.disableSensor();
+//        EventBus.getDefault().unregister(this);
+//        lightSensor.disableSensor();
         super.onDestroy();
     }
 
 
-    //todo: Arthur dark mode...
     /**
      * @author Changwen Li
      * @desc Please get the value of changed sensor signal here. You may change the name of function.
@@ -142,13 +144,59 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
      * */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void lightUpdate(LightMessage LightEvent) { // place to get sensor value from light
-        Log.d("[Subscription]", "Light: " + String.valueOf(LightEvent.getLight()[0]));
-        Log.d("[Subscription]", String.valueOf(AppCompatDelegate.getDefaultNightMode()));
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        // todo: Rizky: when the night mode is set to be different from OS's, tool selection will crash...
-        // todo: arthur: test the appropriate threshold for light/dark.
+        float lightValue = LightEvent.getLight()[0];
         EventBus.getDefault().unregister(this);
         lightSensor.disableSensor();
+        boolean askIfChangeToDark = false;
+        boolean askIfChangeToBright = false;
+        String questionInfo = "";
+        Log.d("[Subscription]", "Light: " + lightValue);
+        // Log.d("[Subscription]", String.valueOf(AppCompatDelegate.getDefaultNightMode()));
+        int nightModeFlags =
+                this.getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        if ((nightModeFlags == Configuration.UI_MODE_NIGHT_NO) && lightValue<50) {
+            Log.d("[Subscription]", "!!!!!!!!");
+            askIfChangeToDark = true;
+            questionInfo = "It seems that you are in a dark place. Do you want to play the game in dark mode?";
+        }
+        if ((nightModeFlags == Configuration.UI_MODE_NIGHT_YES) && lightValue>=50) {
+            Log.d("[Subscription]", "????????");
+            askIfChangeToBright = true;
+            questionInfo = "It seems that you are in a bright place. Do you want to play the game in bright mode?";
+        }
+
+        // The dialog box only appear if the user is in dark place and his phone is in bright mode;
+        // or, the user is in bright place and his phone is in dark mode.
+        if (askIfChangeToBright || askIfChangeToDark){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            // setting for dialog listener
+            boolean finalAskIfChangeToBright = askIfChangeToBright;
+            boolean finalAskIfChangeToDark = askIfChangeToDark;
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            Log.d("mainActivity", "choose yes");
+                            if (finalAskIfChangeToBright) {
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            }
+                            else if (finalAskIfChangeToDark) {
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                            }
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            Log.d("mainActivity", "choose no");
+                            break;
+                    }
+                }
+            };
+
+            builder.setMessage(questionInfo).setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
+        }
     }
 
     /**
