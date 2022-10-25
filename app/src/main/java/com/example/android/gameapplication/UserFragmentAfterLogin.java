@@ -3,11 +3,14 @@ package com.example.android.gameapplication;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class UserFragmentAfterLogin extends Fragment {
@@ -27,13 +31,16 @@ public class UserFragmentAfterLogin extends Fragment {
     private TextView textLoginInfo, userRank;
     private String[] drapdown_Array1 = {"AAA", "BBB", "CCC"};
     private String[] drapdown_Array2 = {""};
+    private Spinner sp1;
     private Spinner sp2;
     private boolean isSpinnerFirst = true;
+    private Button confirmButton;
 
     // set variables, interface for communication between activity & fragment, fragment & fragment
     private String user_name="";
     private GameFragment.SendMessages sendMessages;
     private ArrayAdapter<String> selAdapter2;
+    private ArrayAdapter<String> selAdapter1;
 
     @Override
     public void onAttach(Context context) {
@@ -65,36 +72,58 @@ public class UserFragmentAfterLogin extends Fragment {
         //listView = view.findViewById(R.id.world_score_list_view);
         //listView.setAdapter(adapterWorldScore);
 
-        if (user_name!="") {
+        if (!Objects.equals(user_name, "")) {
 
-            textLoginInfo.setText("You have signed in as "+user_name);
             //userRank.setText("Your world rank is: "+String.valueOf(UserRank(user_name)));
-            textLoginInfo.setText(getString(R.string.sign_in_as)+user_name);
+            textLoginInfo.setText(getString(R.string.sign_in_as)+ " " + user_name);
 
         }
         initSpinner(view);
+        confirmButton = view.findViewById(R.id.button5);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if ( !isSpinnerFirst && !sp2.getSelectedItem().toString().equals("")) {
+                    Toast.makeText(getActivity(), "Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                    sendMessages.iAmMSG("Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString());
+                }else{
+                    Toast.makeText(getActivity(), "Please select a subject", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        sp1.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+                    Toast.makeText(getActivity(), "Faculty ", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         return view;
     }
 
 
     private void initSpinner(View view) {
-        //声明一个下拉列表的数组适配器
-        ArrayAdapter<String> selAdapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, drapdown_Array1);
+
+        selAdapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, new ArrayList<String>(Arrays.asList(drapdown_Array1)));
         selAdapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, new ArrayList<String>(Arrays.asList(drapdown_Array2)));
-        //设置数组适配器的布局样式
+
         selAdapter1.setDropDownViewResource(R.layout.dropdown);
         selAdapter2.setDropDownViewResource(R.layout.dropdown);
-        //从布局文件中获取名叫sp_dialog的下拉框
-        Spinner sp1 = view.findViewById(R.id.spinner1);
+
+        sp1 = view.findViewById(R.id.spinner1);
         sp2 = view.findViewById(R.id.spinner2);
-        //设置下拉框的数组适配器
+
         sp1.setAdapter(selAdapter1);
         sp2.setAdapter(selAdapter2);
-        //设置下拉框默认的显示第一项
+
         sp2.setSelection(0);
         sp2.setEnabled(false);
-        //给下拉框设置选择监听器，一旦用户选中某一项，就触发监听器的onItemSelected方法
+
         sp1.setOnItemSelectedListener(new SelectedListener());
         sp2.setOnItemSelectedListener(new SelectedListener2());
     }
@@ -106,7 +135,9 @@ public class UserFragmentAfterLogin extends Fragment {
             if (isSpinnerFirst) {
                 view.setVisibility(View.INVISIBLE);
                 sp2.setEnabled(false);
+                isSpinnerFirst = false;
             }else{
+                selAdapter1.remove("");
                 if (i == 0) {
                     selAdapter2.clear();
                     selAdapter2.addAll("", "1", "2", "3");
@@ -137,6 +168,10 @@ public class UserFragmentAfterLogin extends Fragment {
     class SelectedListener2 implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            if (!sp2.getSelectedItem().toString().equals("")){
+                selAdapter2.remove("");
+            }
+
             //Toast.makeText(getActivity(), "You have selected " + adapterView.getItemAtPosition(i), Toast.LENGTH_SHORT).show();
         }
 

@@ -6,7 +6,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="confirm">Confirm</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
@@ -64,7 +64,7 @@
     <string name="username_exists">Username already exists!</string>
     <string name="world_rank">Your world rank is: </string>
     <string name="your_best_score">Your best scores:</string>
-    <string name="select_faculty">Select the faculty you want to join</string>
+    <string name="select_faculty">Select the faculty</string>
     <string name="select_subject">Select the subject </string>
     <string name="world_best_score">World\'s best scores</string>
     <string name="your_world_ranking">Your world rank is: over 10000</string>
