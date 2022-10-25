@@ -14,7 +14,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="@string/not_logged_in"
-        android:textColor="#111111"
+        android:textColor="#dddddd"
         android:textSize="20sp">
     </TextView>
 
@@ -27,9 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/select_faculty"
-
-        android:textColor="#111111"
+        android:textColor="#dddddd"
         android:textSize="20sp">
+
     </TextView>
 
     <Spinner
@@ -52,7 +52,7 @@
         android:layout_marginTop="50dp"
         android:text="@string/select_subject"
 
-        android:textColor="#111111"
+        android:textColor="#dddddd"
         android:textSize="20sp">
     </TextView>
 
@@ -73,6 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             android:layout_centerHorizontal="true"
+            android:textColor="#dddddd"
             android:text="@string/confirm" />
     </RelativeLayout>
 
