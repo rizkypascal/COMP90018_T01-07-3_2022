@@ -80,7 +80,6 @@ public class GameActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(uiOptions);
         ActionBar supportActionBar = getSupportActionBar();
         supportActionBar.hide();
-
     }
 
     /**
