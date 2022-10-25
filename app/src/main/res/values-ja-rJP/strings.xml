@@ -60,4 +60,7 @@
     <string name="username">ユーザー名</string>
     <string name="password">パスワード</string>
     <string name="confrimed_password">パスワードを認証する</string>
+    <string name="select_faculty">学部を選択してください</string>
+    <string name="select_subject">コースを選択</string>
+    <string name="confirm">確認</string>
 </resources>
