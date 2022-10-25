@@ -1,20 +1,14 @@
 package com.example.android.gameapplication;
 
-import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.os.Build;
-import android.os.Bundle;
+import android.graphics.Movie;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import com.example.android.gameapplication.game_tools.GameTools;
 import com.example.android.gameapplication.games.Board;
+import com.example.android.gameapplication.games.BombEffect;
 import com.example.android.gameapplication.games.Bullet;
 import com.example.android.gameapplication.games.CollisionUtils;
 import com.example.android.gameapplication.games.Jumper;
@@ -29,9 +23,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+
+import pl.droidsonroids.gif.GifDrawable;
 
 public class GameContext extends View implements Runnable{
 
@@ -52,6 +48,7 @@ public class GameContext extends View implements Runnable{
     private Jumper jumper;
     private ArrayList<Monster> monsters = new ArrayList<>();
     private ArrayList<Bullet> bullets = new ArrayList<>();
+    private BombEffect bomb;
 
     public GameContext(GameActivity activity, int screenX, int screenY) {
         super(activity);
@@ -73,8 +70,6 @@ public class GameContext extends View implements Runnable{
         this.monsters.add(monster);
         Monster monster2 = new Monster(getContext(), 800, 700,150, MonsterType.QUIZ);
         this.monsters.add(monster2);
-
-
         int initBoardX = boards.get(0).getPosX();
         int initBoardY = boards.get(0).getPosY();
         Log.i("generate","initLoc"+initBoardX+"Y"+initBoardY);
@@ -83,7 +78,6 @@ public class GameContext extends View implements Runnable{
 
         Log.i("generate","Game view");
     }
-
 
     @Override
     public void run() {
@@ -120,6 +114,11 @@ public class GameContext extends View implements Runnable{
         super.onDraw(canvas);
 //        Log.i("jumper loc","reach "+jumper.getPosY()+" screen" + screenY);
         jumper.draw(canvas);
+
+        //drawing bomb until the bomb gif is finished
+        if(bomb != null){
+            bomb.draw(canvas);
+        }
 
         for (Monster monster : monsters){
             monster.move(1f, 1f, screenY, screenX);
@@ -217,7 +216,6 @@ public class GameContext extends View implements Runnable{
 
     }
 
-
     /**
      * @author Changwen Li
      * @description Please get the value of changed sensor signal here. You may change the name of function.
@@ -275,7 +273,37 @@ public class GameContext extends View implements Runnable{
         jumper.setStatus(stats);
         // if using fly items, then set maximum fly move as the fly height threshold
         if(stats.equals(Status.onRocket) || stats.equals(Status.onCopter)){
+            if(stats.equals(Status.onRocket)){
+                jumper.setJumper(GifDrawable.createFromResource(getResources(), R.drawable.jumperone_rocket));
+            }else if(stats.equals(Status.onCopter)){
+                jumper.setJumper(GifDrawable.createFromResource(getResources(), R.drawable.jumperone_copter));
+            }
             jumper.setFlyMove(1500f);
         }
+    }
+
+    /**
+     * draw the bomb effect when clear monster
+     */
+    public void clearMonsters(){
+        InputStream is = getResources().openRawResource(R.raw.bomb);
+        Movie movie = Movie.decodeStream(is);
+        int duration = movie.duration();
+
+        this.bomb = new BombEffect(getContext(), 550, 1000,400, R.drawable.bomb);
+
+        CountDownTimer cd = new CountDownTimer(duration, 1000) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                bomb = null;
+                monsters.removeAll(monsters);
+            }
+        };
+        cd.start();
     }
 }

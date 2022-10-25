@@ -52,10 +52,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
         // Initialize the Game Tools Fragment to help locally store state
         if(savedInstanceState != null){
             gameToolsSelectionFragment = (GameToolsSelectionFragment) getSupportFragmentManager().getFragment(savedInstanceState, "gameToolsSelectionFragment");
-        } else {
-            gameToolsSelectionFragment = new GameToolsSelectionFragment();
         }
-
         // Setting for Fragments
         GameFragment gameFragment = new GameFragment();
         getSupportFragmentManager()
@@ -109,6 +106,9 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                 }
                 case R.id.navigation_game_tools: {
                     Log.d("Navigation", "game tools clicked.");
+                    if(gameToolsSelectionFragment == null){
+                        gameToolsSelectionFragment = new GameToolsSelectionFragment();
+                    }
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.layout_fragment, gameToolsSelectionFragment, "gameToolsSelection")
