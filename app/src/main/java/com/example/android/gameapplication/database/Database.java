@@ -27,6 +27,7 @@ public class Database {
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
+
     public Database() {
 
     }
@@ -34,17 +35,31 @@ public class Database {
 
     //TODO: XQ all the following methods need to be re-witten/modified
     //You may modify them in this file, or implement them in another
-    public boolean UsernameMatchPassword(String username, String password){
-        String temppassword = "";
 
+    private String temppassword = new String("1");
+    private void addpassListener(DatabaseReference mpassReference, String username) {
+        // [START post_value_event_listener]
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                temppassword = (String) dataSnapshot.child("password").child(username).getValue();
+                // ..
 
-        return true;
+            }
 
-
-
-
-        //TODO: XQ check if username exist, if password correct. return t/f.
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                System.out.println("faildata"+temppassword);
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        mpassReference.addValueEventListener(postListener);
+        // [END post_value_event_listener]
     }
+
+
 
 
     public void writeNewUser(String username, String password) {
@@ -87,6 +102,31 @@ public class Database {
         };
         mlistReference.addValueEventListener(postListener);
         // [END post_value_event_listener]
+    }
+
+    public boolean UsernameMatchPassword(String username, String password){
+
+
+
+        addpassListener(mDatabase,username);
+        addlistListener(mDatabase);
+        System.out.println("run"+temppassword);
+        System.out.println("r"+username);
+        System.out.println("y"+users);
+        if (users.contains(username)) {
+            if (password.equals(temppassword)) {
+                System.out.println("success"+temppassword);
+                return true;
+            } else {
+                System.out.println("fail"+password);
+                return false;
+            }
+        }
+        else {
+            System.out.println("fail1"+password);
+            return false;
+        }
+        //TODO: XQ check if username exist, if password correct. return t/f.
     }
 
     public boolean CheckAddNewAccount(String username, String password){
