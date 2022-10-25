@@ -53,8 +53,13 @@ public class UserFragmentAfterLogin extends Fragment {
     }
 
     public void fragmentReceiveMsg(String msg) {
-        Log.d("UserFragment", "receive msg: "+msg);
-        user_name = msg;
+        if (msg.startsWith("Faculty")){
+            Log.d("UserFragment", ": "+msg);
+        }
+        else {
+            Log.d("UserFragment", "receive msg: "+msg);
+            user_name = msg;
+        }
     }
 
     @Override
@@ -84,6 +89,8 @@ public class UserFragmentAfterLogin extends Fragment {
             @Override
             public void onClick(View v) {
                 if ( !isSpinnerFirst && !sp2.getSelectedItem().toString().equals("")) {
+                    sp1.setEnabled(false);
+                    sp2.setEnabled(false);
                     Toast.makeText(getActivity(), "Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                     sendMessages.iAmMSG("Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString());
                 }else{

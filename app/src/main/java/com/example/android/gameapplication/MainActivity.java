@@ -125,8 +125,14 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     // receive data form fragments
     @Override
     public void iAmMSG(String msg) {
-        user_name = msg;
-        Log.d("MainActivity", "Receive data: "+msg);
+
+        if (msg.startsWith("Faculty")){
+            Log.d("UserFragment", ": "+msg);
+        }
+        else {
+            Log.d("UserFragment", "receive msg: "+msg);
+            user_name = msg;
+        }
     }
 
     @Override
