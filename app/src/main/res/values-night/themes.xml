@@ -36,4 +36,8 @@
         <item name="android:background">@drawable/background_dark</item>
     </style>
 
+    <style name="toolBox" >
+        <item name="android:background">@drawable/border_dark</item>
+    </style>
+
 </resources>

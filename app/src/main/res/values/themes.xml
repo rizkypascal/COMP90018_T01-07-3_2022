@@ -43,5 +43,9 @@
         <item name="android:background">@drawable/background</item>
     </style>
 
+    <style name="toolBox" >
+        <item name="android:background">@drawable/border</item>
+    </style>
+
 
 </resources>

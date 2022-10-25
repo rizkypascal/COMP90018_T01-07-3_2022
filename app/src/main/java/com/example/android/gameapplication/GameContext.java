@@ -207,7 +207,7 @@ public class GameContext extends View implements Runnable{
             }
             if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
                 bar = new StaticBoard(getContext(), posX, y, width,
-                        screenX, R.drawable.basic_board_dark);
+                        screenX, R.drawable.basic_board_tony);
             }
 
 
