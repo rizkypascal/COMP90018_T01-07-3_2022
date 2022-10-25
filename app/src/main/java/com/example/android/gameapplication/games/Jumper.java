@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -27,7 +28,7 @@ public class Jumper extends View
     Rect imageBounds; // jumper image is drawn based on this rectangle size
     private Integer screenSize;
     private Integer boardMove;
-
+    private Float flyMove;
 
     public Jumper(Context context, Integer posX, Integer posY,Integer radius,Float speedY,Integer screenSize,Integer imageID) {
         super(context);
@@ -40,6 +41,7 @@ public class Jumper extends View
         this.imageBounds = new Rect(posX-radius,posY-radius,posX+radius, posY+radius);
         jumper.setBounds(imageBounds);
         boardMove = 0;
+        flyMove = 0f;
     }
 
     /**
@@ -47,23 +49,31 @@ public class Jumper extends View
      * @param velocityY
      * @return
      */
-    public void move(Float velocityX, Float velocityY, Integer thresholdY)
+    public void move(Float velocityX, Float velocityY, int upperthreshold, int lowerthreshold)
     {
         posX += Math.round(velocityX);
         posY += Math.round(velocityY-this.speedY);
-        if(posY < thresholdY)
+        if(posY < upperthreshold)
         {
-            this.boardMove = thresholdY - posY;
-            posY = thresholdY;
-            this.status = Status.stayStill;
+            if(flyMove <= 0f){
+                this.boardMove = upperthreshold - posY;
+                posY = upperthreshold;
+                status = Status.stayStill;
+            }
         }
-        if (velocityY > this.speedY)
+        
+        if(posY > lowerthreshold)
         {
-            this.status = Status.movingDown;
+            this.boardMove = lowerthreshold - posY;
+            posY = lowerthreshold;
         }
-
-
-
+        
+        if(flyMove <= 0f){
+            if (velocityY > this.speedY)
+            {
+                status = Status.movingDown;
+            }
+        }
     }
 
 
@@ -82,7 +92,12 @@ public class Jumper extends View
         //if falls onto a board (CollisionUtils.JumperBoardCollision),
         //then the speed is reassigned with a new positive value
         // ideally the new value is 20
-        this.speedY -= 0.1f;
+
+        if(flyMove <= 0f) {
+            this.speedY -= 0.1f;
+        } else {
+            this.flyMove -= speedY;
+        }
         invalidate();
     }
 
@@ -220,5 +235,13 @@ public class Jumper extends View
 
     public void setBoardMove(Integer boardMove) {
         this.boardMove = boardMove;
+    }
+
+    public Float getFlyMove() {
+        return flyMove;
+    }
+
+    public void setFlyMove(Float flyMove) {
+        this.flyMove = flyMove;
     }
 }

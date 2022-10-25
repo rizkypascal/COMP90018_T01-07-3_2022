@@ -60,4 +60,7 @@
     <string name="your_world_ranking">您的世界排名为：10000以上</string>
     <string name="play_as_tourist">您以游客身份游玩</string>
     <string name="play_as_user">您以如下账号登录：</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="confrimed_password">确认密码</string>
 </resources>

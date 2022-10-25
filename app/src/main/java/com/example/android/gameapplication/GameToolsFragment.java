@@ -29,6 +29,14 @@ public class GameToolsFragment extends Fragment {
     private MainActivity mainActivity;
     private GameActivity gameActivity;
     private GameToolsSelectionFragment fragment;
+    private GameContext gameContext;
+
+    public GameToolsFragment(GameContext gameContext) {
+        this.gameContext = gameContext;
+    }
+
+    public GameToolsFragment() {
+    }
 
     /**
      * Inflate the view with View Binding
@@ -68,7 +76,7 @@ public class GameToolsFragment extends Fragment {
                 break;
         }
         fragment = (GameToolsSelectionFragment) getParentFragment();
-        adapter = new SelectedGameToolsAdapter(gameTools, fragment, activityName);
+        adapter = new SelectedGameToolsAdapter(gameTools, fragment, activityName, gameContext);
         binding.setSelectedGameToolsAdapter(adapter);
         binding.itemRv.setLayoutManager(layoutManager);
         return binding.getRoot();

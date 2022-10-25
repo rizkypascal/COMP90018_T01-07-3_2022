@@ -70,4 +70,7 @@
     <string name="your_world_ranking">Your world rank is: over 10000</string>
     <string name="play_as_tourist">You are playing as a tourist.</string>
     <string name="play_as_user">You are playing as user: </string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="confrimed_password">Confirm Password</string>
 </resources>
