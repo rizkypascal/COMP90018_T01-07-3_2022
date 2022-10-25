@@ -12,12 +12,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.android.gameapplication.database.Database;
-import com.example.android.gameapplication.generated.callback.OnClickListener;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.UnsupportedEncodingException;
@@ -25,15 +25,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
-
-
-public class UserFragment extends Fragment {
-
-
+/**
+ * @author Tony Shu
+ * @date 25/10/2022
+ * @desc
+ */
+public class SignupTabFragment extends Fragment {
     //private Unbinder unbinder;
     //@BindView(R.id.signInButton)
     Button signInButton;
@@ -58,75 +55,37 @@ public class UserFragment extends Fragment {
     float v = 0;
 
 
+    @Nullable
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        sendMessages = (GameFragment.SendMessages) context;
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.signup_tab_fragment,container,false);
+//        signInNameValue = view.findViewById(R.id.signInNameValue);
+//        signInPasswordValue = view.findViewById(R.id.signInPasswordValue);
+        signUpNameValue = view.findViewById(R.id.signUpNameValue);
+        signUpPasswordValue0 = view.findViewById(R.id.signUpPasswordValue0);
+        signUpPasswordValue1 = view.findViewById(R.id.signUpPasswordValue1);
+        //signInButton = (Button) view.findViewById(R.id.signInButton);
+        signUpButton = (Button) view.findViewById(R.id.signUpButton);
 
-    public interface SendMessages {
-        void iAmMSG(String msg);
-    }
 
-    public void fragmentReceiveMsg(String msg) {
-        Log.d("UserFragment", "receive msg: "+msg);
-        user_name = msg;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user, container, false);
-
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SignUpButtonOnClick();
+            }
+        });
+        //unbinder = ButterKnife.bind(this, view);
         activity = (MainActivity) getActivity();
         context = activity.getApplicationContext();
-
-        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
-        viewPager = (ViewPager) view.findViewById(R.id.view_pager);
-
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.sign_in)));
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.sign_up)));
-
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        final LoginAdapter adapter = new LoginAdapter(getChildFragmentManager(),getActivity(),tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                                               @Override
-                                               public void onTabSelected(TabLayout.Tab tab) {
-                                                   viewPager.setCurrentItem(tab.getPosition());
-                                               }
-
-                                               @Override
-                                               public void onTabUnselected(TabLayout.Tab tab) {
-
-                                               }
-
-                                               @Override
-                                               public void onTabReselected(TabLayout.Tab tab) {
-
-                                               }
-                                           });
-
-        tabLayout.setTranslationY(300);
-        tabLayout.setAlpha(v);
-        tabLayout.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(100).start();
-
+        if (user_name!="") {
+            textLoginInfo.setText(getString(R.string.sign_in_as)+" "+user_name);
+        }
 
         database = new Database();
         //TODO: XUEQING may need to re-initiate
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        System.out.println("hello world");
-    }
-
-    //@OnClick(R.id.signInButton)
     void SignInButtonOnClick(){
         Log.d("UserFragment", "signInButton clicked.");
         String username_temp = signInNameValue.getText().toString();
@@ -258,7 +217,18 @@ public class UserFragment extends Fragment {
         return new String(hexChars);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        sendMessages = (GameFragment.SendMessages) context;
+    }
 
+    public interface SendMessages {
+        void iAmMSG(String msg);
+    }
 
-
+    public void fragmentReceiveMsg(String msg) {
+        Log.d("UserFragment", "receive msg: "+msg);
+        user_name = msg;
+    }
 }

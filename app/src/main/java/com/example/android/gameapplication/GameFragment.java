@@ -120,7 +120,7 @@ public class GameFragment extends Fragment {
     @OnClick(R.id.signInUpButton)
     void SignInUpButtonOnClick(){
         Log.d("GameFragment", "SignInUpButton clicked.");
-        if (signInUpButton.getText().toString()=="LOG OUT"){
+        if (signInUpButton.getText().toString().equals(getString(R.string.log_out))){
             MediaPlayer mp = MediaPlayer.create(activity, R.raw.winxpshutdown);
             mp.start();
 

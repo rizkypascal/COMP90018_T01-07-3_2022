@@ -57,4 +57,7 @@
     <string name="your_world_ranking">Ihre Weltrangliste ist: über 10000</string>
     <string name="play_as_tourist">Du spielst als Tourist.</string>
     <string name="play_as_user">Sie spielen als Benutzer:</string>
+    <string name="username">Nutzername</string>
+    <string name="password">Passwort</string>
+    <string name="confrimed_password">Passwort bestätigen</string>
 </resources>

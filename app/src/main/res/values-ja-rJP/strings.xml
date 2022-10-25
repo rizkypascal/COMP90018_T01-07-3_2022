@@ -57,4 +57,7 @@
     <string name="your_world_ranking">あなたの世界ランクは10000以上です</string>
     <string name="play_as_tourist">あなたは観光客として遊んでいます。</string>
     <string name="play_as_user">" あなたはユーザーとしてプレイしています:"</string>
+    <string name="username">ユーザー名</string>
+    <string name="password">パスワード</string>
+    <string name="confrimed_password">パスワードを認証する</string>
 </resources>
