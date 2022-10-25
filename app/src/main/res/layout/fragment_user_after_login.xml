@@ -67,14 +67,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
             android:layout_centerHorizontal="true"
-            android:textColor="#dddddd"
-            android:text="@string/confirm" />
+            android:layout_marginTop="100dp"
+            android:text="@string/confirm"
+            />
     </RelativeLayout>
 
 </LinearLayout>

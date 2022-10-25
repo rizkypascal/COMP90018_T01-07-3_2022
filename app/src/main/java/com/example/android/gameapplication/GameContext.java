@@ -1,5 +1,7 @@
 package com.example.android.gameapplication;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Movie;
 import android.os.CountDownTimer;
@@ -192,8 +194,23 @@ public class GameContext extends View implements Runnable{
             while (posX == lastX){
                 posX = width * random.nextInt(widthRatio);
             }
-            Board bar = new StaticBoard(getContext(), posX, y, width,
-                    screenX, R.drawable.basic_board);
+
+            // get current dark mode setting
+            // Determine bard pictures via dark mode setting
+            Board bar = null;
+            int nightModeFlags =
+                    this.getResources().getConfiguration().uiMode &
+                            Configuration.UI_MODE_NIGHT_MASK;
+            if (nightModeFlags == Configuration.UI_MODE_NIGHT_NO) {
+                bar = new StaticBoard(getContext(), posX, y, width,
+                        screenX, R.drawable.basic_board);
+            }
+            if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+                bar = new StaticBoard(getContext(), posX, y, width,
+                        screenX, R.drawable.basic_board_tony);
+            }
+
+
             newboards.add(bar);
 //            Log.i(String.valueOf(bar.y),String.valueOf(bar.height));
             y -= bar.getBoardHeight()*3*(random.nextInt(2)+1);

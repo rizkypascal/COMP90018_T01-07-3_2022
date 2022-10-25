@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
 
         setContentView(R.layout.activity_main);
 
+        Log.d("[Subscription]", "main activity create");
+
+
         // Setting for Navigation Bar
         navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -162,12 +165,10 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                 this.getResources().getConfiguration().uiMode &
                         Configuration.UI_MODE_NIGHT_MASK;
         if ((nightModeFlags == Configuration.UI_MODE_NIGHT_NO) && lightValue<50) {
-            Log.d("[Subscription]", "!!!!!!!!");
             askIfChangeToDark = true;
             questionInfo = "It seems that you are in a dark place. Do you want to play the game in dark mode?";
         }
         if ((nightModeFlags == Configuration.UI_MODE_NIGHT_YES) && lightValue>=50) {
-            Log.d("[Subscription]", "????????");
             askIfChangeToBright = true;
             questionInfo = "It seems that you are in a bright place. Do you want to play the game in bright mode?";
         }
@@ -184,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                 public void onClick(DialogInterface dialog, int which) {
                     switch (which){
                         case DialogInterface.BUTTON_POSITIVE:
-                            Log.d("mainActivity", "choose yes");
                             if (finalAskIfChangeToBright) {
                                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                             }
@@ -194,7 +194,6 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                             break;
 
                         case DialogInterface.BUTTON_NEGATIVE:
-                            Log.d("mainActivity", "choose no");
                             break;
                     }
                 }

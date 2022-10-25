@@ -22,4 +22,30 @@
     <style name="Theme.GameApplication.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.GameApplication.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="navigation_bar" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:background">@drawable/bottom_nav_background</item>
+        <item name="android:elevation">8dp</item>
+        <item name="itemIconTint">@drawable/bottom_nav_color_selector</item>
+    </style>
+
+    <style name="userFragmentBgColor" >
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="gameActivity" >
+        <item name="android:background">@drawable/background</item>
+    </style>
+
+    <style name="toolBox" >
+        <item name="android:background">@drawable/border</item>
+    </style>
+
+
 </resources>
