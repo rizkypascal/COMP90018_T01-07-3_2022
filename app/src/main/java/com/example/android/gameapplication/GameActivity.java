@@ -132,4 +132,17 @@ public class GameActivity extends AppCompatActivity {
     public void setGameTools(List<GameTools> gameTools) {
         this.gameTools = gameTools;
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameContext.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gameContext.resume();
+    }
+
 }

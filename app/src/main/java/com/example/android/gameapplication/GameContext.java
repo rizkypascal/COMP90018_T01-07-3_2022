@@ -36,6 +36,7 @@ import java.util.Random;
 public class GameContext extends View implements Runnable{
 
     private OrientationSensor orientationSensor;
+    private GameActivity activity;
     private Thread thread;
     private boolean isPlaying = true;
     private boolean isUpdate = false;
@@ -45,20 +46,21 @@ public class GameContext extends View implements Runnable{
     private final float gravityY = 10f;
     private final int lowerthreshold;
 
-    private static int screenX, screenY;
+    private int screenX, screenY;
 
     private ArrayList<Board> boards;
     private Jumper jumper;
     private ArrayList<Monster> monsters = new ArrayList<>();
     private ArrayList<Bullet> bullets = new ArrayList<>();
 
-    public GameContext(Context context, int screenX, int screenY) {
-        super(context);
+    public GameContext(GameActivity activity, int screenX, int screenY) {
+        super(activity);
 
         /** Init sensor variables*/
         this.orientationSensor = new OrientationSensor(getContext());
         EventBus.getDefault().register(this);
 
+        this.activity = activity;
         this.screenX = screenX;
         this.screenY = screenY;
         this.lowerthreshold = screenY * 9 / 10;
@@ -86,8 +88,9 @@ public class GameContext extends View implements Runnable{
     @Override
     public void run() {
         while (isPlaying){
-            checkJumper();
+            checkStatus();
         }
+        exit();
     }
 
     @Override
@@ -203,22 +206,17 @@ public class GameContext extends View implements Runnable{
         return newboards;
     }
 
-    private void checkJumper(){
-
-        if (jumper.getStatus() == Status.movingDown){
-            if (boards.get(0).getPosY() <= 0){
+    private void checkStatus(){
+        if (boards.get(0).getPosY() <= 0){
+            if (jumper.getStatus() == Status.movingDown){
                 isPlaying = false;
             }
-
-
         }
-
     }
 
     private void update () {
 
     }
-
 
 
     /**
@@ -247,6 +245,10 @@ public class GameContext extends View implements Runnable{
                 break;
             }
         }
+    }
+
+    public void exit (){
+        activity.finish();
     }
 
     public void resume () {
