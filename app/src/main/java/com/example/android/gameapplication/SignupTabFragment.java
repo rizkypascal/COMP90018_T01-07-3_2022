@@ -65,6 +65,7 @@ public class SignupTabFragment extends Fragment {
         signUpPasswordValue0 = view.findViewById(R.id.signUpPasswordValue0);
         signUpPasswordValue1 = view.findViewById(R.id.signUpPasswordValue1);
         //signInButton = (Button) view.findViewById(R.id.signInButton);
+        database = new Database();
         signUpButton = (Button) view.findViewById(R.id.signUpButton);
 
 
@@ -81,7 +82,7 @@ public class SignupTabFragment extends Fragment {
             textLoginInfo.setText(getString(R.string.sign_in_as)+" "+user_name);
         }
 
-        database = new Database();
+
         //TODO: XUEQING may need to re-initiate
         return view;
     }

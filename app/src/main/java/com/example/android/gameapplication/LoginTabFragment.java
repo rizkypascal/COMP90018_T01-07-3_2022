@@ -62,7 +62,7 @@ public class LoginTabFragment extends Fragment {
 
         signInNameValue = view.findViewById(R.id.signInNameValue);
         signInPasswordValue = view.findViewById(R.id.signInPasswordValue);
-
+        database = new Database();
         signInButton = (Button) view.findViewById(R.id.signInButton);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +79,7 @@ public class LoginTabFragment extends Fragment {
             textLoginInfo.setText(getString(R.string.sign_in_as)+" "+user_name);
         }
 
-        database = new Database();
+
         //TODO: XUEQING may need to re-initiate
         return view;
     }

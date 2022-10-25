@@ -29,7 +29,8 @@ public class Database {
 
 
     public Database() {
-
+        addlistListener();
+        addpassListener("a");
     }
 
 
@@ -37,25 +38,21 @@ public class Database {
     //You may modify them in this file, or implement them in another
 
     private String temppassword = new String("1");
-    private void addpassListener(DatabaseReference mpassReference, String username) {
+    private void addpassListener(String username) {
         // [START post_value_event_listener]
-        ValueEventListener postListener = new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                temppassword = (String) dataSnapshot.child("password").child(username).getValue();
-                // ..
-
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                temppassword = (String) snapshot.child("password").child(username).getValue();
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                System.out.println("faildata"+temppassword);
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
             }
-        };
-        mpassReference.addValueEventListener(postListener);
+        });
+
+        //mpassReference.addValueEventListener(postListener);
         // [END post_value_event_listener]
     }
 
@@ -83,24 +80,21 @@ public class Database {
 
 
 
-    private void addlistListener(DatabaseReference mlistReference) {
+    private void addlistListener() {
         // [START post_value_event_listener]
-        ValueEventListener postListener = new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                users = (ArrayList<String>) dataSnapshot.child("users").getValue();
-                // ..
-
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                users = (ArrayList<String>) snapshot.child("users").getValue();
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
             }
-        };
-        mlistReference.addValueEventListener(postListener);
+        });
+
+        //mlistReference.addValueEventListener(postListener);
         // [END post_value_event_listener]
     }
 
@@ -108,8 +102,8 @@ public class Database {
 
 
 
-        addpassListener(mDatabase,username);
-        addlistListener(mDatabase);
+        addpassListener(username);
+        addlistListener();
         System.out.println("run"+temppassword);
         System.out.println("r"+username);
         System.out.println("y"+users);
@@ -131,7 +125,7 @@ public class Database {
 
     public boolean CheckAddNewAccount(String username, String password){
 
-        addlistListener(mDatabase);
+        addlistListener();
 
         if (users.contains(username)){
             return false;
