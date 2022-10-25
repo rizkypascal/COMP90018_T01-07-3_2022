@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_baseline_account_circle_24"
+        app:layout_constraintBottom_toBottomOf="@+id/signUpNameValue"
+        app:layout_constraintEnd_toStartOf="@+id/signUpNameValue"
+        app:layout_constraintTop_toTopOf="@+id/signUpNameValue" />
     <EditText
         android:id="@+id/signUpNameValue"
         android:layout_width="0dp"
@@ -14,7 +23,7 @@
         app:layout_constraintVertical_bias=".3"
         android:textColor="@color/white"
         android:textColorHint="@color/gray"
-        app:layout_constraintHorizontal_bias=".5"
+        app:layout_constraintHorizontal_bias=".78"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -24,6 +33,14 @@
         app:layout_constraintTop_toTopOf="parent">
     </EditText>
 
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_baseline_security_24"
+        app:layout_constraintBottom_toBottomOf="@+id/signUpPasswordValue0"
+        app:layout_constraintEnd_toStartOf="@+id/signUpPasswordValue0"
+        app:layout_constraintTop_toTopOf="@+id/signUpPasswordValue0"
+        android:layout_marginRight="5dp"/>
     <EditText
         android:id="@+id/signUpPasswordValue0"
         android:layout_width="0dp"
@@ -35,6 +52,7 @@
         android:background="@drawable/edit_text_bg"
         app:layout_constraintWidth_percent=".8"
         app:layout_constraintVertical_bias="0"
+        app:layout_constraintHorizontal_bias="0.78"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -45,6 +63,14 @@
         app:layout_constraintStart_toStartOf="parent">
     </EditText>
 
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_baseline_verified_user_24"
+        app:layout_constraintBottom_toBottomOf="@+id/signUpPasswordValue1"
+        app:layout_constraintEnd_toStartOf="@+id/signUpPasswordValue1"
+        app:layout_constraintTop_toTopOf="@+id/signUpPasswordValue1"
+        android:layout_marginRight="5dp"/>
     <EditText
         android:id="@+id/signUpPasswordValue1"
         android:layout_width="0dp"
@@ -56,6 +82,7 @@
         android:background="@drawable/edit_text_bg"
         app:layout_constraintWidth_percent=".8"
         app:layout_constraintVertical_bias="0"
+        app:layout_constraintHorizontal_bias="0.78"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
