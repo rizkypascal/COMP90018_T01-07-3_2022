@@ -90,7 +90,6 @@ public class GameContext extends View implements Runnable{
         while (isPlaying){
             checkStatus();
         }
-        exit();
     }
 
     @Override
@@ -209,7 +208,7 @@ public class GameContext extends View implements Runnable{
     private void checkStatus(){
         if (boards.get(0).getPosY() <= 0){
             if (jumper.getStatus() == Status.movingDown){
-                isPlaying = false;
+                exit();
             }
         }
     }
@@ -241,7 +240,7 @@ public class GameContext extends View implements Runnable{
             //set jumper to have constant speed without changing status
             else if(jumper.getStatus().equals(Status.onCopter) || jumper.getStatus().equals(Status.onRocket))
             {
-                jumper.setSpeedY(10f);
+                jumper.setSpeedY(gravityY);
                 break;
             }
         }
@@ -253,6 +252,7 @@ public class GameContext extends View implements Runnable{
 
     public void resume () {
         isPlaying = true;
+        orientationSensor.enableSensor();
         thread = new Thread(this);
         thread.start();
     }
@@ -260,6 +260,7 @@ public class GameContext extends View implements Runnable{
     public void pause () {
         try {
             isPlaying = false;
+            orientationSensor.disableSensor();
             thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
