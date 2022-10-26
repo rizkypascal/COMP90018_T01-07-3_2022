@@ -26,7 +26,6 @@ public class Monster extends View {
     private Rect imageBounds;
     private Drawable monster;
 
-
     public Monster(Context context, Integer posX, Integer posY, Integer size, MonsterType monsterType) {
         super(context);
         this.posX = posX;

@@ -95,15 +95,15 @@ public class GameToolsSelectionFragment extends Fragment {
         String helicopter = getString(R.string.helicopter);
         String rocket = getString(R.string.rocket_tool);
         String clearMonster = getString(R.string.clear_monsters);
-        gameTools.add(new FlyItems(GameToolsName.COPTER, sharedPref.getInt(String.valueOf(R.string.copter), toolDefaultQuantity), helicopter));
-        gameTools.add(new FlyItems(GameToolsName.ROCKET, sharedPref.getInt(String.valueOf(R.string.rocket), toolDefaultQuantity), rocket));
-        gameTools.add(new ClearMonsters(clearMonster,sharedPref.getInt(String.valueOf(R.string.clear_monsters), toolDefaultQuantity)));
+//        gameTools.add(new FlyItems(GameToolsName.COPTER, sharedPref.getInt(String.valueOf(R.string.copter), toolDefaultQuantity), helicopter));
+//        gameTools.add(new FlyItems(GameToolsName.ROCKET, sharedPref.getInt(String.valueOf(R.string.rocket), toolDefaultQuantity), rocket));
+//        gameTools.add(new ClearMonsters(clearMonster,sharedPref.getInt(String.valueOf(R.string.clear_monsters), toolDefaultQuantity)));
         /**
          * uncomment code below to have unlimited tool quantity (start from 5)
          */
-//        gameTools.add(new FlyItems(GameToolsName.COPTER, 5, helicopter));
-//        gameTools.add(new FlyItems(GameToolsName.ROCKET, 5,rocket));
-//        gameTools.add(new ClearMonsters(clearMonster, 5));
+        gameTools.add(new FlyItems(GameToolsName.COPTER, 5, helicopter));
+        gameTools.add(new FlyItems(GameToolsName.ROCKET, 5,rocket));
+        gameTools.add(new ClearMonsters(clearMonster, 5));
         return gameTools;
     }
 

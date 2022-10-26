@@ -1,11 +1,16 @@
 package com.example.android.gameapplication.games;
 
+import static android.os.Build.VERSION_CODES.R;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
+
+import pl.droidsonroids.gif.GifDrawable;
 
 /**
  * @author Tony Shu
@@ -24,20 +29,24 @@ public class Jumper extends View
     private Integer score; // can be stored in game activity instead
     private Boolean alive;
     private Integer radius; // size of jumper
-    private Drawable jumper; // image resource
+    private Integer radiusDefault;
+    private GifDrawable jumper; // image resource
     Rect imageBounds; // jumper image is drawn based on this rectangle size
     private Integer screenSize;
     private Integer boardMove;
     private Float flyMove;
+    private GifDrawable jumperDefault;
 
-    public Jumper(Context context, Integer posX, Integer posY,Integer radius,Float speedY,Integer screenSize,Integer imageID) {
+    public Jumper(Context context, Integer posX, Integer posY, Integer radius, Float speedY, Integer screenSize, Integer imageID) {
         super(context);
         this.posX = posX;
         this.posY = posY;
         this.radius = radius;
+        this.radiusDefault = radius;
         this.speedY = speedY;
         this.screenSize = screenSize;
-        this.jumper = context.getResources().getDrawable(imageID);
+        this.jumper = GifDrawable.createFromResource(context.getResources(), imageID);
+        this.jumperDefault = GifDrawable.createFromResource(context.getResources(), imageID);
         this.imageBounds = new Rect(posX-radius,posY-radius,posX+radius, posY+radius);
         jumper.setBounds(imageBounds);
         boardMove = 0;
@@ -56,6 +65,8 @@ public class Jumper extends View
         if(posY < upperthreshold)
         {
             if(flyMove <= 0f){
+                this.jumper = this.jumperDefault;
+                this.radius = this.radiusDefault;
                 this.boardMove = upperthreshold - posY;
                 posY = upperthreshold;
                 status = Status.stayStill;
@@ -69,6 +80,8 @@ public class Jumper extends View
         }
         
         if(flyMove <= 0f){
+            this.jumper = this.jumperDefault;
+            this.radius = this.radiusDefault;
             if (velocityY > this.speedY)
             {
                 status = Status.movingDown;
@@ -205,11 +218,11 @@ public class Jumper extends View
         this.radius = radius;
     }
 
-    public Drawable getJumper() {
+    public GifDrawable getJumper() {
         return jumper;
     }
 
-    public void setJumper(Drawable jumper) {
+    public void setJumper(GifDrawable jumper) {
         this.jumper = jumper;
     }
 

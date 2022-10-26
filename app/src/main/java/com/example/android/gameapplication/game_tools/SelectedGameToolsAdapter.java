@@ -88,6 +88,8 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
                 gameContext.setJumperStatus(Status.onRocket);
             }else if (gameToolsParams.getCodeName().equals(String.valueOf(R.string.copter))){
                 gameContext.setJumperStatus(Status.onCopter);
+            }else if (gameToolsParams.getCodeName().equals(String.valueOf(R.string.clear_monsters))){
+                gameContext.clearMonsters();
             }
         }
         notifyDataSetChanged();
