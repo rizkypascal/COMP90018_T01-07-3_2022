@@ -30,18 +30,22 @@ public class Database {
         addmonster1Listener();
         addmonster2Listener();
         addboardListener("subject1","week1");
-        addscoreListener("subject1","week1", "a");
+        addscore1Listener();
+        addscore2Listener();
 
     }
 
 
     private String tempscore = new String("0");
-    private void addscoreListener(String subject, String week, String username) {
+    private HashMap tempscoremap = new HashMap<>();
+    private HashMap scoremap1 = new HashMap<>();
+    private HashMap scoremap2 = new HashMap<>();
+    private void addscore1Listener() {
         // [START post_value_event_listener]
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                tempscore = (String) snapshot.child(subject).child(week).child(username).getValue();
+                scoremap1 = (HashMap) snapshot.child("subject1").getValue();
             }
 
             @Override
@@ -50,13 +54,37 @@ public class Database {
             }
         });
 
-        //mpassReference.addValueEventListener(postListener);
-        // [END post_value_event_listener]
+    }
+    private void addscore2Listener() {
+        // [START post_value_event_listener]
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                scoremap2 = (HashMap) snapshot.child("subject2").getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        });
+
     }
     // this method will return all the monster's positions and type
     public String getScore(String subject, String week, String username){
+        if (subject.equals("subject1")) {
+            addscore1Listener();
+            tempscoremap = (HashMap) scoremap1.get(week);
+            tempscore = (String) tempscoremap.get(username);
 
-        addscoreListener(subject, week, username);
+        }
+        else{
+            addscore2Listener();
+            tempscoremap = (HashMap) scoremap2.get(week);
+            tempscore = (String) tempscoremap.get(username);
+        }
+
+
 
         return tempscore;
     }
@@ -243,6 +271,7 @@ public class Database {
 
         addpassListener();
         addlistListener();
+        addscore1Listener();
         // just for test
         //addmonsterListener("subject1","week1");
         //addboardListener("subject1","week1");

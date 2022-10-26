@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Demande de jeu</string>
+    <string name="app_name">Trémie Unimelb H1</string>
     <string name="action_settings">" Réglages"</string>
     <string name="first_fragment_label">Premier fragment</string>
     <string name="second_fragment_label">Deuxième fragment</string>
@@ -60,4 +60,7 @@
     <string name="username">Nom d\'utilisateur</string>
     <string name="password">Mot de passe</string>
     <string name="confrimed_password">" Confirmez le mot de passe"</string>
+    <string name="confirm">Confirmer</string>
+    <string name="select_faculty">Sélectionnez la faculté</string>
+    <string name="select_subject">" Sélectionnez le sujet"</string>
 </resources>
