@@ -27,8 +27,37 @@ public class Database {
         addpassListener("a");
         addmonsterListener("subject1","week1");
         addboardListener("subject1","week1");
+        addscoreListener("subject1","week1", "a");
 
     }
+
+    private String tempscore = new String("0");
+    private void addscoreListener(String subject, String week, String username) {
+        // [START post_value_event_listener]
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tempscore = (String) snapshot.child(subject).child(week).child(username).getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        });
+
+        //mpassReference.addValueEventListener(postListener);
+        // [END post_value_event_listener]
+    }
+    // this method will return all the monster's positions and type
+    public String getScore(String subject, String week, String username){
+
+        addscoreListener(subject, week, username);
+
+        return tempscore;
+    }
+
+
     private ArrayList<String> monsters = new ArrayList<String>();
     private void addmonsterListener(String subject, String week) {
         // [START post_value_event_listener]
@@ -110,13 +139,43 @@ public class Database {
         // [END post_value_event_listener]
     }
 
-
+    private String initscore = new String("0");
     public void writeNewUser(String username, String password) {
+
         // this method for update user information to firebase
         users.add(username);
         // set value for the list of username and the users password
         mDatabase.child("users").setValue(users);
         mDatabase.child("password").child(username).setValue(password);
+        mDatabase.child("subject1").child("week1").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week2").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week3").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week4").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week5").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week6").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week7").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week8").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week9").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week10").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week11").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week12").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week13").child(username).setValue(initscore);
+        mDatabase.child("subject1").child("week14").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week1").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week2").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week3").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week4").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week5").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week6").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week7").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week8").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week9").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week10").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week11").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week12").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week13").child(username).setValue(initscore);
+        mDatabase.child("subject2").child("week14").child(username).setValue(initscore);
+
     }
 
 
