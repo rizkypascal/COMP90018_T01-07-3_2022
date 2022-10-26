@@ -1,6 +1,7 @@
 package com.example.android.gameapplication;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Movie;
@@ -8,6 +9,8 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.android.gameapplication.games.Board;
 import com.example.android.gameapplication.games.BombEffect;
@@ -37,8 +40,8 @@ public class GameContext extends View implements Runnable{
     private GameActivity activity;
     private Thread thread;
     private boolean isPlaying = true;
-    private boolean isUpdate = false;
-    private int initialBoards = 200;
+    private boolean isExit, isComplete = false;
+    private int initialBoards = 100;
     private int widthRatio = 5;
     private final float changeY = 22f;
     private final float gravityY = 10f;
@@ -60,22 +63,26 @@ public class GameContext extends View implements Runnable{
         EventBus.getDefault().register(this);
 
         this.activity = activity;
-        this.screenX = screenX;
-        this.screenY = screenY;
+        this.screenX = screenX; //1440
+        this.screenY = screenY;   //3040
         this.lowerthreshold = screenY * 9 / 10;
+
+        int jumperX = screenX/14;
+        int jumperY = screenY/7;
+        int size = screenX/10;
 
         // random generate the boards for full screen
         this.boards = random_generate(screenY, screenX);
 
         //some monsters for testing purpose
-        Monster monster = new Monster(getContext(), 500, 500,150, MonsterType.EXAM);
+        Monster monster = new Monster(getContext(), 500, 500,size, 10,MonsterType.EXAM);
         this.monsters.add(monster);
-        Monster monster2 = new Monster(getContext(), 800, 700,150, MonsterType.QUIZ);
+        Monster monster2 = new Monster(getContext(), 800, 700,size, 10,MonsterType.QUIZ);
         this.monsters.add(monster2);
         int initBoardX = boards.get(0).getPosX();
         int initBoardY = boards.get(0).getPosY();
         Log.i("generate","initLoc"+initBoardX+"Y"+initBoardY);
-        this.jumper = new Jumper(getContext(),100,500,100,gravityY,
+        this.jumper = new Jumper(getContext(),jumperX,jumperY, jumperX,gravityY,
                 screenX, R.drawable.jumperone);
 
         Log.i("generate","Game view");
@@ -114,18 +121,6 @@ public class GameContext extends View implements Runnable{
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-//        Log.i("jumper loc","reach "+jumper.getPosY()+" screen" + screenY);
-        jumper.draw(canvas);
-
-        //drawing bomb until the bomb gif is finished
-        if(bomb != null){
-            bomb.draw(canvas);
-        }
-
-        for (Monster monster : monsters){
-            monster.move(1f, 1f, screenY, screenX);
-            monster.draw(canvas);
-        }
 
         //all boards move down if the jumper's status is stayStill
         for (Board board : boards){
@@ -147,10 +142,16 @@ public class GameContext extends View implements Runnable{
             }
         }
 
+        jumper.draw(canvas);
+
+        //drawing bomb until the bomb gif is finished
+        if(bomb != null){
+            bomb.draw(canvas);
+        }
         //draw all monsters
-        if(monsters.size()>0)
-        {
-            for (Monster monster: monsters) {
+        for (Monster monster : monsters){
+            if (monster.getAlive()){
+                monster.move(1f, 1f, screenY, screenX);
                 monster.draw(canvas);
             }
         }
@@ -170,15 +171,23 @@ public class GameContext extends View implements Runnable{
         //detect collision between monsters and bullets
         for (Bullet bullet: bullets) {
             for (Monster monster: monsters) {
-                if(CollisionUtils.bulletMonsterCollision(bullet,monster))
-                {
-                    monsters.remove(monster);
-                    break;
+                if (monster.getAlive()){
+                    if(CollisionUtils.bulletMonsterCollision(bullet,monster))
+                    {
+                        monster.setAlive(false);
+                        break;
+                    }
                 }
+
             }
         }
 
-        invalidate();
+        if (isExit){
+            exit();
+        }
+        else{
+            invalidate();
+        }
 
     }
 
@@ -224,8 +233,21 @@ public class GameContext extends View implements Runnable{
     private void checkStatus(){
         if (boards.get(0).getPosY() <= 0){
             if (jumper.getStatus() == Status.movingDown){
-                exit();
+                isExit = true;
             }
+        }
+        int alive = 0;
+        for (Monster monster : monsters){
+            if (monster.getAlive()){
+                alive += 1;
+            }
+        }
+
+        if (boards.get(boards.size()-1).getPosY() >= jumper.getPosY()){
+            if (alive == 0){
+                isComplete = true;
+            }
+            isExit = true;
         }
     }
 
@@ -262,7 +284,21 @@ public class GameContext extends View implements Runnable{
     }
 
     public void exit (){
-        activity.finish();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        String msg = getResources().getString(R.string.finish_game);
+        if (isComplete){
+            msg += getResources().getString(R.string.complete_game);
+        }else{
+            msg += getResources().getString(R.string.incomplete_game);
+        }
+        builder.setMessage(msg);
+        builder.setCancelable(false);
+        builder.setPositiveButton(getResources().getString(R.string.got_it),
+                (DialogInterface.OnClickListener) (dialog, which) -> {
+            activity.finish();
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     public void resume () {
@@ -296,7 +332,7 @@ public class GameContext extends View implements Runnable{
                 jumper.setJumper(GifDrawable.createFromResource(getResources(), R.drawable.jumperone_copter));
             }
             jumper.setRadius(130);
-            jumper.setFlyMove(1500f);
+            jumper.setFlyMove((float) screenY);
         }
     }
 
@@ -316,7 +352,9 @@ public class GameContext extends View implements Runnable{
             @Override
             public void onFinish() {
                 bomb = null;
-                monsters.removeAll(monsters);
+                for (Monster monster : monsters){
+                    monster.setAlive(false);
+                }
             }
         };
         cd.start();
