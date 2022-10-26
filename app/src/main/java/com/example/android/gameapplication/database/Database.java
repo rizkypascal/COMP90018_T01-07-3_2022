@@ -18,7 +18,7 @@ import java.util.*;
 public class Database {
     private static final String TAG = "Database";
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    private String temp = new String("1");
+
 
 
 
@@ -26,7 +26,7 @@ public class Database {
     public Database() {
         // activate the listener
         addlistListener();
-        addpassListener("b");
+        addpassListener();
         addmonsterListener("subject1","week1");
         addboardListener("subject1","week1");
         addscoreListener("subject1","week1", "a");
@@ -130,12 +130,13 @@ public class Database {
     // the temppassword is once we get the user's password from firebase
     // basic logic is similar
     private String temppassword = new String("1");
-    private void addpassListener(String username) {
+    private Map<String,String> passwordmap = new HashMap<>();
+    private void addpassListener() {
         // [START post_value_event_listener]
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                temppassword = (String) snapshot.child("password").child(username).getValue();
+                passwordmap = (Map<String, String>) snapshot.child("password").getValue();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -211,15 +212,18 @@ public class Database {
     }
     // function that can check if the username match the password
     public boolean UsernameMatchPassword(String username, String password){
-        temp = username;
 
-        addpassListener(username);
+
+        addpassListener();
         addlistListener();
         // just for test
         //addmonsterListener("subject1","week1");
         //addboardListener("subject1","week1");
         //System.out.println("monster:"+monsters);
         //System.out.println("board:"+boards);
+        //System.out.println("map:"+passwordmap);
+        temppassword = passwordmap.get(username);
+        //System.out.println("ppass:"+temppassword);
         if (users.contains(username)) {
 
             if (password.equals(temppassword)) {
