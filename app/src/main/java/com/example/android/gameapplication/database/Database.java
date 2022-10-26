@@ -1,22 +1,15 @@
 package com.example.android.gameapplication.database;
 import android.util.Log;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ServerValue;
-import com.google.firebase.database.Transaction;
-import com.google.firebase.database.ValueEventListener;
 
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.*;
 
@@ -31,6 +24,65 @@ public class Database {
     public Database() {
         addlistListener();
         addpassListener("a");
+        addmonsterListener("subject1","week1");
+        addboardListener("subject1","week1");
+
+    }
+    private ArrayList<String> monsters = new ArrayList<String>();
+    private void addmonsterListener(String subject, String week) {
+        // [START post_value_event_listener]
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                monsters = (ArrayList<String>) snapshot.child("monster").child(subject).child(week).getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        });
+
+        //mpassReference.addValueEventListener(postListener);
+        // [END post_value_event_listener]
+    }
+    public ArrayList<String> getMonsters(String subject, String week){
+
+        addmonsterListener(subject, week);
+
+        return monsters;
+    }
+
+
+
+
+    private ArrayList<String> boards = new ArrayList<String>();
+    private void addboardListener(String subject, String week) {
+        // [START post_value_event_listener]
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boards = (ArrayList<String>) snapshot.child("board").child(subject).child(week).getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        });
+
+        //mpassReference.addValueEventListener(postListener);
+        // [END post_value_event_listener]
+    }
+
+
+
+
+    public ArrayList<String> getBoards(String subject, String week){
+
+        addboardListener(subject, week);
+
+        return boards;
     }
 
 
@@ -104,6 +156,10 @@ public class Database {
 
         addpassListener(username);
         addlistListener();
+        addmonsterListener("subject1","week1");
+        addboardListener("subject1","week1");
+        System.out.println("monster:"+monsters);
+        System.out.println("board:"+boards);
 
         if (users.contains(username)) {
             if (password.equals(temppassword)) {
