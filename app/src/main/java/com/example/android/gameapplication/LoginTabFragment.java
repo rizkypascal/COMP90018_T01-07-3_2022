@@ -62,7 +62,8 @@ public class LoginTabFragment extends Fragment {
 
         signInNameValue = view.findViewById(R.id.signInNameValue);
         signInPasswordValue = view.findViewById(R.id.signInPasswordValue);
-        database = new Database();
+        String username = signInNameValue.getText().toString();
+        database = new Database(username);
         signInButton = (Button) view.findViewById(R.id.signInButton);
 
         signInButton.setOnClickListener(new View.OnClickListener() {

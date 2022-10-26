@@ -21,10 +21,10 @@ public class Database {
 
 
 
-    public Database() {
+    public Database(String username) {
         // activate the listener
         addlistListener();
-        addpassListener("a");
+        addpassListener(username);
         addmonsterListener("subject1","week1");
         addboardListener("subject1","week1");
         addscoreListener("subject1","week1", "a");
@@ -55,6 +55,11 @@ public class Database {
         addscoreListener(subject, week, username);
 
         return tempscore;
+    }
+    public void updateScore(String subject, String week, String username, String scores){
+
+        mDatabase.child(subject).child(week).child(username).setValue(scores);
+
     }
 
 
