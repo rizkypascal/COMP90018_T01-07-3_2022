@@ -29,6 +29,7 @@ public class Jumper extends View
     private Integer score; // can be stored in game activity instead
     private Boolean alive;
     private Integer radius; // size of jumper
+    private Integer radiusDefault;
     private GifDrawable jumper; // image resource
     Rect imageBounds; // jumper image is drawn based on this rectangle size
     private Integer screenSize;
@@ -41,6 +42,7 @@ public class Jumper extends View
         this.posX = posX;
         this.posY = posY;
         this.radius = radius;
+        this.radiusDefault = radius;
         this.speedY = speedY;
         this.screenSize = screenSize;
         this.jumper = GifDrawable.createFromResource(context.getResources(), imageID);
@@ -64,6 +66,7 @@ public class Jumper extends View
         {
             if(flyMove <= 0f){
                 this.jumper = this.jumperDefault;
+                this.radius = this.radiusDefault;
                 this.boardMove = upperthreshold - posY;
                 posY = upperthreshold;
                 status = Status.stayStill;
@@ -78,6 +81,7 @@ public class Jumper extends View
         
         if(flyMove <= 0f){
             this.jumper = this.jumperDefault;
+            this.radius = this.radiusDefault;
             if (velocityY > this.speedY)
             {
                 status = Status.movingDown;

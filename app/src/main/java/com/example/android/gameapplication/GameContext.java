@@ -295,6 +295,7 @@ public class GameContext extends View implements Runnable{
             }else if(stats.equals(Status.onCopter)){
                 jumper.setJumper(GifDrawable.createFromResource(getResources(), R.drawable.jumperone_copter));
             }
+            jumper.setRadius(130);
             jumper.setFlyMove(1500f);
         }
     }
@@ -307,12 +308,9 @@ public class GameContext extends View implements Runnable{
         Movie movie = Movie.decodeStream(is);
         int duration = movie.duration();
 
-        this.bomb = new BombEffect(getContext(), 550, 1000,400, R.drawable.bomb);
-
         CountDownTimer cd = new CountDownTimer(duration, 1000) {
             @Override
             public void onTick(long l) {
-
             }
 
             @Override
@@ -322,5 +320,7 @@ public class GameContext extends View implements Runnable{
             }
         };
         cd.start();
+
+        bomb = new BombEffect(getContext(), 550, 1000,400, R.drawable.bomb);
     }
 }

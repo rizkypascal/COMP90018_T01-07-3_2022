@@ -12,11 +12,11 @@
     <string name="copter">helikopter</string>
     <string name="rocket">roket</string>
     <string name="clear_monsters">bersihkan monster</string>
-    <string name="reborn">lahir baru</string>
+    <string name="reborn">hidup kembali</string>
     <string name="game_tools_instruction">Ketuk gambar alat (Maks 3 alat)</string>
     <string name="helicopter">Helikopter</string>
     <string name="play_game">Mainkan Game</string>
-    <string name="sing_in_up">Masuk/up</string>
+    <string name="sing_in_up">Masuk/Daftar</string>
     <string name="user">PENGGUNA</string>
     <string name="game">PERMAINAN</string>
     <string name="game_tools">ALAT PERMAINAN</string>
@@ -25,7 +25,7 @@
     <string name="enter_username">Silakan masukkan nama pengguna Anda</string>
     <string name="enter_password">Silakan masukkan kata sandi Anda</string>
     <string name="sign_up_here">Belum punya akun? Daftar disini!</string>
-    <string name="username_hint">Nama belakang:</string>
+    <string name="username_hint">Nama pengguna:</string>
     <string name="confirm_password">Harap konfirmasi kata sandi Anda</string>
     <string name="password_hint">Kata sandi:</string>
     <string name="sign_up">Daftar</string>
@@ -37,7 +37,7 @@
     <string name="rocket_tool">Roket</string>
     <string name="clear_monsters_tool">Bersihkan Monster</string>
     <string name="all_tools_picked">Anda telah memilih semua item</string>
-    <string name="reborn_tool">Lahir baru</string>
+    <string name="reborn_tool">Hidup kembali</string>
     <string name="duplicated_tool">Item duplikat terdeteksi!</string>
     <string name="no">Tidak</string>
     <string name="yes">Ya</string>
@@ -60,7 +60,7 @@
     <string name="username">Nama belakang</string>
     <string name="password">Kata sandi</string>
     <string name="confrimed_password">konfirmasi sandi</string>
-    <string name="select_subject">Pilih kursus Anda</string>
+    <string name="select_subject">Pilih mata kuliah Anda</string>
     <string name="select_faculty">Silakan pilih fakultas</string>
     <string name="confirm">Mengonfirmasi</string>
 </resources>
