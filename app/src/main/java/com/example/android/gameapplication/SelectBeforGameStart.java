@@ -189,34 +189,34 @@ public class SelectBeforGameStart extends Fragment {
 
     public void play_Game() {
 
-        GameFragment startmenu = new GameFragment();
+        SelectWeek selectweek = new SelectWeek();
         activity.getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.layout_fragment, startmenu)
+                .replace(R.id.layout_fragment, selectweek)
                 .addToBackStack(null)
                 .commit();
-        startmenu.fragmentReceiveMsg(user_name);
+        selectweek.fragmentReceiveMsg(user_name);
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
-        Intent intent = new Intent(context, GameActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        //Bundle bundle = new Bundle();
+        //bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
+        //Intent intent = new Intent(context, GameActivity.class);
+        //intent.putExtras(bundle);
+        //startActivity(intent);
 
 
         // storing game tools quantity locally after game started
 
-        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
+        //SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        //SharedPreferences.Editor editor = sharedPref.edit();
 
-        if(activity.getGameTools() != null){
-            for(GameTools gameTools : activity.getGameTools()){
-                editor.putInt(gameTools.getCodeName(), gameTools.getQuantity());
-            }
-            editor.apply();
-        }
+        //if(activity.getGameTools() != null){
+        //    for(GameTools gameTools : activity.getGameTools()){
+        //        editor.putInt(gameTools.getCodeName(), gameTools.getQuantity());
+        //    }
+        //   editor.apply();
+        //}
         //reset the selected game tools box on the GameToolsFragment
-        activity.setSelectedGameTools(new ArrayList<GameTools>());
+        //activity.setSelectedGameTools(new ArrayList<GameTools>());
     }
 
 
