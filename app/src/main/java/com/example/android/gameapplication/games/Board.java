@@ -73,7 +73,7 @@ public class Board extends View
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        this.imageBounds = new Rect(posX-this.width/2,posY-this.height/2,posX+this.width/2, posY+this.height/2);
+        this.imageBounds = new Rect(posX-this.width/2,posY-this.height/2,posX+this.width/2, posY+this.height);
         this.boardDrawable.setBounds(this.imageBounds);
         this.boardDrawable.draw(canvas);
         invalidate();
