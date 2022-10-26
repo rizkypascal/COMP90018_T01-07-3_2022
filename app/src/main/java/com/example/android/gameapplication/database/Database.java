@@ -30,6 +30,11 @@ public class Database {
         addscoreListener("subject1","week1", "a");
 
     }
+    public Database() {
+        // activate the listener
+        addlistListener();
+
+    }
 
     private String tempscore = new String("0");
     private void addscoreListener(String subject, String week, String username) {
