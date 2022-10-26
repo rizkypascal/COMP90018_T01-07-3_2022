@@ -18,23 +18,21 @@ import java.util.*;
 public class Database {
     private static final String TAG = "Database";
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private String temp = new String("1");
 
 
 
-    public Database(String username) {
+
+    public Database() {
         // activate the listener
         addlistListener();
-        addpassListener(username);
+        addpassListener("b");
         addmonsterListener("subject1","week1");
         addboardListener("subject1","week1");
         addscoreListener("subject1","week1", "a");
 
     }
-    public Database() {
-        // activate the listener
-        addlistListener();
 
-    }
 
     private String tempscore = new String("0");
     private void addscoreListener(String subject, String week, String username) {
@@ -213,6 +211,8 @@ public class Database {
     }
     // function that can check if the username match the password
     public boolean UsernameMatchPassword(String username, String password){
+        temp = username;
+
         addpassListener(username);
         addlistListener();
         // just for test
@@ -221,6 +221,7 @@ public class Database {
         //System.out.println("monster:"+monsters);
         //System.out.println("board:"+boards);
         if (users.contains(username)) {
+
             if (password.equals(temppassword)) {
                 // only work when we have the user can the password is correct
                 return true;
