@@ -104,20 +104,18 @@ public class Database {
 
         addpassListener(username);
         addlistListener();
-        System.out.println("run"+temppassword);
-        System.out.println("r"+username);
-        System.out.println("y"+users);
+
         if (users.contains(username)) {
             if (password.equals(temppassword)) {
-                System.out.println("success"+temppassword);
+
                 return true;
             } else {
-                System.out.println("fail"+password);
+
                 return false;
             }
         }
         else {
-            System.out.println("fail1"+password);
+
             return false;
         }
         //TODO: XQ check if username exist, if password correct. return t/f.
