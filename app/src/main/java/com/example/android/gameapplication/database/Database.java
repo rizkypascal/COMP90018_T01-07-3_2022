@@ -27,7 +27,8 @@ public class Database {
         // activate the listener
         addlistListener();
         addpassListener();
-        addmonsterListener("subject1","week1");
+        addmonster1Listener();
+        addmonster2Listener();
         addboardListener("subject1","week1");
         addscoreListener("subject1","week1", "a");
 
@@ -65,14 +66,32 @@ public class Database {
 
     }
 
-
+    private HashMap monstermap2 = new HashMap<>();
+    private HashMap monstermap1 = new HashMap<>();
     private ArrayList<String> monsters = new ArrayList<String>();
-    private void addmonsterListener(String subject, String week) {
+    private void addmonster2Listener() {
         // [START post_value_event_listener]
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                monsters = (ArrayList<String>) snapshot.child("monster").child(subject).child(week).getValue();
+                monstermap2 = (HashMap) snapshot.child("monster").child("subject2").getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        });
+
+        //mpassReference.addValueEventListener(postListener);
+        // [END post_value_event_listener]
+    }
+    private void addmonster1Listener() {
+        // [START post_value_event_listener]
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                monstermap1 = (HashMap) snapshot.child("monster").child("subject1").getValue();
             }
 
             @Override
@@ -86,8 +105,16 @@ public class Database {
     }
     // this method will return all the monster's positions and type
     public ArrayList<String> getMonsters(String subject, String week){
+        if (subject.equals("subject1")) {
+            addmonster1Listener();
+            monsters = (ArrayList<String>) monstermap1.get(week);
 
-        addmonsterListener(subject, week);
+        }
+        if (subject.equals("subject2")) {
+            addmonster2Listener();
+            monsters = (ArrayList<String>) monstermap2.get(week);
+
+        }
 
         return monsters;
     }
@@ -219,6 +246,8 @@ public class Database {
         // just for test
         //addmonsterListener("subject1","week1");
         //addboardListener("subject1","week1");
+        //addmonster1Listener();
+        //monsters = (ArrayList<String>) monstermap1.get("week1");
         //System.out.println("monster:"+monsters);
         //System.out.println("board:"+boards);
         //System.out.println("map:"+passwordmap);
