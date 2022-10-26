@@ -189,13 +189,13 @@ public class SelectBeforGameStart extends Fragment {
 
     public void play_Game() {
 
-        GameFragment startmenu = new GameFragment();
+        Fragment_SelectWeek selectWeek = new Fragment_SelectWeek();
         activity.getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.layout_fragment, startmenu)
+                .replace(R.id.layout_fragment, selectWeek)
                 .addToBackStack(null)
                 .commit();
-        startmenu.fragmentReceiveMsg(user_name);
+        //selectWeek.fragmentReceiveMsg(user_name);
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
