@@ -166,6 +166,7 @@ public class GameFragment extends Fragment {
     public void playGame(){
         if (user_name=="") {
             PopToast(getString(R.string.play_as_tourist));
+            play_Game_();
         }
         else {
             PopToast(getString(R.string.play_as_user)+user_name);
