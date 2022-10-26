@@ -69,8 +69,13 @@ public class UserFragment extends Fragment {
     }
 
     public void fragmentReceiveMsg(String msg) {
-        Log.d("UserFragment", "receive msg: "+msg);
-        user_name = msg;
+        if (msg.startsWith("Faculty")){
+            Log.d("UserFragment", ": "+msg);
+        }
+        else {
+            Log.d("UserFragment", "receive msg: "+msg);
+            user_name = msg;
+        }
     }
 
     @Override

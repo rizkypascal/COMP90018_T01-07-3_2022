@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.android.gameapplication.game_tools.GameTools;
 
@@ -163,17 +164,33 @@ public class GameFragment extends Fragment {
      * function to switch activity for the gameplay
      */
     public void playGame(){
-        if (user_name=="") PopToast(getString(R.string.play_as_tourist));
-        else PopToast(getString(R.string.play_as_user)+user_name);
+        if (user_name=="") {
+            PopToast(getString(R.string.play_as_tourist));
+        }
+        else {
+            PopToast(getString(R.string.play_as_user)+user_name);
+            SelectBeforGameStart selectFragment = new SelectBeforGameStart();
+            activity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.layout_fragment, selectFragment)
+                    .addToBackStack(null)
+                    .commit();
+            selectFragment.fragmentReceiveMsg(user_name);
+
+        }
+        //play_Game_();
+    }
+
+    public void play_Game_() {
         Bundle bundle = new Bundle();
         bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
         Intent intent = new Intent(context, GameActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
 
-        /**
-         * storing game tools quantity locally after game started
-         */
+
+        // storing game tools quantity locally after game started
+
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
