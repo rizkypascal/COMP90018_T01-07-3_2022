@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">游戏アプリ</string>
+    <string name="app_name">Unimelb H1 Hopper</string>
     <string name="action_settings">設定</string>
     <string name="first_fragment_label">最初のフラグメント</string>
     <string name="second_fragment_label">2 番目のフラグメント</string>

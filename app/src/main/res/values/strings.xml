@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Game Application</string>
+
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -73,4 +73,5 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="confrimed_password">Confirm Password</string>
+    <string name="app_name">Unimelb H1 Hopper</string>
 </resources>
