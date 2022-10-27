@@ -157,6 +157,9 @@ public class LoginTabFragment extends Fragment {
             if (database.UsernameMatchPassword(user_name, password)) {
                 PopToast(getString(R.string.login_as)+user_name);
                 Log.d("UserFragment","password username matches");
+
+                Log.i("i","database:" + database.getMonsters("subject1","week1"));
+
                 return true;
             }
             PopToast(getString(R.string.something_wrong));

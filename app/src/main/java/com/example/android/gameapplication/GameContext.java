@@ -5,17 +5,23 @@ import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Movie;
+import android.media.Image;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.android.gameapplication.database.Database;
 import com.example.android.gameapplication.games.Board;
 import com.example.android.gameapplication.games.BombEffect;
 import com.example.android.gameapplication.games.Bullet;
 import com.example.android.gameapplication.games.CollisionUtils;
+import com.example.android.gameapplication.games.FireworkEffect;
 import com.example.android.gameapplication.games.Jumper;
 import com.example.android.gameapplication.games.MonsterType;
 import com.example.android.gameapplication.games.StaticBoard;
@@ -23,6 +29,7 @@ import com.example.android.gameapplication.games.Status;
 import com.example.android.gameapplication.games.Monster;
 import com.example.android.gameapplication.sensors.OrientationMessage;
 import com.example.android.gameapplication.sensors.OrientationSensor;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -41,21 +48,24 @@ public class GameContext extends View implements Runnable{
     private Thread thread;
     private boolean isPlaying = true;
     private boolean isExit, isComplete = false;
-    private int initialBoards = 100;
-    private int widthRatio = 5;
+    private int score = 0;
+
+    private final int initialBoards = 100;
+    private final int widthRatio = 5;
     private final float changeY = 22f;
     private final float gravityY = 10f;
     private final int lowerthreshold;
-
-    private int screenX, screenY;
+    private final int screenX, screenY;
 
     private ArrayList<Board> boards;
     private Jumper jumper;
     private ArrayList<Monster> monsters = new ArrayList<>();
     private ArrayList<Bullet> bullets = new ArrayList<>();
     private BombEffect bomb;
+    private FireworkEffect firework;
+    private Database database;
 
-    public GameContext(GameActivity activity, int screenX, int screenY) {
+    public GameContext(GameActivity activity, int screenX, int screenY, Database database) {
         super(activity);
 
         /** Init sensor variables*/
@@ -65,11 +75,14 @@ public class GameContext extends View implements Runnable{
         this.activity = activity;
         this.screenX = screenX; //1440
         this.screenY = screenY;   //3040
+        this.database = database;
         this.lowerthreshold = screenY * 9 / 10;
 
         int jumperX = screenX/14;
         int jumperY = screenY/7;
         int size = screenX/10;
+
+        // database = new Database();
 
         // random generate the boards for full screen
         this.boards = random_generate(screenY, screenX);
@@ -79,13 +92,22 @@ public class GameContext extends View implements Runnable{
         this.monsters.add(monster);
         Monster monster2 = new Monster(getContext(), 800, 700,size, 10,MonsterType.QUIZ);
         this.monsters.add(monster2);
-        int initBoardX = boards.get(0).getPosX();
-        int initBoardY = boards.get(0).getPosY();
-        Log.i("generate","initLoc"+initBoardX+"Y"+initBoardY);
+//        int initBoardX = boards.get(0).getPosX();
+//        int initBoardY = boards.get(0).getPosY();
+//        Log.i("generate","initLoc"+initBoardX+"Y"+initBoardY);
         this.jumper = new Jumper(getContext(),jumperX,jumperY, jumperX,gravityY,
                 screenX, R.drawable.jumperone);
 
         Log.i("generate","Game view");
+
+        //checkData();
+
+    }
+
+    private void checkData(){
+        Log.i("i","database:" + activity.getSubject() + activity.getWeek());
+        Log.i("i","database:" + database.getMonsters(activity.getSubject(),
+                activity.getWeek()));
     }
 
     @Override
@@ -148,6 +170,8 @@ public class GameContext extends View implements Runnable{
         if(bomb != null){
             bomb.draw(canvas);
         }
+
+
         //draw all monsters
         for (Monster monster : monsters){
             if (monster.getAlive()){
@@ -175,20 +199,18 @@ public class GameContext extends View implements Runnable{
                     if(CollisionUtils.bulletMonsterCollision(bullet,monster))
                     {
                         monster.setAlive(false);
+                        score += monster.getScore();
                         break;
                     }
                 }
-
             }
         }
 
         if (isExit){
             exit();
-        }
-        else{
+        } else{
             invalidate();
         }
-
     }
 
     private ArrayList<Board> random_generate(int startY, int screenX){
@@ -228,6 +250,18 @@ public class GameContext extends View implements Runnable{
         }
 
         return newboards;
+    }
+
+    private void generate_monsters(){
+        ArrayList<String> lists = new ArrayList<>();
+        lists = database.getMonsters("subject1", "week1");
+        Log.i("monster","list:"+lists.size());
+    }
+
+    private void save_record(){
+        database.updateScore(activity.getSubject(), activity.getWeek(),
+                activity.getUser_name(), String.valueOf(score));
+        //Log.i("i",""+activity.subject+ activity.week+activity.user_name+ String.valueOf(score));
     }
 
     private void checkStatus(){
@@ -284,14 +318,23 @@ public class GameContext extends View implements Runnable{
     }
 
     public void exit (){
+        // display firework
+        firework(screenX/2, screenY/5);
+        activity.constraintLayout.addView(firework);
+        // save record to database
+        save_record();
+        // show dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         String msg = getResources().getString(R.string.finish_game);
+        String title = getResources().getString(R.string.done);
         if (isComplete){
             msg += getResources().getString(R.string.complete_game);
         }else{
             msg += getResources().getString(R.string.incomplete_game);
+            title = getResources().getString(R.string.good);
         }
         builder.setMessage(msg);
+        builder.setTitle(title);
         builder.setCancelable(false);
         builder.setPositiveButton(getResources().getString(R.string.got_it),
                 (DialogInterface.OnClickListener) (dialog, which) -> {
@@ -361,4 +404,38 @@ public class GameContext extends View implements Runnable{
 
         bomb = new BombEffect(getContext(), 550, 1000,400, R.drawable.bomb);
     }
+
+    /**
+     * draw the firework effect when game complete and finish
+     */
+    public void firework(int posX, int posY){
+
+        InputStream is = getResources().openRawResource(R.raw.fireworks);
+        Movie movie = Movie.decodeStream(is);
+        int duration = movie.duration();
+        CountDownTimer cd = new CountDownTimer(duration, 1000) {
+            @Override
+            public void onTick(long l) {
+            }
+
+            @Override
+            public void onFinish() {
+                Log.i("i","finish");
+                firework = null;
+            }
+        };
+        cd.start();
+        firework = new FireworkEffect(getContext(),posX,posY,
+                screenX/2, R.drawable.fireworks);
+    }
+
+    private void PopToast(String text, int duration){
+        Toast toast = Toast.makeText(getContext(), null, Toast.LENGTH_LONG);
+        toast.setText(text);
+        toast.show();
+    }
+
+
+
+
 }

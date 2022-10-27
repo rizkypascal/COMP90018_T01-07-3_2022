@@ -26,6 +26,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import com.example.android.gameapplication.database.Database;
 import com.example.android.gameapplication.game_tools.GameTools;
 import com.example.android.gameapplication.games.Board;
 import com.example.android.gameapplication.games.CollisionUtils;
@@ -41,9 +42,24 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
 
     private GameContext gameContext;
+    private Database database;
     private int screenX, screenY = 0;
     private FragmentTransaction transaction;
     private List<GameTools> gameTools;
+    public ConstraintLayout constraintLayout;
+    public String subject, week, user_name;
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getWeek() {
+        return week;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,24 +68,27 @@ public class GameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_game);
         // get game activity
-        ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.game_activity);
+        constraintLayout = (ConstraintLayout) findViewById(R.id.game_activity);
 
         //use screen size to set game context
         DisplayMetrics metrics = this.getResources().getDisplayMetrics();
         screenX = metrics.widthPixels;
         screenY = metrics.heightPixels;
-
-        gameContext = new GameContext (this, screenX, screenY);
-        constraintLayout.addView(gameContext);
+        this.database = new Database();
 
         /**
          * Get all passed values from MainActivity
          */
         Bundle bundle = getIntent().getExtras();
         gameTools = (List<GameTools>) bundle.getSerializable("gameTools");
-        String subject = bundle.getString("subject");
-        String week = bundle.getString("week");
+        subject = bundle.getString("subject");
+        week = bundle.getString("week");
+        user_name = bundle.getString("user_name");
         Log.d("GameActivity", "subject: "+subject+" week: "+week);
+
+        gameContext = new GameContext (this, screenX, screenY, database);
+        constraintLayout.addView(gameContext);
+
         GameToolsFragment gameToolsFragment = new GameToolsFragment(gameContext);
         FragmentManager manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
@@ -145,6 +164,11 @@ public class GameActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         gameContext.resume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
 }

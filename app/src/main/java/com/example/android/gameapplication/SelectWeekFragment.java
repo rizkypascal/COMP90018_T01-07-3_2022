@@ -89,7 +89,7 @@ public class SelectWeekFragment extends Fragment {
             weeks.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String msg = "Week" + (finalI + 1);
+                    String msg = "week" + (finalI + 1);
                     //Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
                     play_Game(msg);
                 }
@@ -107,6 +107,7 @@ public class SelectWeekFragment extends Fragment {
             bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
             bundle.putString("week", week);
             bundle.putString("subject", subject);
+            bundle.putString("user_name", activity.getUserName());
             Intent intent = new Intent(context, GameActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
