@@ -84,8 +84,17 @@ public class SelectBeforeGameStart extends Fragment {
                 if ( !isSpinnerFirst && !sp2.getSelectedItem().toString().equals("")) {
                     sp1.setEnabled(false);
                     sp2.setEnabled(false);
-                    activity.setSubject(sp2.getSelectedItem().toString());
-                    subject = "Subject:" + sp2.getSelectedItem().toString();
+
+                    String this_subject = "";
+
+                    if (sp2.getSelectedItem().toString().equals(getString(R.string.subject1))){
+                        this_subject = "subject1";
+                    }
+                    else{
+                        this_subject = "subject2";
+                    }
+                    activity.setSubject(this_subject);
+                    subject = "Subject:" + this_subject;
                     //Toast.makeText(getActivity(), "Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                     //sendMessages.iAmMSG("Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString());
                     play_Game();
@@ -112,8 +121,8 @@ public class SelectBeforeGameStart extends Fragment {
 
     private void initSpinner(View view) {
 
-        selAdapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, new ArrayList<String>(Arrays.asList(drapdown_Array1)));
-        selAdapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, new ArrayList<String>(Arrays.asList(drapdown_Array2)));
+        selAdapter1 = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, new ArrayList<String>(Arrays.asList(drapdown_Array1)));
+        selAdapter2 = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, new ArrayList<String>(Arrays.asList(drapdown_Array2)));
 
         selAdapter1.setDropDownViewResource(R.layout.dropdown);
         selAdapter2.setDropDownViewResource(R.layout.dropdown);
@@ -143,11 +152,11 @@ public class SelectBeforeGameStart extends Fragment {
                 selAdapter1.remove("");
                 if (i == 0) {
                     selAdapter2.clear();
-                    selAdapter2.addAll("", getString(R.string.subject1), getString(R.string.subject2));
+                    selAdapter2.addAll("");
                     sp2.setSelection(0);
                 } else if (i == 1) {
                     selAdapter2.clear();
-                    selAdapter2.addAll("", getString(R.string.subject1), getString(R.string.subject2));
+                    selAdapter2.addAll("");
                     sp2.setSelection(0);
                 } else if (i == 2) {
                     selAdapter2.clear();

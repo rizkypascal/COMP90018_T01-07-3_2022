@@ -17,6 +17,7 @@ import com.example.android.gameapplication.list_content.ListAdapter;
 import com.example.android.gameapplication.list_content.ListTuple;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 
@@ -96,8 +97,9 @@ public class UserFragmentAfterLogin extends Fragment {
         ArrayList<ListTuple> personalScoreList = new ArrayList<>();
         //String[] subjectList = {getString(R.string.subject1),getString(R.string.subject2)};
         String[] subjectList = {"subject1","subject2"};
-        subjectList = new String[]{"subject1"};
+        //subjectList = new String[]{"subject1"};
 
+        String grade;
 
         for (int i = 0; i < subjectList.length; i++) {
             String subjectName = subjectList[i];
@@ -108,7 +110,23 @@ public class UserFragmentAfterLogin extends Fragment {
                 String score = db.getScore(subjectName, "week" + j, user_name);
                 subjectScore += Integer.parseInt(score);
             }
-            personalScoreList.add(new ListTuple(subjectName, "" + subjectScore));
+            if ( subjectScore < 50){
+                grade = "N";
+            }
+            else if (subjectScore < 65){
+                grade = "P";
+            }
+            else if (subjectScore < 70){
+                grade = "H3";
+            }
+            else if (subjectScore < 80){
+                grade = "H2";
+            }
+            else {
+                grade = "H1";
+            }
+            String sc = String.format(Locale.ENGLISH,"%4d",subjectScore);
+            personalScoreList.add(new ListTuple(convertSubjectName(subjectName), sc  + " /100     " + grade ));
         }
 
 
@@ -121,5 +139,16 @@ public class UserFragmentAfterLogin extends Fragment {
         //}
 
         return  personalScoreList;
+    }
+
+    private String convertSubjectName(String subjectName) {
+        switch (subjectName) {
+            case "subject1":
+                return getString(R.string.subject1);
+            case "subject2":
+                return getString(R.string.subject2);
+            default:
+                return "";
+        }
     }
 }

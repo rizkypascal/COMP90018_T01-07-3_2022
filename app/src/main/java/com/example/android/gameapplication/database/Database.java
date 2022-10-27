@@ -87,9 +87,7 @@ public class Database {
         if (subject.equals("subject1")) {
 
             scoremap1 = subject1;
-
-
-            System.out.println("test"+scoremap1);
+            
             tempscoremap = (HashMap) scoremap1.get(week);
             tempscore = (String) tempscoremap.get(username);
 
@@ -98,6 +96,7 @@ public class Database {
         }
         else{
             addscore2Listener();
+            scoremap2 = subject2;
             tempscoremap = (HashMap) scoremap2.get(week);
             tempscore = (String) tempscoremap.get(username);
         }

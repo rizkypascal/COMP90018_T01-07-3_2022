@@ -87,8 +87,8 @@
     <string name="week10">Week10</string>
     <string name="week11">Week11</string>
     <string name="week12">Week12</string>
-    <string name="subject1">subject1</string>
-    <string name="subject2">subject2</string>
+    <string name="subject1">COMP90018</string>
+    <string name="subject2">COMP90049</string>
 
     <!--strings for game-->
     <string name="got_it">I got it.</string>
