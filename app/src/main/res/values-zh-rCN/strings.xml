@@ -17,7 +17,7 @@
     <string name="game_tools_instruction">请选择工具(最多三个)</string>
     <string name="helicopter">竹蜻蜓</string>
     <string name="play_game">开始游戏</string>
-    <string name="sing_in_up">登录/注册</string>
+    <string name="sign_in_up">登录/注册</string>
     <string name="user">用户</string>
     <string name="game">游戏</string>
     <string name="game_tools">工具</string>

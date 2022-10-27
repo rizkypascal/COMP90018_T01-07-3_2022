@@ -25,7 +25,7 @@
 
     <!--Strings in fragment game-->
     <string name="play_game">Play Game</string>
-    <string name="sing_in_up">Sign in/up</string>
+    <string name="sign_in_up">Sign in/up</string>
 
     <!--strings for navigator-->
     <string name="user">USER</string>

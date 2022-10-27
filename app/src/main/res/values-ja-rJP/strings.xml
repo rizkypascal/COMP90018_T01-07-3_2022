@@ -16,7 +16,7 @@
     <string name="hello_second_fragment">こんにちは、2 番目のフラグメント</string>
     <string name="helicopter">ヘリコプター</string>
     <string name="play_game">ゲームします</string>
-    <string name="sing_in_up">サインイン/アップ</string>
+    <string name="sign_in_up">サインイン/アップ</string>
     <string name="user">ユーザー</string>
     <string name="game">" ゲーム"</string>
     <string name="game_tools">ゲームツール</string>

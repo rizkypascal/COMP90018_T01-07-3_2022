@@ -16,7 +16,7 @@
     <string name="game_tools_instruction">Appuyez sur l\'image de l\'outil (Max 3 outils)</string>
     <string name="helicopter">Hélicoptère</string>
     <string name="play_game">Jouer au jeu</string>
-    <string name="sing_in_up">Se connecter/s\'inscrire</string>
+    <string name="sign_in_up">Se connecter/s\'inscrire</string>
     <string name="user">UTILISATRICE</string>
     <string name="game">JEU</string>
     <string name="game_tools">OUTILS DE JEU</string>
