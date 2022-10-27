@@ -185,6 +185,8 @@ public class GameFragment extends Fragment {
     public void play_Game_() {
         Bundle bundle = new Bundle();
         bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
+        bundle.putString("week", "");
+        bundle.putString("subject", "");
         Intent intent = new Intent(context, GameActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);

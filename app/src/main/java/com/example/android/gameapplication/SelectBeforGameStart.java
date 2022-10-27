@@ -41,6 +41,7 @@ public class SelectBeforGameStart extends Fragment {
     private Spinner sp2;
     private boolean isSpinnerFirst = true;
     private Button confirmButton;
+    private String subject;
 
     // set variables, interface for communication between activity & fragment, fragment & fragment
     private String user_name="";
@@ -89,8 +90,9 @@ public class SelectBeforGameStart extends Fragment {
                 if ( !isSpinnerFirst && !sp2.getSelectedItem().toString().equals("")) {
                     sp1.setEnabled(false);
                     sp2.setEnabled(false);
-                    Toast.makeText(getActivity(), "Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                    sendMessages.iAmMSG("Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString());
+                    subject = "Subject:" + sp2.getSelectedItem().toString();
+                    //Toast.makeText(getActivity(), "Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                    //sendMessages.iAmMSG("Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString());
                     play_Game();
                 }else{
                     Toast.makeText(getActivity(), "Please select a subject", Toast.LENGTH_SHORT).show();
@@ -195,28 +197,28 @@ public class SelectBeforGameStart extends Fragment {
                 .replace(R.id.layout_fragment, selectWeek)
                 .addToBackStack(null)
                 .commit();
-        //selectWeek.fragmentReceiveMsg(user_name);
+        selectWeek.fragmentReceiveMsg(subject);
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
-        Intent intent = new Intent(context, GameActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        //Bundle bundle = new Bundle();
+        //bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
+        //Intent intent = new Intent(context, GameActivity.class);
+        //intent.putExtras(bundle);
+        //startActivity(intent);
 
 
         // storing game tools quantity locally after game started
 
-        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
-        if(activity.getGameTools() != null){
-            for(GameTools gameTools : activity.getGameTools()){
-                editor.putInt(gameTools.getCodeName(), gameTools.getQuantity());
-            }
-            editor.apply();
-        }
-        //reset the selected game tools box on the GameToolsFragment
-        activity.setSelectedGameTools(new ArrayList<GameTools>());
+        //SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        //SharedPreferences.Editor editor = sharedPref.edit();
+//
+        //if(activity.getGameTools() != null){
+        //    for(GameTools gameTools : activity.getGameTools()){
+        //        editor.putInt(gameTools.getCodeName(), gameTools.getQuantity());
+        //    }
+        //    editor.apply();
+        //}
+        ////reset the selected game tools box on the GameToolsFragment
+        //activity.setSelectedGameTools(new ArrayList<GameTools>());
     }
 
 

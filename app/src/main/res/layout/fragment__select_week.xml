@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
+        android:textColor="#DDDDDD"
         android:text="@string/choose_week"
         android:textSize="20sp" />
 
@@ -30,12 +31,13 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="13dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/week1"
 
                 />
@@ -47,6 +49,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="13dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/week2"
 
                 />
@@ -76,6 +79,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="13dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/week4"
 
                 />
@@ -98,6 +102,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="13dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/week6"
 
                 />
@@ -126,6 +131,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="13dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/week8"
 
                 />
@@ -137,6 +143,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="13dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/week9"
 
                 />
@@ -153,8 +160,9 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_weight="0.8"
+                android:layout_weight="0.5"
                 android:layout_marginTop="13dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/week10" />
 
 
@@ -162,9 +170,10 @@
                 android:id="@+id/button12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:layout_marginLeft="10dp"
+                android:layout_weight="0.7"
+                android:layout_marginLeft="9dp"
                 android:layout_marginTop="13dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/week11" />
 
 
@@ -172,9 +181,10 @@
                 android:id="@+id/button13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.8"
+                android:layout_weight="0.7"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="13dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/week12" />
 
         </LinearLayout>
