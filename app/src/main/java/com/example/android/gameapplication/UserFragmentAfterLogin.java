@@ -54,6 +54,8 @@ public class UserFragmentAfterLogin extends Fragment {
         }
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,7 +64,8 @@ public class UserFragmentAfterLogin extends Fragment {
         activity = (MainActivity) getActivity();
         context = activity.getApplicationContext();
         db = new Database();
-        db.addscore1Listener();
+
+        System.out.println("testoncreat");
 
         ListAdapter adapterPersonalScore = new ListAdapter(getActivity(), R.layout.list_instance, getPersonalScores(user_name));
         listView = view.findViewById(R.id.personal_score_list_view);
