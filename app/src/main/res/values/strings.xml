@@ -76,6 +76,8 @@
 
     <!--strings for game-->
     <string name="got_it">I got it.</string>
+    <string name="done">Well Done!.</string>
+    <string name="good">Good Job.</string>
     <string name="finish_game">Congratulations on making it through the week.\n</string>
     <string name="complete_game">"You've completed all the tasks for the week. \nKeep working hard."</string>
     <string name="incomplete_game">"Unfortunately, there are some unfinished tasks. \nTry your best."</string>

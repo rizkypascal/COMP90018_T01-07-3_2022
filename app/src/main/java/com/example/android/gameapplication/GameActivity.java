@@ -44,6 +44,7 @@ public class GameActivity extends AppCompatActivity {
     private int screenX, screenY = 0;
     private FragmentTransaction transaction;
     private List<GameTools> gameTools;
+    public ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class GameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_game);
         // get game activity
-        ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.game_activity);
+        constraintLayout = (ConstraintLayout) findViewById(R.id.game_activity);
 
         //use screen size to set game context
         DisplayMetrics metrics = this.getResources().getDisplayMetrics();
@@ -142,6 +143,11 @@ public class GameActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         gameContext.resume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
 }
