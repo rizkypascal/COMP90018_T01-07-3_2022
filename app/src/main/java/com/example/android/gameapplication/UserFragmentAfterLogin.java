@@ -26,7 +26,7 @@ public class UserFragmentAfterLogin extends Fragment {
     //    private Unbinder unbinder;
     private ListView listView;
     private TextView textLoginInfo, userRank;
-    private Database db = new Database();
+    private Database db;
     private MainActivity activity;
     private Context context;
 
@@ -61,6 +61,8 @@ public class UserFragmentAfterLogin extends Fragment {
         textLoginInfo = view.findViewById(R.id.textLoginInfo);
         activity = (MainActivity) getActivity();
         context = activity.getApplicationContext();
+        db = new Database();
+        db.addscore1Listener();
 
         ListAdapter adapterPersonalScore = new ListAdapter(getActivity(), R.layout.list_instance, getPersonalScores(user_name));
         listView = view.findViewById(R.id.personal_score_list_view);
@@ -93,11 +95,16 @@ public class UserFragmentAfterLogin extends Fragment {
         if (Objects.equals(subject, "")) {
             subject = getString(R.string.subject1);
         }
-        //db.getScore( subject,  "week1", user_name);
+
+
+
+
+
         Log.d("UserFragmentAfterLogin", "getPersonalScoresFromDB: "+ user_name + " " + subject);
         for (int i = 1; i < 13; i++) {
-            //personalScoreList.add(new ListTuple("week"+i, db.getScore( subject,  "week"+i, user_name)));
+            personalScoreList.add(new ListTuple("week"+i, db.getScore( subject,  "week"+i, user_name)));
         }
+
         return  personalScoreList;
     }
 }

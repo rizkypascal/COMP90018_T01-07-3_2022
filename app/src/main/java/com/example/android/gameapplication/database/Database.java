@@ -3,16 +3,15 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-
+import com.example.android.gameapplication.*;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.*;
-
 
 
 public class Database {
@@ -29,30 +28,42 @@ public class Database {
         addpassListener();
         addmonster1Listener();
         addmonster2Listener();
-        addboardListener("subject1","week1");
         addscore1Listener();
         addscore2Listener();
 
     }
 
 
+
+
+
     private String tempscore = new String("0");
     private HashMap tempscoremap = new HashMap<>();
     private HashMap scoremap1 = new HashMap<>();
     private HashMap scoremap2 = new HashMap<>();
-    private void addscore1Listener() {
+    public void addscore1Listener() {
         // [START post_value_event_listener]
+
         mDatabase.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
                 scoremap1 = (HashMap) snapshot.child("subject1").getValue();
+                System.out.println("In onDataChange");
+
+
             }
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.w(TAG, "loadPost:onCancelled", error.toException());
             }
         });
+        System.out.println("After attaching listener"+scoremap1);
 
     }
     private void addscore2Listener() {
@@ -61,6 +72,8 @@ public class Database {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 scoremap2 = (HashMap) snapshot.child("subject2").getValue();
+
+
             }
 
             @Override
@@ -70,12 +83,21 @@ public class Database {
         });
 
     }
+
     // this method will return all the monster's positions and type
     public String getScore(String subject, String week, String username){
         if (subject.equals("subject1")) {
-            addscore1Listener();
+
+
+
+            scoremap1 = subject1;
+
+
+            System.out.println("test"+scoremap1);
             tempscoremap = (HashMap) scoremap1.get(week);
             tempscore = (String) tempscoremap.get(username);
+
+
 
         }
         else{
@@ -83,6 +105,7 @@ public class Database {
             tempscoremap = (HashMap) scoremap2.get(week);
             tempscore = (String) tempscoremap.get(username);
         }
+        System.out.println("test"+scoremap1);
 
 
 
@@ -93,6 +116,7 @@ public class Database {
         mDatabase.child(subject).child(week).child(username).setValue(scores);
 
     }
+
 
     private HashMap monstermap2 = new HashMap<>();
     private HashMap monstermap1 = new HashMap<>();
@@ -135,12 +159,12 @@ public class Database {
     public ArrayList<String> getMonsters(String subject, String week){
         if (subject.equals("subject1")) {
             addmonster1Listener();
-            monsters = (ArrayList<String>) monstermap1.get(week);
+            monsters = (ArrayList<String>) monster1.get(week);
 
         }
         if (subject.equals("subject2")) {
             addmonster2Listener();
-            monsters = (ArrayList<String>) monstermap2.get(week);
+            monsters = (ArrayList<String>) monster2.get(week);
 
         }
 
@@ -202,7 +226,9 @@ public class Database {
         //mpassReference.addValueEventListener(postListener);
         // [END post_value_event_listener]
     }
+    public static void download(String[] ragv) {
 
+    }
     private String initscore = new String("0");
     public void writeNewUser(String username, String password) {
 
@@ -266,25 +292,52 @@ public class Database {
         // [END post_value_event_listener]
     }
     // function that can check if the username match the password
+
+    public static HashMap subject1 = new HashMap<>();
+    public static HashMap subject2 = new HashMap<>();
+    public static HashMap monster1 = new HashMap<>();
+    public static HashMap monster2 = new HashMap<>();
+
+    public static void tempmap1(HashMap subjectscore) {
+        subject1 = subjectscore;
+
+    }
+    public static void tempmap2(HashMap subjectscore) {
+        subject2 = subjectscore;
+
+    }
+    public static void tempmap3(HashMap monster) {
+        monster1 = monster;
+
+    }
+    public static void tempmap4(HashMap monster) {
+        monster2 = monster;
+
+    }
     public boolean UsernameMatchPassword(String username, String password){
 
 
         addpassListener();
         addlistListener();
         addscore1Listener();
+        addscore2Listener();
         // just for test
         //addmonsterListener("subject1","week1");
         //addboardListener("subject1","week1");
-        //addmonster1Listener();
+        addmonster1Listener();
+        addmonster1Listener();
         //monsters = (ArrayList<String>) monstermap1.get("week1");
         //System.out.println("monster:"+monsters);
         //System.out.println("board:"+boards);
-        //System.out.println("map:"+passwordmap);
         temppassword = passwordmap.get(username);
         //System.out.println("ppass:"+temppassword);
         if (users.contains(username)) {
 
             if (password.equals(temppassword)) {
+                tempmap1(scoremap1);
+                tempmap2(scoremap2);
+                tempmap3(monstermap1);
+                tempmap4(monstermap2);
                 // only work when we have the user can the password is correct
                 return true;
             } else {
