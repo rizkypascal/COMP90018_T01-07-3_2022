@@ -90,7 +90,7 @@ public class Fragment_SelectWeek extends Fragment {
             weeks.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String msg = "Week" + (finalI + 1);
+                    String msg = "week" + (finalI + 1);
                     //Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
                     play_Game(msg);
                 }
