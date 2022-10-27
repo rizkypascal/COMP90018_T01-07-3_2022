@@ -108,6 +108,7 @@ public class Fragment_SelectWeek extends Fragment {
             bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
             bundle.putString("week", week);
             bundle.putString("subject", subject);
+            bundle.putString("user_name", activity.getUserName());
             Intent intent = new Intent(context, GameActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);

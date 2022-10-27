@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     @Override
     public void iAmMSG(String msg) {
 
-        if (msg.startsWith("Faculty")){
+        if (msg.startsWith("Subject:")){
             Log.d("UserFragment", ": "+msg);
         }
         else {
@@ -257,5 +257,9 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
 
     public String getSubject() {
         return subject;
+    }
+
+    public String getUserName() {
+        return this.user_name;
     }
 }

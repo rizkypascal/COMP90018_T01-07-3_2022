@@ -69,6 +69,7 @@ public class GameActivity extends AppCompatActivity {
         gameTools = (List<GameTools>) bundle.getSerializable("gameTools");
         String subject = bundle.getString("subject");
         String week = bundle.getString("week");
+        String user_name = bundle.getString("user_name");
         Log.d("GameActivity", "subject: "+subject+" week: "+week);
         GameToolsFragment gameToolsFragment = new GameToolsFragment(gameContext);
         FragmentManager manager = getSupportFragmentManager();
