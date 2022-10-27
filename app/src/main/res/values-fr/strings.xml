@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Demande de jeu</string>
+    <string name="app_name">Trémie Unimelb H1</string>
     <string name="action_settings">" Réglages"</string>
     <string name="first_fragment_label">Premier fragment</string>
     <string name="second_fragment_label">Deuxième fragment</string>
@@ -16,7 +16,7 @@
     <string name="game_tools_instruction">Appuyez sur l\'image de l\'outil (Max 3 outils)</string>
     <string name="helicopter">Hélicoptère</string>
     <string name="play_game">Jouer au jeu</string>
-    <string name="sing_in_up">Se connecter/s\'inscrire</string>
+    <string name="sign_in_up">Se connecter/s\'inscrire</string>
     <string name="user">UTILISATRICE</string>
     <string name="game">JEU</string>
     <string name="game_tools">OUTILS DE JEU</string>
@@ -59,5 +59,8 @@
     <string name="play_as_user">Vous jouez en tant qu\'utilisateur :</string>
     <string name="username">Nom d\'utilisateur</string>
     <string name="password">Mot de passe</string>
-    <string name="confrimed_password">" Confirmez le mot de passe"</string>
+    <string name="confirmed_password">" Confirmez le mot de passe"</string>
+    <string name="confirm">Confirmer</string>
+    <string name="select_faculty">Sélectionnez la faculté</string>
+    <string name="select_subject">" Sélectionnez le sujet"</string>
 </resources>

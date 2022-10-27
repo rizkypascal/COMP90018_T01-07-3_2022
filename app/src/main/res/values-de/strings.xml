@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Spielanwendung</string>
+    <string name="app_name">Unimelb H1 Trichter</string>
     <string name="action_settings">Einstellungen</string>
     <string name="first_fragment_label">Erstes Fragment</string>
     <string name="second_fragment_label">Zweites Fragment</string>
@@ -16,7 +16,7 @@
     <string name="game_tools_instruction">Tippen Sie auf das Werkzeugbild (maximal 3 Werkzeuge)</string>
     <string name="helicopter">Hubschrauber</string>
     <string name="play_game">Spiel spielen</string>
-    <string name="sing_in_up">Anmelden/anmelden</string>
+    <string name="sign_in_up">Anmelden/anmelden</string>
     <string name="user">BENUTZERIN</string>
     <string name="game">SPIEL</string>
     <string name="game_tools">SPIEL-TOOLS</string>
@@ -59,7 +59,7 @@
     <string name="play_as_user">Sie spielen als Benutzer:</string>
     <string name="username">Nutzername</string>
     <string name="password">Passwort</string>
-    <string name="confrimed_password">Passwort bestätigen</string>
+    <string name="confirmed_password">Passwort bestätigen</string>
     <string name="select_subject">Wählen Sie Ihren Kurs</string>
     <string name="select_faculty">Bitte wählen Sie eine Fakultät aus</string>
     <string name="confirm">Bestätigen</string>

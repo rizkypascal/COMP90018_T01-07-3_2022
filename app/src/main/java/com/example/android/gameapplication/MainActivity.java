@@ -28,6 +28,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements GameFragment.SendMessages, UserFragment.SendMessages{
     private String user_name = "";
+    private String subject = "";
     public BottomNavigationView navView;
     private LightSensor lightSensor;
     private ActivityMainBinding binding;
@@ -248,5 +249,13 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
      */
     public void setGameTools(List<GameTools> gameTools) {
         this.gameTools = gameTools;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getSubject() {
+        return subject;
     }
 }

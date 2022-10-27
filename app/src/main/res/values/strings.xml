@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Game Application</string>
+    <string name="app_name">Unimelb H1 Hopper</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -25,7 +25,7 @@
 
     <!--Strings in fragment game-->
     <string name="play_game">Play Game</string>
-    <string name="sing_in_up">Sign in/up</string>
+    <string name="sign_in_up">Sign in/up</string>
 
     <!--strings for navigator-->
     <string name="user">USER</string>
@@ -34,6 +34,7 @@
 
     <!--strings for tips-->
     <string name="not_logged_in">You have not logged in yet</string>
+    <string name="choose_week">Choose week</string>
     <string name="sign_in_here">Already got an account? Sign in here!</string>
     <string name="enter_username">Please enter your username</string>
     <string name="enter_password">Please enter your password</string>
@@ -63,16 +64,30 @@
     <string name="sign_up_successful">Successfully sign up!</string>
     <string name="username_exists">Username already exists!</string>
     <string name="world_rank">Your world rank is: </string>
-    <string name="your_best_score">Your best scores:</string>
+    <string name="your_best_score">your score by week</string>
     <string name="select_faculty">Select the faculty</string>
-    <string name="select_subject">Select the subject </string>
+    <string name="select_subject">Select the subject</string>
     <string name="world_best_score">World\'s best scores</string>
     <string name="your_world_ranking">Your world rank is: over 10000</string>
     <string name="play_as_tourist">You are playing as a tourist.</string>
     <string name="play_as_user">You are playing as user: </string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="confrimed_password">Confirm Password</string>
+    <string name="confirmed_password">Confirm Password</string>
+    <string name="week1">Week 1</string>
+    <string name="week2">Week 2</string>
+    <string name="week3">Week 3</string>
+    <string name="week4">Week 4</string>
+    <string name="week5">Week 5</string>
+    <string name="week6">Week 6</string>
+    <string name="week7">Week 7</string>
+    <string name="week8">Week 8</string>
+    <string name="week9">Week 9</string>
+    <string name="week10">Week10</string>
+    <string name="week11">Week11</string>
+    <string name="week12">Week12</string>
+    <string name="subject1">subject1</string>
+    <string name="subject2">subject2</string>
 
     <!--strings for game-->
     <string name="got_it">I got it.</string>
@@ -81,6 +96,5 @@
     <string name="finish_game">Congratulations on making it through the week.\n</string>
     <string name="complete_game">"You've completed all the tasks for the week. \nKeep working hard."</string>
     <string name="incomplete_game">"Unfortunately, there are some unfinished tasks. \nTry your best."</string>
-
 
 </resources>

@@ -75,7 +75,7 @@
         android:id="@+id/signUpPasswordValue1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/confrimed_password"
+        android:hint="@string/confirmed_password"
         android:textColor="@color/white"
         android:textColorHint="@color/gray"
         android:inputType="textPassword"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Aplikasi Game</string>
+    <string name="app_name">Unimelb H1 Hopper</string>
     <string name="action_settings">Pengaturan</string>
     <string name="first_fragment_label">Fragmen Pertama</string>
     <string name="second_fragment_label">Fragmen Kedua</string>
@@ -16,7 +16,7 @@
     <string name="game_tools_instruction">Ketuk gambar alat (Maks 3 alat)</string>
     <string name="helicopter">Helikopter</string>
     <string name="play_game">Mainkan Game</string>
-    <string name="sing_in_up">Masuk/Daftar</string>
+    <string name="sign_in_up">Masuk/Daftar</string>
     <string name="user">PENGGUNA</string>
     <string name="game">PERMAINAN</string>
     <string name="game_tools">ALAT PERMAINAN</string>
@@ -59,7 +59,7 @@
     <string name="play_as_user">Anda bermain sebagai pengguna:</string>
     <string name="username">Nama belakang</string>
     <string name="password">Kata sandi</string>
-    <string name="confrimed_password">konfirmasi sandi</string>
+    <string name="confirmed_password">konfirmasi sandi</string>
     <string name="select_subject">Pilih mata kuliah Anda</string>
     <string name="select_faculty">Silakan pilih fakultas</string>
     <string name="confirm">Mengonfirmasi</string>
