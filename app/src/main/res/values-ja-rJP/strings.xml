@@ -63,4 +63,5 @@
     <string name="select_faculty">学部を選択してください</string>
     <string name="select_subject">コースを選択</string>
     <string name="confirm">確認</string>
+    <string name="time_remaining_placeholder">ゲーム ツールが更新されるまでの残り時間\n</string>
 </resources>

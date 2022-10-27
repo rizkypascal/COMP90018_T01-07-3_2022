@@ -64,4 +64,5 @@
     <string name="username">用户名</string>
     <string name="password">密码</string>
     <string name="confirmed_password">确认密码</string>
+    <string name="time_remaining_placeholder">距离游戏工具刷新的剩余时间\n</string>
 </resources>

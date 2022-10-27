@@ -194,7 +194,7 @@ public class GameFragment extends Fragment {
 
         // storing game tools quantity locally after game started
 
-        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = activity.getSharedPreferences("gameToolsQty", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         if(activity.getGameTools() != null){

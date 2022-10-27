@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.android.gameapplication.game_tools.GameTools;
 import com.example.android.gameapplication.game_tools.GameToolsAdapter;
@@ -19,8 +21,12 @@ import com.example.android.gameapplication.game_tools.FlyItems;
 import com.example.android.gameapplication.game_tools.GameToolsName;
 import com.example.android.gameapplication.databinding.FragmentGameToolsSelectionBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: Rizky Paskalis Totong
@@ -75,6 +81,8 @@ public class GameToolsSelectionFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.itemSelectionRv.setLayoutManager(layoutManager);
 
+        setRefreshGameToolsCountdown();
+
         return binding.getRoot();
     }
 
@@ -89,21 +97,21 @@ public class GameToolsSelectionFragment extends Fragment {
         /**
          * Retrieve data for tool quantity from SharedPreferences
          */
-        sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        sharedPref = getActivity().getSharedPreferences("gameToolsQty", Context.MODE_PRIVATE);
 
         int toolDefaultQuantity = getResources().getInteger(R.integer.tool_default_quantity);
         String helicopter = getString(R.string.helicopter);
         String rocket = getString(R.string.rocket_tool);
-        String clearMonster = getString(R.string.clear_monsters);
-//        gameTools.add(new FlyItems(GameToolsName.COPTER, sharedPref.getInt(String.valueOf(R.string.copter), toolDefaultQuantity), helicopter));
-//        gameTools.add(new FlyItems(GameToolsName.ROCKET, sharedPref.getInt(String.valueOf(R.string.rocket), toolDefaultQuantity), rocket));
-//        gameTools.add(new ClearMonsters(clearMonster,sharedPref.getInt(String.valueOf(R.string.clear_monsters), toolDefaultQuantity)));
+        String clearMonster = getString(R.string.clear_monsters_tool);
+        gameTools.add(new FlyItems(GameToolsName.COPTER, sharedPref.getInt(String.valueOf(R.string.copter), toolDefaultQuantity), helicopter));
+        gameTools.add(new FlyItems(GameToolsName.ROCKET, sharedPref.getInt(String.valueOf(R.string.rocket), toolDefaultQuantity), rocket));
+        gameTools.add(new ClearMonsters(clearMonster,sharedPref.getInt(String.valueOf(R.string.clear_monsters), toolDefaultQuantity)));
         /**
          * uncomment code below to have unlimited tool quantity (start from 5)
          */
-        gameTools.add(new FlyItems(GameToolsName.COPTER, 5, helicopter));
-        gameTools.add(new FlyItems(GameToolsName.ROCKET, 5,rocket));
-        gameTools.add(new ClearMonsters(clearMonster, 5));
+//        gameTools.add(new FlyItems(GameToolsName.COPTER, 5, helicopter));
+//        gameTools.add(new FlyItems(GameToolsName.ROCKET, 5,rocket));
+//        gameTools.add(new ClearMonsters(clearMonster, 5));
         return gameTools;
     }
 
@@ -116,6 +124,48 @@ public class GameToolsSelectionFragment extends Fragment {
         adapter = binding.getGameToolsAdapter();
         adapter.updateQuantity(gameTools);
     }
+
+    /**
+     * the user can see how many times remaining until game tools refreshed
+     */
+    public void setRefreshGameToolsCountdown(){
+        TextView tvCountDown = binding.textCountDown;
+
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Australia/Melbourne"));
+        long startMillis = calendar.getTimeInMillis();
+
+        Calendar tomorrowCalendar = Calendar.getInstance(TimeZone.getTimeZone("Australia/Melbourne"));
+        tomorrowCalendar.add(Calendar.DAY_OF_MONTH, 1); //add a day
+        tomorrowCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        tomorrowCalendar.set(Calendar.MINUTE, 0);
+        tomorrowCalendar.set(Calendar.SECOND, 0);
+        tomorrowCalendar.set(Calendar.MILLISECOND, 0);
+
+        long endMillis = tomorrowCalendar.getTimeInMillis();
+
+        long totalMillis = endMillis - startMillis;
+        CountDownTimer timer = new CountDownTimer(totalMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
+
+                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
+
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+
+                tvCountDown.setText(getString(R.string.time_remaining_placeholder) + hours + ":" + minutes + ":" + seconds + " hours");
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+        timer.start();
+    }
+
 
     /**
      * This method is called in SelectedGameToolsAdapter

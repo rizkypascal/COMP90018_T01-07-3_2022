@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.android.gameapplication.game_tools.GameTools;
 
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class Fragment_SelectWeek extends Fragment {
+public class SelectWeekFragment extends Fragment {
 
     private MainActivity activity;
     private Context context;
@@ -31,7 +30,7 @@ public class Fragment_SelectWeek extends Fragment {
     private GameFragment.SendMessages sendMessages;
     private String subject = "";
 
-    public Fragment_SelectWeek() {
+    public SelectWeekFragment() {
         // Required empty public constructor
     }
 

@@ -16,12 +16,11 @@
 
         <TextView
             android:id="@+id/textPickItems"
-            android:textSize="26dp"
+            android:textSize="16dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
-            android:fontFamily="@font/games_scribble"
             android:text="@string/game_tools_instruction"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -42,11 +41,10 @@
 
         <TextView
             android:id="@+id/textItemsFull"
-            android:fontFamily="@font/games_scribble"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="26dp"
+            android:textSize="16dp"
             android:layout_marginTop="60dp"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/fragment_container_view"
@@ -63,6 +61,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_editor_absoluteX="179dp"
             android:background="@drawable/border_white_color"/>
+
+        <TextView
+            android:id="@+id/textCountDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:layout_marginTop="60dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/fragment_container_view"
+            app:layout_constraintTop_toBottomOf="@id/fragment_container_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

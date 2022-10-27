@@ -63,4 +63,5 @@
     <string name="select_subject">Pilih mata kuliah Anda</string>
     <string name="select_faculty">Silakan pilih fakultas</string>
     <string name="confirm">Mengonfirmasi</string>
+    <string name="time_remaining_placeholder">Sisa waktu hingga alat permainan dikembalikan\n</string>
 </resources>
