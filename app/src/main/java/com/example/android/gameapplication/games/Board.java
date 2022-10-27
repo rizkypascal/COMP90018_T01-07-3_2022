@@ -14,7 +14,7 @@ import android.view.View;
 public class Board extends View
 {
     protected Integer posX;
-    protected Integer moveDrection;
+    protected Integer moveDirection;
     protected Integer posY;
     protected Integer width; // length of the board
     protected Enum status;
@@ -40,7 +40,7 @@ public class Board extends View
         this.boardDrawable = context.getResources().getDrawable(imageID);
         this.imageBounds = new Rect(posX-width/2,posY-this.height/2,posX+width/2, posY+this.height/2);
         this.boardDrawable.setBounds(imageBounds);
-        this.moveDrection = 1;
+        this.moveDirection = 1;
     }
 
     /**
@@ -50,13 +50,13 @@ public class Board extends View
      */
     public void move(Float velocityX, Float velocityY)
     {
-        Integer nextX = Math.round(velocityX * this.moveDrection) + posX;
+        Integer nextX = Math.round(velocityX * this.moveDirection) + posX;
         Log.d("Board", "move: " + this.posX);
         if (nextX >= screenSize - this.width/2){
-            this.moveDrection = -1;
+            this.moveDirection = -1;
         }
         else if (nextX <= this.width/2){
-            this.moveDrection = 1;
+            this.moveDirection = 1;
             this.posX = this.width/2;
         }
         else{

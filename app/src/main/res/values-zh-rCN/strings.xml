@@ -63,5 +63,5 @@
     <string name="play_as_user">您以如下账号登录：</string>
     <string name="username">用户名</string>
     <string name="password">密码</string>
-    <string name="confrimed_password">确认密码</string>
+    <string name="confirmed_password">确认密码</string>
 </resources>
