@@ -18,6 +18,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+
+
+
+import com.example.android.gameapplication.database.Database;
+
 import com.example.android.gameapplication.broadcaster.GameToolsBroadcastReceiver;
 
 import com.example.android.gameapplication.game_tools.GameTools;

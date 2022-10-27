@@ -51,12 +51,9 @@ public class Database {
 
 
                 scoremap1 = (HashMap) snapshot.child("subject1").getValue();
+                tempmap1(scoremap1);
                 System.out.println("In onDataChange");
-
-
             }
-
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -72,6 +69,7 @@ public class Database {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 scoremap2 = (HashMap) snapshot.child("subject2").getValue();
+                tempmap2(scoremap2);
 
 
             }
@@ -87,8 +85,6 @@ public class Database {
     // this method will return all the monster's positions and type
     public String getScore(String subject, String week, String username){
         if (subject.equals("subject1")) {
-
-
 
             scoremap1 = subject1;
 
@@ -127,6 +123,7 @@ public class Database {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 monstermap2 = (HashMap) snapshot.child("monster").child("subject2").getValue();
+                tempmap4(monstermap2);
             }
 
             @Override
@@ -144,6 +141,8 @@ public class Database {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 monstermap1 = (HashMap) snapshot.child("monster").child("subject1").getValue();
+                tempmap3(monstermap1);
+
             }
 
             @Override
@@ -172,37 +171,6 @@ public class Database {
         return monsters;
     }
 
-
-
-
-    private ArrayList<String> boards = new ArrayList<String>();
-    private void addboardListener(String subject, String week) {
-        // [START post_value_event_listener]
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boards = (ArrayList<String>) snapshot.child("board").child(subject).child(week).getValue();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w(TAG, "loadPost:onCancelled", error.toException());
-            }
-        });
-
-        //mpassReference.addValueEventListener(postListener);
-        // [END post_value_event_listener]
-    }
-
-
-
-    // this method will return all the board's positions
-    public ArrayList<String> getBoards(String subject, String week){
-
-        addboardListener(subject, week);
-
-        return boards;
-    }
 
 
     // all the following methods need to be re-witten/modified
