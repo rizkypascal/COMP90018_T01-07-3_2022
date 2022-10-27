@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/your_best_score"
+        android:layout_marginLeft="5dp"
         android:textColor="#DDDDDD"
         android:textSize="20sp">
     </TextView>
@@ -34,7 +35,10 @@
     <ListView
         android:id="@+id/personal_score_list_view"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:choiceMode="singleChoice"
+         />
 
 
 </LinearLayout>

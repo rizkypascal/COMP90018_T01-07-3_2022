@@ -66,7 +66,9 @@ public class UserFragmentAfterLogin extends Fragment {
 
         ListAdapter adapterPersonalScore = new ListAdapter(getActivity(), R.layout.list_instance, getPersonalScores(user_name));
         listView = view.findViewById(R.id.personal_score_list_view);
+
         listView.setAdapter(adapterPersonalScore);
+        listView.setItemChecked(0,true);
 
 
         if (!Objects.equals(user_name, "")) {
@@ -85,25 +87,33 @@ public class UserFragmentAfterLogin extends Fragment {
 
 
 
-    //TODO: XQ all the following methods need to be re-witten/modified
-    //You may modify them in this file, or implement them in another
+
     private ArrayList<ListTuple> getPersonalScoresFromDB(String user_name) {
-        //TODO: XQ return a ListTuple arrayList. This list records the best N (e.g. 10) scores of user.
-        // ListTuple is a simple self-defined data structure with 2 Strings. see ListTuple.java.
+
         ArrayList<ListTuple> personalScoreList = new ArrayList<>();
         String subject = activity.getSubject();
-        if (Objects.equals(subject, "")) {
-            subject = getString(R.string.subject1);
-        }
+        String[] subjectList = {getString(R.string.subject1),getString(R.string.subject2)};
+
+        personalScoreList.add(new ListTuple(subjectList[0], "00"));
+        personalScoreList.add(new ListTuple(subjectList[1], "11"));
+
+        // for (int i = 0; i < subjectList.length; i++) {
+        //     String subjectName = subjectList[i];
+        //     int subjectScore = 0;
+        //     for (int j = 1; j < 13; j++) {
+        //         String score = db.getScore(subject, "week" + i, user_name);
+        //         subjectScore += Integer.parseInt(score);
+        //     }
+        //     personalScoreList.add(new ListTuple(subjectName, "" + subjectScore));
+        // }
 
 
 
 
-
-        Log.d("UserFragmentAfterLogin", "getPersonalScoresFromDB: "+ user_name + " " + subject);
-        for (int i = 1; i < 13; i++) {
-            personalScoreList.add(new ListTuple("week"+i, db.getScore( subject,  "week"+i, user_name)));
-        }
+        //Log.d("UserFragmentAfterLogin", "getPersonalScoresFromDB: "+ user_name + " " + subject);
+        //for (int i = 1; i < 13; i++) {
+        //    personalScoreList.add(new ListTuple("week"+i, db.getScore( subject,  "week"+i, user_name)));
+        //}
 
         return  personalScoreList;
     }

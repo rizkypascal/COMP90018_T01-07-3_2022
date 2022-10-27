@@ -9,6 +9,7 @@
         android:id="@+id/list_element0"
         android:layout_width="150dp"
         android:layout_height="match_parent"
+        android:textColor="#DDDDDD"
         android:layout_marginLeft="10dp" />
 
     <TextView
@@ -17,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
+        android:textColor="#DDDDDD"
         android:layout_marginLeft="10dp" />
 
 </LinearLayout>

@@ -55,8 +55,8 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="log_out">LOG OUT</string>
-    <string name="sign_in_as">You have signed in as </string>
-    <string name="login_as">Successfully logged in as </string>
+    <string name="sign_in_as">You have signed in as  </string>
+    <string name="login_as">Successfully logged in as  </string>
     <string name="something_wrong">Something wrong with username/password!</string>
     <string name="username_empty">Username is empty!</string>
     <string name="password_empty">Password is empty!</string>
