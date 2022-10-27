@@ -429,8 +429,10 @@ public class GameContext extends View implements Runnable{
             public void onFinish() {
                 bomb = null;
                 for (Monster monster : monsters){
-                    monster.setAlive(false);
-                    score += monster.getScore();
+                    if (monster.getAlive()){
+                        monster.setAlive(false);
+                        score += monster.getScore();
+                    }
                 }
             }
         };
