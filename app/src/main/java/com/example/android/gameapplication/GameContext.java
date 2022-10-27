@@ -430,6 +430,7 @@ public class GameContext extends View implements Runnable{
                 bomb = null;
                 for (Monster monster : monsters){
                     monster.setAlive(false);
+                    score += monster.getScore();
                 }
             }
         };
@@ -467,8 +468,4 @@ public class GameContext extends View implements Runnable{
         toast.setText(text);
         toast.show();
     }
-
-
-
-
 }

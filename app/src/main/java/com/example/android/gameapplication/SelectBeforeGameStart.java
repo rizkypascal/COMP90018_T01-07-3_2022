@@ -1,8 +1,6 @@
 package com.example.android.gameapplication;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,9 +16,6 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.android.gameapplication.game_tools.GameTools;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -195,7 +190,7 @@ public class SelectBeforeGameStart extends Fragment {
 
     public void play_Game() {
 
-        Fragment_SelectWeek selectWeek = new Fragment_SelectWeek();
+        SelectWeekFragment selectWeek = new SelectWeekFragment();
         activity.getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.layout_fragment, selectWeek)

@@ -22,6 +22,7 @@
     <string name="rocket_tool">Rocket</string>
     <string name="clear_monsters_tool">Clear Monsters</string>
     <string name="reborn_tool">Reborn</string>
+    <string name="time_remaining_placeholder">Time remaining until game tools refreshed\n</string>
 
     <!--Strings in fragment game-->
     <string name="play_game">Play Game</string>
