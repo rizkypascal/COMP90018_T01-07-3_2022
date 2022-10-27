@@ -115,7 +115,6 @@ public class GameFragment extends Fragment {
         } else {
             playGame();
         }
-        //TODO: tony or arthur: need passing msg of user account
     }
 
     @OnClick(R.id.signInUpButton)

@@ -155,7 +155,7 @@ public class GameToolsSelectionFragment extends Fragment {
 
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
-                tvCountDown.setText(getString(R.string.time_remaining_placeholder) + hours + ":" + minutes + ":" + seconds + " hours");
+                tvCountDown.setText(getString(R.string.time_remaining_placeholder) + hours + " hours " + minutes + " minutes " + seconds + " seconds");
             }
 
             @Override
