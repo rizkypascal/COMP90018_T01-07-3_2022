@@ -63,4 +63,5 @@
     <string name="select_subject">Wählen Sie Ihren Kurs</string>
     <string name="select_faculty">Bitte wählen Sie eine Fakultät aus</string>
     <string name="confirm">Bestätigen</string>
+    <string name="time_remaining_placeholder">Verbleibende Zeit bis zur Aktualisierung der Spieltools\n</string>
 </resources>

@@ -1,9 +1,15 @@
 package com.example.android.gameapplication;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -13,7 +19,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+<<<<<<< HEAD
 import com.example.android.gameapplication.database.Database;
+=======
+import com.example.android.gameapplication.broadcaster.GameToolsBroadcastReceiver;
+>>>>>>> 6b6c01be041ce19d3cf6785ef4b7bf286ed91c30
 import com.example.android.gameapplication.game_tools.GameTools;
 import com.example.android.gameapplication.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -24,7 +34,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import com.example.android.gameapplication.sensors.LightMessage;
 import com.example.android.gameapplication.sensors.LightSensor;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 
 public class MainActivity extends AppCompatActivity implements GameFragment.SendMessages, UserFragment.SendMessages{
@@ -36,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     private GameToolsSelectionFragment gameToolsSelectionFragment;
     private List<GameTools> selectedGameTools;
     private List<GameTools> gameTools;
+    private PendingIntent pendingIntent;
+    private AlarmManager alarmManager;
+    private BroadcastReceiver broadcastReceiver;
+    private Calendar scheduledCal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +83,38 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                 .commit();
 
         gameFragment.fragmentReceiveMsg(user_name);
+
+        //set background job for refresh game tools
+        registerBackgroundJobForRefreshGameTools();
+    }
+
+    /**
+     * register alarm to refresh game tools
+     */
+    private void registerBackgroundJobForRefreshGameTools() {
+        //reset game tools at the next day 00:00:00 AM AEST
+        Calendar scheduledCal= Calendar.getInstance(TimeZone.getTimeZone("Australia/Melbourne"));
+        scheduledCal.add(Calendar.DAY_OF_MONTH, 1);
+        scheduledCal.set(Calendar.HOUR, 0);
+        scheduledCal.set(Calendar.MINUTE, 0);
+        scheduledCal.set(Calendar.SECOND, 0);
+        long intendedTime = scheduledCal.getTimeInMillis();
+
+        Log.i("AlarmGameTools", "Going to register Intent.RegisterAlarmBroadcast");
+
+        Intent intent = new Intent(this, GameToolsBroadcastReceiver.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT );
+        }
+
+        alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE );
+
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                intendedTime,
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent );
     }
 
     // Click listener for choosing different navigation tabs
@@ -131,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     @Override
     public void iAmMSG(String msg) {
 
-        if (msg.startsWith("Faculty")){
+        if (msg.startsWith("Subject:")){
             Log.d("UserFragment", ": "+msg);
         }
         else {
@@ -258,5 +306,9 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
 
     public String getSubject() {
         return subject;
+    }
+
+    public String getUserName() {
+        return this.user_name;
     }
 }

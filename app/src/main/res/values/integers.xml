@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="tool_default_quantity">3</integer>
+    <integer name="tool_default_quantity">5</integer>
 </resources>

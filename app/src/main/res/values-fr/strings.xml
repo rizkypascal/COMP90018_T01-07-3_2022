@@ -63,4 +63,5 @@
     <string name="confirm">Confirmer</string>
     <string name="select_faculty">Sélectionnez la faculté</string>
     <string name="select_subject">" Sélectionnez le sujet"</string>
+    <string name="time_remaining_placeholder">"Temps restant avant l'actualisation des outils de jeu"\n</string>
 </resources>

@@ -115,7 +115,6 @@ public class GameFragment extends Fragment {
         } else {
             playGame();
         }
-        //TODO: tony or arthur: need passing msg of user account
     }
 
     @OnClick(R.id.signInUpButton)
@@ -187,6 +186,7 @@ public class GameFragment extends Fragment {
         bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
         bundle.putString("week", "");
         bundle.putString("subject", "");
+        bundle.putString("user_name", user_name);
         Intent intent = new Intent(context, GameActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -194,7 +194,7 @@ public class GameFragment extends Fragment {
 
         // storing game tools quantity locally after game started
 
-        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = activity.getSharedPreferences("gameToolsQty", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         if(activity.getGameTools() != null){

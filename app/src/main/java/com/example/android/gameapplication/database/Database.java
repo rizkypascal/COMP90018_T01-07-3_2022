@@ -157,6 +157,7 @@ public class Database {
     }
     // this method will return all the monster's positions and type
     public ArrayList<String> getMonsters(String subject, String week){
+
         if (subject.equals("subject1")) {
             addmonster1Listener();
             monsters = (ArrayList<String>) monster1.get(week);

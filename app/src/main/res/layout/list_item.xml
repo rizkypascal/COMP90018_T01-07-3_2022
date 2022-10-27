@@ -51,9 +51,8 @@
 
         <TextView
             android:id="@+id/item_text"
-            android:fontFamily="@font/games_scribble"
             android:textStyle="bold"
-            android:textSize="26dp"
+            android:textSize="16dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

@@ -37,6 +37,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 import pl.droidsonroids.gif.GifDrawable;
@@ -48,13 +50,14 @@ public class GameContext extends View implements Runnable{
     private Thread thread;
     private boolean isPlaying = true;
     private boolean isExit, isComplete = false;
-    private int initialBoards = 100;
-    private int widthRatio = 5;
+    private int score = 0;
+
+    private final int initialBoards = 100;
+    private final int widthRatio = 5;
     private final float changeY = 22f;
     private final float gravityY = 10f;
     private final int lowerthreshold;
-
-    private int screenX, screenY;
+    private final int screenX, screenY;
 
     private ArrayList<Board> boards;
     private Jumper jumper;
@@ -64,7 +67,7 @@ public class GameContext extends View implements Runnable{
     private FireworkEffect firework;
     private Database database;
 
-    public GameContext(GameActivity activity, int screenX, int screenY) {
+    public GameContext(GameActivity activity, int screenX, int screenY, Database database) {
         super(activity);
 
         /** Init sensor variables*/
@@ -74,6 +77,7 @@ public class GameContext extends View implements Runnable{
         this.activity = activity;
         this.screenX = screenX; //1440
         this.screenY = screenY;   //3040
+        this.database = database;
         this.lowerthreshold = screenY * 9 / 10;
 
         int jumperX = screenX/14;
@@ -85,19 +89,31 @@ public class GameContext extends View implements Runnable{
         // random generate the boards for full screen
         this.boards = random_generate(screenY, screenX);
 
-        //some monsters for testing purpose
-        Monster monster = new Monster(getContext(), 500, 500,size, 10,MonsterType.EXAM);
-        this.monsters.add(monster);
-        Monster monster2 = new Monster(getContext(), 800, 700,size, 10,MonsterType.QUIZ);
-        this.monsters.add(monster2);
 //        int initBoardX = boards.get(0).getPosX();
 //        int initBoardY = boards.get(0).getPosY();
 //        Log.i("generate","initLoc"+initBoardX+"Y"+initBoardY);
         this.jumper = new Jumper(getContext(),jumperX,jumperY, jumperX,gravityY,
                 screenX, R.drawable.jumperone);
 
-        Log.i("generate","Game view");
+        if (activity.monsterInfo != null){
+            for (Object s : activity.monsterInfo){
+                // s type: hashmap
+                generate_monster((HashMap) s, size);
+                //Log.i("i","monsterInfo: " + s.getClass().getSimpleName());
+            }
+        }
 
+        if (activity.subject == null){
+            //some monsters for tourist
+            Monster monster = new Monster(getContext(), screenX/5, screenY/7,
+                    size, 10,MonsterType.EXAM);
+            this.monsters.add(monster);
+            Monster monster2 = new Monster(getContext(), screenX/2, screenY/5,
+                    size, 10,MonsterType.QUIZ);
+            this.monsters.add(monster2);
+        }
+        Log.i("i","monsterSize: " + monsters.size());
+        Log.i("generate","Game view");
     }
 
     @Override
@@ -189,16 +205,11 @@ public class GameContext extends View implements Runnable{
                     if(CollisionUtils.bulletMonsterCollision(bullet,monster))
                     {
                         monster.setAlive(false);
-                        firework(monster.getPosX(),monster.getPosY());
+                        score += monster.getScore();
                         break;
                     }
                 }
             }
-        }
-
-        //drawing firework until the bomb gif is finished
-        if(firework != null){
-            firework.draw(canvas);
         }
 
         if (isExit){
@@ -247,10 +258,43 @@ public class GameContext extends View implements Runnable{
         return newboards;
     }
 
-    private void generate_monsters(){
-        ArrayList<String> lists = new ArrayList<>();
-        lists = database.getMonsters("subject1", "week1");
-        Log.i("monster","list:"+lists.size());
+    private void generate_monster(HashMap info, int size){
+        Object x, y, s;
+        int posX, posY, score = 0;
+        MonsterType type = null;
+        switch (Objects.requireNonNull(info.get("type")).toString()){
+            case "test":
+                type = MonsterType.TEST;
+                break;
+            case "exam":
+                type = MonsterType.EXAM;
+                break;
+            case "homework":
+                type = MonsterType.HOMEWORK;
+                break;
+            case "quiz":
+                type = MonsterType.QUIZ;
+                break;
+        }
+        x = info.get("x");
+        y = info.get("y");
+        s = info.get("score");
+        score = (int) ((int) 1 * Float.valueOf(s.toString()));
+        Log.i("i", "score: "+ score);
+
+        posX = (int) ((int) screenX * Float.valueOf(x.toString()));
+        posY = (int) ((int) screenY * Float.valueOf(y.toString()));
+//        Log.i("i", "x: "+ posX +" " + posY);
+//        Log.i("i", "type: "+ type.getClass().getSimpleName());
+
+        Monster monster = new Monster(getContext(), posX, screenY - posY, size, (int) score,type);
+        this.monsters.add(monster);
+    }
+
+    private void save_record(){
+        database.updateScore(activity.getSubject(), activity.getWeek(),
+                activity.getUser_name(), String.valueOf(score));
+        //Log.i("i",""+activity.subject+ activity.week+activity.user_name+ String.valueOf(score));
     }
 
     private void checkStatus(){
@@ -307,10 +351,12 @@ public class GameContext extends View implements Runnable{
     }
 
     public void exit (){
-
+        // display firework
         firework(screenX/2, screenY/5);
         activity.constraintLayout.addView(firework);
-
+        // save record to database
+        save_record();
+        // show dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         String msg = getResources().getString(R.string.finish_game);
         String title = getResources().getString(R.string.done);
@@ -383,7 +429,10 @@ public class GameContext extends View implements Runnable{
             public void onFinish() {
                 bomb = null;
                 for (Monster monster : monsters){
-                    monster.setAlive(false);
+                    if (monster.getAlive()){
+                        monster.setAlive(false);
+                        score += monster.getScore();
+                    }
                 }
             }
         };
@@ -418,12 +467,7 @@ public class GameContext extends View implements Runnable{
 
     private void PopToast(String text, int duration){
         Toast toast = Toast.makeText(getContext(), null, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.CENTER_VERTICAL, 0,0);
         toast.setText(text);
         toast.show();
     }
-
-
-
-
 }
