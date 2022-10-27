@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.android.gameapplication.database.Database;
 import com.example.android.gameapplication.game_tools.GameTools;
 
 import java.io.Serializable;
@@ -30,6 +31,7 @@ public class Fragment_SelectWeek extends Fragment {
     private String mParam2;
     private GameFragment.SendMessages sendMessages;
     private String subject = "";
+    private Database database = new Database();
 
     public Fragment_SelectWeek() {
         // Required empty public constructor
@@ -109,6 +111,8 @@ public class Fragment_SelectWeek extends Fragment {
             bundle.putString("week", week);
             bundle.putString("subject", subject);
             bundle.putString("user_name", activity.getUserName());
+            bundle.putSerializable("monsters", database.getMonsters(subject, week));
+            Log.i("info",""+database.getMonsters(subject, week));
             Intent intent = new Intent(context, GameActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);

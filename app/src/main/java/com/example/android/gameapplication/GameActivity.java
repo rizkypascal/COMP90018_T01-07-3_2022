@@ -48,6 +48,7 @@ public class GameActivity extends AppCompatActivity {
     private List<GameTools> gameTools;
     public ConstraintLayout constraintLayout;
     public String subject, week, user_name;
+    public ArrayList<String> monsterInfo;
 
     public String getSubject() {
         return subject;
@@ -84,7 +85,7 @@ public class GameActivity extends AppCompatActivity {
         subject = bundle.getString("subject");
         week = bundle.getString("week");
         user_name = bundle.getString("user_name");
-        Log.d("GameActivity", "subject: "+subject+" week: "+week);
+        monsterInfo = bundle.getStringArrayList("monsters");
 
         gameContext = new GameContext (this, screenX, screenY, database);
         constraintLayout.addView(gameContext);

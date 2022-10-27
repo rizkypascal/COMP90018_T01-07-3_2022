@@ -37,6 +37,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 import pl.droidsonroids.gif.GifDrawable;
@@ -87,27 +89,31 @@ public class GameContext extends View implements Runnable{
         // random generate the boards for full screen
         this.boards = random_generate(screenY, screenX);
 
-        //some monsters for testing purpose
-        Monster monster = new Monster(getContext(), 500, 500,size, 10,MonsterType.EXAM);
-        this.monsters.add(monster);
-        Monster monster2 = new Monster(getContext(), 800, 700,size, 10,MonsterType.QUIZ);
-        this.monsters.add(monster2);
 //        int initBoardX = boards.get(0).getPosX();
 //        int initBoardY = boards.get(0).getPosY();
 //        Log.i("generate","initLoc"+initBoardX+"Y"+initBoardY);
         this.jumper = new Jumper(getContext(),jumperX,jumperY, jumperX,gravityY,
                 screenX, R.drawable.jumperone);
 
+        if (activity.monsterInfo != null){
+            for (Object s : activity.monsterInfo){
+                // s type: hashmap
+                generate_monster((HashMap) s, size);
+                //Log.i("i","monsterInfo: " + s.getClass().getSimpleName());
+            }
+        }
+
+        if (activity.subject == null){
+            //some monsters for tourist
+            Monster monster = new Monster(getContext(), screenX/5, screenY/7,
+                    size, 10,MonsterType.EXAM);
+            this.monsters.add(monster);
+            Monster monster2 = new Monster(getContext(), screenX/2, screenY/5,
+                    size, 10,MonsterType.QUIZ);
+            this.monsters.add(monster2);
+        }
+        Log.i("i","monsterSize: " + monsters.size());
         Log.i("generate","Game view");
-
-        //checkData();
-
-    }
-
-    private void checkData(){
-        Log.i("i","database:" + activity.getSubject() + activity.getWeek());
-        Log.i("i","database:" + database.getMonsters(activity.getSubject(),
-                activity.getWeek()));
     }
 
     @Override
@@ -252,10 +258,37 @@ public class GameContext extends View implements Runnable{
         return newboards;
     }
 
-    private void generate_monsters(){
-        ArrayList<String> lists = new ArrayList<>();
-        lists = database.getMonsters("subject1", "week1");
-        Log.i("monster","list:"+lists.size());
+    private void generate_monster(HashMap info, int size){
+        Object x, y, s;
+        int posX, posY, score = 0;
+        MonsterType type = null;
+        switch (Objects.requireNonNull(info.get("type")).toString()){
+            case "test":
+                type = MonsterType.TEST;
+                break;
+            case "exam":
+                type = MonsterType.EXAM;
+                break;
+            case "homework":
+                type = MonsterType.HOMEWORK;
+                break;
+            case "quiz":
+                type = MonsterType.QUIZ;
+                break;
+        }
+        x = info.get("x");
+        y = info.get("y");
+        s = info.get("score");
+        score = (int) ((int) 1 * Float.valueOf(s.toString()));
+        Log.i("i", "score: "+ score);
+
+        posX = (int) ((int) screenX * Float.valueOf(x.toString()));
+        posY = (int) ((int) screenY * Float.valueOf(y.toString()));
+//        Log.i("i", "x: "+ posX +" " + posY);
+//        Log.i("i", "type: "+ type.getClass().getSimpleName());
+
+        Monster monster = new Monster(getContext(), posX, screenY - posY, size, (int) score,type);
+        this.monsters.add(monster);
     }
 
     private void save_record(){
