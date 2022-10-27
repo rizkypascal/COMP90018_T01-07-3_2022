@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Spielanwendung</string>
+    <string name="app_name">Unimelb H1 Trichter</string>
     <string name="action_settings">Einstellungen</string>
     <string name="first_fragment_label">Erstes Fragment</string>
     <string name="second_fragment_label">Zweites Fragment</string>

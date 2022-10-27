@@ -121,6 +121,7 @@ public class UserFragment extends Fragment {
 
 
         database = new Database();
+
         //TODO: XUEQING may need to re-initiate
         return view;
     }

@@ -67,6 +67,9 @@ public class GameActivity extends AppCompatActivity {
          */
         Bundle bundle = getIntent().getExtras();
         gameTools = (List<GameTools>) bundle.getSerializable("gameTools");
+        String subject = bundle.getString("subject");
+        String week = bundle.getString("week");
+        Log.d("GameActivity", "subject: "+subject+" week: "+week);
         GameToolsFragment gameToolsFragment = new GameToolsFragment(gameContext);
         FragmentManager manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();

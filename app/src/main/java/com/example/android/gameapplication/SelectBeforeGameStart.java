@@ -34,12 +34,13 @@ public class SelectBeforeGameStart extends Fragment {
     private Context context;
 
     private TextView textLoginInfo, userRank;
-    private String[] drapdown_Array1 = {"AAA", "BBB", "CCC"};
+    private String[] drapdown_Array1 = {"Arts", "Business and Economics", "Engineering and Information Technology"};
     private String[] drapdown_Array2 = {""};
     private Spinner sp1;
     private Spinner sp2;
     private boolean isSpinnerFirst = true;
     private Button confirmButton;
+    private String subject;
 
     // set variables, interface for communication between activity & fragment, fragment & fragment
     private String user_name="";
@@ -88,8 +89,10 @@ public class SelectBeforeGameStart extends Fragment {
                 if ( !isSpinnerFirst && !sp2.getSelectedItem().toString().equals("")) {
                     sp1.setEnabled(false);
                     sp2.setEnabled(false);
-                    Toast.makeText(getActivity(), "Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                    sendMessages.iAmMSG("Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString());
+                    activity.setSubject(sp2.getSelectedItem().toString());
+                    subject = "Subject:" + sp2.getSelectedItem().toString();
+                    //Toast.makeText(getActivity(), "Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                    //sendMessages.iAmMSG("Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString());
                     play_Game();
                 }else{
                     Toast.makeText(getActivity(), "Please select a subject", Toast.LENGTH_SHORT).show();
@@ -145,15 +148,15 @@ public class SelectBeforeGameStart extends Fragment {
                 selAdapter1.remove("");
                 if (i == 0) {
                     selAdapter2.clear();
-                    selAdapter2.addAll("", "1", "2", "3");
+                    selAdapter2.addAll("", getString(R.string.subject1), getString(R.string.subject2));
                     sp2.setSelection(0);
                 } else if (i == 1) {
                     selAdapter2.clear();
-                    selAdapter2.addAll("", "A", "B", "C");
+                    selAdapter2.addAll("", getString(R.string.subject1), getString(R.string.subject2));
                     sp2.setSelection(0);
                 } else if (i == 2) {
                     selAdapter2.clear();
-                    selAdapter2.addAll("", "X", "Y", "Z");
+                    selAdapter2.addAll("", getString(R.string.subject1), getString(R.string.subject2));
                     sp2.setSelection(0);
                 }else{
                     sp2.setEnabled(false);
@@ -174,8 +177,12 @@ public class SelectBeforeGameStart extends Fragment {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             if (!sp2.getSelectedItem().toString().equals("")){
-                selAdapter2.remove("");
+                if (sp2.getAdapter().getItem(0).equals("")){
+                    selAdapter2.remove("");
+                    sp2.setSelection(i-1);
+                }
             }
+
 
             //Toast.makeText(getActivity(), "You have selected " + adapterView.getItemAtPosition(i), Toast.LENGTH_SHORT).show();
         }
@@ -188,34 +195,34 @@ public class SelectBeforeGameStart extends Fragment {
 
     public void play_Game() {
 
-        GameFragment startmenu = new GameFragment();
+        Fragment_SelectWeek selectWeek = new Fragment_SelectWeek();
         activity.getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.layout_fragment, startmenu)
+                .replace(R.id.layout_fragment, selectWeek)
                 .addToBackStack(null)
                 .commit();
-        startmenu.fragmentReceiveMsg(user_name);
+        selectWeek.fragmentReceiveMsg(subject);
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
-        Intent intent = new Intent(context, GameActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        //Bundle bundle = new Bundle();
+        //bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
+        //Intent intent = new Intent(context, GameActivity.class);
+        //intent.putExtras(bundle);
+        //startActivity(intent);
 
 
         // storing game tools quantity locally after game started
 
-        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
-        if(activity.getGameTools() != null){
-            for(GameTools gameTools : activity.getGameTools()){
-                editor.putInt(gameTools.getCodeName(), gameTools.getQuantity());
-            }
-            editor.apply();
-        }
-        //reset the selected game tools box on the GameToolsFragment
-        activity.setSelectedGameTools(new ArrayList<GameTools>());
+        //SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        //SharedPreferences.Editor editor = sharedPref.edit();
+//
+        //if(activity.getGameTools() != null){
+        //    for(GameTools gameTools : activity.getGameTools()){
+        //        editor.putInt(gameTools.getCodeName(), gameTools.getQuantity());
+        //    }
+        //    editor.apply();
+        //}
+        ////reset the selected game tools box on the GameToolsFragment
+        //activity.setSelectedGameTools(new ArrayList<GameTools>());
     }
 
 

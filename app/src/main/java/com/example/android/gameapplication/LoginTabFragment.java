@@ -62,6 +62,7 @@ public class LoginTabFragment extends Fragment {
 
         signInNameValue = view.findViewById(R.id.signInNameValue);
         signInPasswordValue = view.findViewById(R.id.signInPasswordValue);
+        String username = signInNameValue.getText().toString();
         database = new Database();
         signInButton = (Button) view.findViewById(R.id.signInButton);
 
@@ -88,6 +89,8 @@ public class LoginTabFragment extends Fragment {
         Log.d("UserFragment", "signInButton clicked.");
         String username_temp = signInNameValue.getText().toString();
         String password_temp = signInPasswordValue.getText().toString();
+
+
         try {
             if (CheckLogin(username_temp, password_temp)){
                 MediaPlayer mp = MediaPlayer.create(activity, R.raw.vista);
@@ -134,6 +137,7 @@ public class LoginTabFragment extends Fragment {
         //unbinder.unbind();
     }
 
+
     boolean CheckLogin(String user_name, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         Log.d("UserFragment", "print out username+password: "+user_name+" "+password);
         if (user_name.length()==0){
@@ -149,6 +153,7 @@ public class LoginTabFragment extends Fragment {
             messageDigest.update(password.getBytes("UTF-8"));
             String encodePassword = byte2Hex(messageDigest.digest());
             Log.d("password", encodePassword+" "+password);
+
             if (database.UsernameMatchPassword(user_name, password)) {
                 PopToast(getString(R.string.login_as)+user_name);
                 Log.d("UserFragment","password username matches");

@@ -21,23 +21,88 @@ public class Database {
 
 
 
+
+
     public Database() {
         // activate the listener
         addlistListener();
-        addpassListener("a");
-        addmonsterListener("subject1","week1");
+        addpassListener();
+        addmonster1Listener();
+        addmonster2Listener();
         addboardListener("subject1","week1");
-        addscoreListener("subject1","week1", "a");
+        addscore1Listener();
+        addscore2Listener();
 
     }
 
+
     private String tempscore = new String("0");
-    private void addscoreListener(String subject, String week, String username) {
+    private HashMap tempscoremap = new HashMap<>();
+    private HashMap scoremap1 = new HashMap<>();
+    private HashMap scoremap2 = new HashMap<>();
+    private void addscore1Listener() {
         // [START post_value_event_listener]
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                tempscore = (String) snapshot.child(subject).child(week).child(username).getValue();
+                scoremap1 = (HashMap) snapshot.child("subject1").getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        });
+
+    }
+    private void addscore2Listener() {
+        // [START post_value_event_listener]
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                scoremap2 = (HashMap) snapshot.child("subject2").getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        });
+
+    }
+    // this method will return all the monster's positions and type
+    public String getScore(String subject, String week, String username){
+        if (subject.equals("subject1")) {
+            addscore1Listener();
+            tempscoremap = (HashMap) scoremap1.get(week);
+            tempscore = (String) tempscoremap.get(username);
+
+        }
+        else{
+            addscore2Listener();
+            tempscoremap = (HashMap) scoremap2.get(week);
+            tempscore = (String) tempscoremap.get(username);
+        }
+
+
+
+        return tempscore;
+    }
+    public void updateScore(String subject, String week, String username, String scores){
+
+        mDatabase.child(subject).child(week).child(username).setValue(scores);
+
+    }
+
+    private HashMap monstermap2 = new HashMap<>();
+    private HashMap monstermap1 = new HashMap<>();
+    private ArrayList<String> monsters = new ArrayList<String>();
+    private void addmonster2Listener() {
+        // [START post_value_event_listener]
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                monstermap2 = (HashMap) snapshot.child("monster").child("subject2").getValue();
             }
 
             @Override
@@ -49,22 +114,12 @@ public class Database {
         //mpassReference.addValueEventListener(postListener);
         // [END post_value_event_listener]
     }
-    // this method will return all the monster's positions and type
-    public String getScore(String subject, String week, String username){
-
-        addscoreListener(subject, week, username);
-
-        return tempscore;
-    }
-
-
-    private ArrayList<String> monsters = new ArrayList<String>();
-    private void addmonsterListener(String subject, String week) {
+    private void addmonster1Listener() {
         // [START post_value_event_listener]
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                monsters = (ArrayList<String>) snapshot.child("monster").child(subject).child(week).getValue();
+                monstermap1 = (HashMap) snapshot.child("monster").child("subject1").getValue();
             }
 
             @Override
@@ -78,8 +133,16 @@ public class Database {
     }
     // this method will return all the monster's positions and type
     public ArrayList<String> getMonsters(String subject, String week){
+        if (subject.equals("subject1")) {
+            addmonster1Listener();
+            monsters = (ArrayList<String>) monstermap1.get(week);
 
-        addmonsterListener(subject, week);
+        }
+        if (subject.equals("subject2")) {
+            addmonster2Listener();
+            monsters = (ArrayList<String>) monstermap2.get(week);
+
+        }
 
         return monsters;
     }
@@ -122,12 +185,13 @@ public class Database {
     // the temppassword is once we get the user's password from firebase
     // basic logic is similar
     private String temppassword = new String("1");
-    private void addpassListener(String username) {
+    private Map<String,String> passwordmap = new HashMap<>();
+    private void addpassListener() {
         // [START post_value_event_listener]
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                temppassword = (String) snapshot.child("password").child(username).getValue();
+                passwordmap = (Map<String, String>) snapshot.child("password").getValue();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -203,14 +267,23 @@ public class Database {
     }
     // function that can check if the username match the password
     public boolean UsernameMatchPassword(String username, String password){
-        addpassListener(username);
+
+
+        addpassListener();
         addlistListener();
+        addscore1Listener();
         // just for test
         //addmonsterListener("subject1","week1");
         //addboardListener("subject1","week1");
+        //addmonster1Listener();
+        //monsters = (ArrayList<String>) monstermap1.get("week1");
         //System.out.println("monster:"+monsters);
         //System.out.println("board:"+boards);
+        //System.out.println("map:"+passwordmap);
+        temppassword = passwordmap.get(username);
+        //System.out.println("ppass:"+temppassword);
         if (users.contains(username)) {
+
             if (password.equals(temppassword)) {
                 // only work when we have the user can the password is correct
                 return true;

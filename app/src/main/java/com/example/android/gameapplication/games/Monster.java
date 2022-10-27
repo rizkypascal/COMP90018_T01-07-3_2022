@@ -22,14 +22,17 @@ public class Monster extends View {
     private Integer posX;
     private Integer posY;
     private Integer size;
+    private int score;
     private Boolean alive;
     private Rect imageBounds;
     private Drawable monster;
 
-    public Monster(Context context, Integer posX, Integer posY, Integer size, MonsterType monsterType) {
+    public Monster(Context context, Integer posX, Integer posY,
+                   Integer size, int score, MonsterType monsterType) {
         super(context);
         this.posX = posX;
         this.posY = posY;
+        this.score = score;
         this.size = size;
         this.alive = true;
         this.imageBounds = new Rect(posX-size,posY-size,posX+size, posY+size);
@@ -48,6 +51,18 @@ public class Monster extends View {
             default:
                 break;
         }
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public Boolean getAlive() {
+        return alive;
+    }
+
+    public void setAlive(Boolean alive) {
+        this.alive = alive;
     }
 
     /**
