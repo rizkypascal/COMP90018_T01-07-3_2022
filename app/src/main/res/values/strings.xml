@@ -25,7 +25,7 @@
 
     <!--Strings in fragment game-->
     <string name="play_game">Play Game</string>
-    <string name="sing_in_up">Sign in/up</string>
+    <string name="sign_in_up">Sign in/up</string>
 
     <!--strings for navigator-->
     <string name="user">USER</string>
@@ -66,14 +66,14 @@
     <string name="world_rank">Your world rank is: </string>
     <string name="your_best_score">your score by week</string>
     <string name="select_faculty">Select the faculty</string>
-    <string name="select_subject">Select the subject </string>
+    <string name="select_subject">Select the subject</string>
     <string name="world_best_score">World\'s best scores</string>
     <string name="your_world_ranking">Your world rank is: over 10000</string>
     <string name="play_as_tourist">You are playing as a tourist.</string>
     <string name="play_as_user">You are playing as user: </string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="confrimed_password">Confirm Password</string>
+    <string name="confirmed_password">Confirm Password</string>
     <string name="week1">Week 1</string>
     <string name="week2">Week 2</string>
     <string name="week3">Week 3</string>
@@ -91,6 +91,8 @@
 
     <!--strings for game-->
     <string name="got_it">I got it.</string>
+    <string name="done">Well Done!.</string>
+    <string name="good">Good Job.</string>
     <string name="finish_game">Congratulations on making it through the week.\n</string>
     <string name="complete_game">"You've completed all the tasks for the week. \nKeep working hard."</string>
     <string name="incomplete_game">"Unfortunately, there are some unfinished tasks. \nTry your best."</string>

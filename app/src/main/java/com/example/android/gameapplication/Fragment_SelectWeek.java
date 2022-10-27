@@ -130,7 +130,7 @@ public class Fragment_SelectWeek extends Fragment {
 
         }
         else{
-            SelectBeforGameStart selectsubject = new SelectBeforGameStart();
+            SelectBeforeGameStart selectsubject = new SelectBeforeGameStart();
             activity.getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.layout_fragment, selectsubject)

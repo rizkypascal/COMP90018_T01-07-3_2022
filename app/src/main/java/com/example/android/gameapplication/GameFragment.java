@@ -170,7 +170,7 @@ public class GameFragment extends Fragment {
         }
         else {
             PopToast(getString(R.string.play_as_user)+user_name);
-            SelectBeforGameStart selectFragment = new SelectBeforGameStart();
+            SelectBeforeGameStart selectFragment = new SelectBeforeGameStart();
             activity.getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.layout_fragment, selectFragment)

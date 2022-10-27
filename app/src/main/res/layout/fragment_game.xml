@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:text="@string/sing_in_up">
+        android:text="@string/sign_in_up">
     </androidx.appcompat.widget.AppCompatButton>
 
     <ImageView
