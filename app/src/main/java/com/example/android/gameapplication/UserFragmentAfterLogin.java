@@ -94,28 +94,30 @@ public class UserFragmentAfterLogin extends Fragment {
     private ArrayList<ListTuple> getPersonalScoresFromDB(String user_name) {
 
         ArrayList<ListTuple> personalScoreList = new ArrayList<>();
-        String subject = activity.getSubject();
-        String[] subjectList = {getString(R.string.subject1),getString(R.string.subject2)};
+        //String[] subjectList = {getString(R.string.subject1),getString(R.string.subject2)};
+        String[] subjectList = {"subject1","subject2"};
+        subjectList = new String[]{"subject1"};
 
-        personalScoreList.add(new ListTuple(subjectList[0], "00"));
-        personalScoreList.add(new ListTuple(subjectList[1], "11"));
 
-        // for (int i = 0; i < subjectList.length; i++) {
-        //     String subjectName = subjectList[i];
-        //     int subjectScore = 0;
-        //     for (int j = 1; j < 13; j++) {
-        //         String score = db.getScore(subject, "week" + i, user_name);
-        //         subjectScore += Integer.parseInt(score);
-        //     }
-        //     personalScoreList.add(new ListTuple(subjectName, "" + subjectScore));
-        // }
+        for (int i = 0; i < subjectList.length; i++) {
+            String subjectName = subjectList[i];
+            System.out.println("subjectName");
+            int subjectScore = 0;
+            for (int j = 1; j < 13; j++) {
+
+                String score = db.getScore(subjectName, "week" + j, user_name);
+                subjectScore += Integer.parseInt(score);
+            }
+            personalScoreList.add(new ListTuple(subjectName, "" + subjectScore));
+        }
 
 
 
 
         //Log.d("UserFragmentAfterLogin", "getPersonalScoresFromDB: "+ user_name + " " + subject);
         //for (int i = 1; i < 13; i++) {
-        //    personalScoreList.add(new ListTuple("week"+i, db.getScore( subject,  "week"+i, user_name)));
+
+        //    personalScoreList.add(new ListTuple("week"+i, db.getScore(  subjectList[1],  "week"+i, user_name)));
         //}
 
         return  personalScoreList;
