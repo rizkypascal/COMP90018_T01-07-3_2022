@@ -64,7 +64,7 @@
     <string name="sign_up_successful">Successfully sign up!</string>
     <string name="username_exists">Username already exists!</string>
     <string name="world_rank">Your world rank is: </string>
-    <string name="your_best_score">Your best scores:</string>
+    <string name="your_best_score">your score by week</string>
     <string name="select_faculty">Select the faculty</string>
     <string name="select_subject">Select the subject </string>
     <string name="world_best_score">World\'s best scores</string>
@@ -86,6 +86,8 @@
     <string name="week10">Week10</string>
     <string name="week11">Week11</string>
     <string name="week12">Week12</string>
+    <string name="subject1">subject1</string>
+    <string name="subject2">subject2</string>
 
     <!--strings for game-->
     <string name="got_it">I got it.</string>

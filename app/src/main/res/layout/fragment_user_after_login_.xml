@@ -36,32 +36,5 @@
         android:layout_width="wrap_content"
         android:layout_height="200dp"/>
 
-    <TextView
-        android:id="@+id/worldScoresLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/world_best_score"
-        android:textColor="#111111"
-        android:textSize="20sp">
-    </TextView>
-
-    <ListView
-        android:id="@+id/world_score_list_view"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"/>
-
-    <TextView
-        android:id="@+id/userRank"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/your_world_ranking"
-        android:textColor="#111111"
-        android:textSize="20sp">
-    </TextView>
-
-
-
-
 
 </LinearLayout>

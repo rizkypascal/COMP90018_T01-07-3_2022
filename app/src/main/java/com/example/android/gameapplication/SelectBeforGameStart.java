@@ -35,7 +35,7 @@ public class SelectBeforGameStart extends Fragment {
     private Context context;
 
     private TextView textLoginInfo, userRank;
-    private String[] drapdown_Array1 = {"AAA", "BBB", "CCC"};
+    private String[] drapdown_Array1 = {"Arts", "Business and Economics", "Engineering and Information Technology"};
     private String[] drapdown_Array2 = {""};
     private Spinner sp1;
     private Spinner sp2;
@@ -90,6 +90,7 @@ public class SelectBeforGameStart extends Fragment {
                 if ( !isSpinnerFirst && !sp2.getSelectedItem().toString().equals("")) {
                     sp1.setEnabled(false);
                     sp2.setEnabled(false);
+                    activity.setSubject(sp2.getSelectedItem().toString());
                     subject = "Subject:" + sp2.getSelectedItem().toString();
                     //Toast.makeText(getActivity(), "Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                     //sendMessages.iAmMSG("Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString());
@@ -148,15 +149,15 @@ public class SelectBeforGameStart extends Fragment {
                 selAdapter1.remove("");
                 if (i == 0) {
                     selAdapter2.clear();
-                    selAdapter2.addAll("", "1", "2", "3");
+                    selAdapter2.addAll("", getString(R.string.subject1), getString(R.string.subject2));
                     sp2.setSelection(0);
                 } else if (i == 1) {
                     selAdapter2.clear();
-                    selAdapter2.addAll("", "A", "B", "C");
+                    selAdapter2.addAll("", getString(R.string.subject1), getString(R.string.subject2));
                     sp2.setSelection(0);
                 } else if (i == 2) {
                     selAdapter2.clear();
-                    selAdapter2.addAll("", "X", "Y", "Z");
+                    selAdapter2.addAll("", getString(R.string.subject1), getString(R.string.subject2));
                     sp2.setSelection(0);
                 }else{
                     sp2.setEnabled(false);
@@ -177,8 +178,12 @@ public class SelectBeforGameStart extends Fragment {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             if (!sp2.getSelectedItem().toString().equals("")){
-                selAdapter2.remove("");
+                if (sp2.getAdapter().getItem(0).equals("")){
+                    selAdapter2.remove("");
+                    sp2.setSelection(i-1);
+                }
             }
+
 
             //Toast.makeText(getActivity(), "You have selected " + adapterView.getItemAtPosition(i), Toast.LENGTH_SHORT).show();
         }
