@@ -65,7 +65,7 @@
     <string name="sign_up_successful">Successfully sign up!</string>
     <string name="username_exists">Username already exists!</string>
     <string name="world_rank">Your world rank is: </string>
-    <string name="your_best_score">your score by week</string>
+    <string name="your_best_score">Grade</string>
     <string name="select_faculty">Select the faculty</string>
     <string name="select_subject">Select the subject</string>
     <string name="world_best_score">World\'s best scores</string>
