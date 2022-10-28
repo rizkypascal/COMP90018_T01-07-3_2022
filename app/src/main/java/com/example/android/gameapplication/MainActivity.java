@@ -101,8 +101,6 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
         scheduledCal.set(Calendar.SECOND, 0);
         long intendedTime = scheduledCal.getTimeInMillis();
 
-        Log.i("AlarmGameTools", "Going to register Intent.RegisterAlarmBroadcast");
-
         Intent intent = new Intent(this, GameToolsBroadcastReceiver.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
@@ -112,10 +110,15 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
 
         alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE );
 
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                intendedTime,
-                AlarmManager.INTERVAL_DAY,
-                pendingIntent );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,
+                    intendedTime,
+                    pendingIntent );
+        }else {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP,
+                    intendedTime,
+                    pendingIntent );
+        }
     }
 
     // Click listener for choosing different navigation tabs

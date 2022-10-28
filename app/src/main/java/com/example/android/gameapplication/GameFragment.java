@@ -203,6 +203,7 @@ public class GameFragment extends Fragment {
             }
             editor.apply();
         }
+
         //reset the selected game tools box on the GameToolsFragment
         activity.setSelectedGameTools(new ArrayList<GameTools>());
     }

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -137,7 +138,7 @@ public class GameToolsSelectionFragment extends Fragment {
         Calendar tomorrowCalendar = Calendar.getInstance(TimeZone.getTimeZone("Australia/Melbourne"));
         tomorrowCalendar.add(Calendar.DAY_OF_MONTH, 1); //add a day
         tomorrowCalendar.set(Calendar.HOUR_OF_DAY, 0);
-        tomorrowCalendar.set(Calendar.MINUTE, 0);
+        tomorrowCalendar.set(Calendar.MINUTE, 1);
         tomorrowCalendar.set(Calendar.SECOND, 0);
         tomorrowCalendar.set(Calendar.MILLISECOND, 0);
 
@@ -160,12 +161,12 @@ public class GameToolsSelectionFragment extends Fragment {
 
             @Override
             public void onFinish() {
-
+                //refresh game tools
+                activity.setGameTools(getGameTools());
             }
         };
         timer.start();
     }
-
 
     /**
      * This method is called in SelectedGameToolsAdapter
