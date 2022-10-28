@@ -15,6 +15,7 @@
     <color name="amber_dark">#FFA000</color>
     <color name="amber_light">#FFECB3</color>
     <color name="gray">#C6C5C0</color>
+    <color name="light_black">#2B2828</color>
 
 
 </resources>

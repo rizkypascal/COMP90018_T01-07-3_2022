@@ -67,4 +67,10 @@
     <string name="switch_to_dark">Vous êtes dans un environnement sombre. Jouer au jeu en mode sombre ?</string>
     <string name="switch_to_bright">Vous êtes dans un environnement lumineux. Jouer au jeu en mode lumineux ?</string>
     <string name="light_mode_switching">Commutation du mode d\'éclairage</string>
+    <string name="got_it">J\'ai compris.</string>
+    <string name="done">Bien fait!.</string>
+    <string name="good">Bon travail.</string>
+    <string name="finish_game">Félicitations pour avoir passé la semaine.</string>
+    <string name="complete_game">Vous avez terminé toutes les tâches de la semaine. Continue à travailler dur.</string>
+    <string name="incomplete_game">" Malheureusement, il reste des tâches inachevées. Fais de ton mieux."</string>
 </resources>

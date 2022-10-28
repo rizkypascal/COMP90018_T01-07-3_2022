@@ -47,5 +47,18 @@
         <item name="android:background">@drawable/border</item>
     </style>
 
+    <style name="spinner_bg">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="spinner_text">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="week_bg">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 
 </resources>

@@ -78,20 +78,20 @@
     <string name="switch_to_dark">You are in dark environment. Play the game in dark mode?</string>
     <string name="switch_to_bright">You are in bright environment. Play the game in bright mode?</string>
     <string name="light_mode_switching">Light Mode Switching</string>
-    <string name="week1">Week 1</string>
-    <string name="week2">Week 2</string>
-    <string name="week3">Week 3</string>
-    <string name="week4">Week 4</string>
-    <string name="week5">Week 5</string>
-    <string name="week6">Week 6</string>
-    <string name="week7">Week 7</string>
-    <string name="week8">Week 8</string>
-    <string name="week9">Week 9</string>
-    <string name="week10">Week10</string>
-    <string name="week11">Week11</string>
-    <string name="week12">Week12</string>
-    <string name="subject1">COMP90018</string>
-    <string name="subject2">COMP90049</string>
+    <string name="week1" translatable="false">Week 1</string>
+    <string name="week2" translatable="false">Week 2</string>
+    <string name="week3" translatable="false">Week 3</string>
+    <string name="week4" translatable="false">Week 4</string>
+    <string name="week5" translatable="false">Week 5</string>
+    <string name="week6" translatable="false">Week 6</string>
+    <string name="week7" translatable="false">Week 7</string>
+    <string name="week8" translatable="false">Week 8</string>
+    <string name="week9" translatable="false">Week 9</string>
+    <string name="week10" translatable="false">Week10</string>
+    <string name="week11" translatable="false">Week11</string>
+    <string name="week12" translatable="false">Week12</string>
+    <string name="subject1" translatable="false">COMP90018</string>
+    <string name="subject2" translatable="false">COMP90049</string>
 
     <!--strings for game-->
     <string name="got_it">I got it.</string>

@@ -67,5 +67,11 @@
     <string name="switch_to_dark">Sie befinden sich in einer dunklen Umgebung. Das Spiel im Dunkelmodus spielen?</string>
     <string name="switch_to_bright">Sie befinden sich in einer hellen Umgebung. Spielen Sie das Spiel im hellen Modus?</string>
     <string name="light_mode_switching">Umschalten des Lichtmodus</string>
+    <string name="got_it">Ich habe es verstanden.</string>
+    <string name="done">Gut erledigt!.</string>
+    <string name="good">Gut gemacht.</string>
+    <string name="finish_game">Herzlichen Glückwunsch, dass Sie die Woche überstanden haben.</string>
+    <string name="complete_game">Sie haben alle Aufgaben der Woche erledigt. Arbeite weiter hart.</string>
+    <string name="incomplete_game">" Leider gibt es noch einige unerledigte Aufgaben. Versuch dein Bestes."</string>
 
 </resources>

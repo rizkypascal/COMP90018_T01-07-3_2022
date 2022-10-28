@@ -25,19 +25,26 @@
         android:id="@+id/personalScoresLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
         android:text="@string/select_faculty"
         android:textColor="#dddddd"
-        android:textSize="20sp">
+        android:textSize="20sp"
+        android:textStyle="bold">
 
     </TextView>
 
     <Spinner
+
         android:id="@+id/spinner1"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
+        android:layout_gravity="center"
         android:layout_height="40dp"
         android:dropDownVerticalOffset="45dp"
-        android:spinnerMode="dropdown" />
+        android:spinnerMode="dropdown"
+        style="@style/spinner_bg"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp" />
 
 
 
@@ -49,8 +56,10 @@
         android:id="@+id/worldScoresLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:text="@string/select_subject"
+        android:textStyle="bold"
 
         android:textColor="#dddddd"
         android:textSize="20sp">
@@ -58,10 +67,15 @@
 
     <Spinner
         android:id="@+id/spinner2"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
+        android:layout_gravity="center"
         android:layout_height="40dp"
         android:dropDownVerticalOffset="45dp"
-        android:spinnerMode="dropdown" />
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        style="@style/spinner_bg"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
