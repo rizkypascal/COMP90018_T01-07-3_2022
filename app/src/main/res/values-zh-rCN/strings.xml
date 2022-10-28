@@ -65,4 +65,8 @@
     <string name="password">密码</string>
     <string name="confirmed_password">确认密码</string>
     <string name="time_remaining_placeholder">距离游戏工具刷新的剩余时间\n</string>
+    <string name="switch_to_dark">你在阴暗环境中。切换到深夜模式？</string>
+    <string name="switch_to_bright">你在明亮环境中。切换到白昼模式？</string>
+    <string name="light_mode_switching">明暗模式切换</string>
+
 </resources>

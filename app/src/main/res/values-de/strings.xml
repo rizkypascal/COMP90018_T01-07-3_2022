@@ -64,4 +64,8 @@
     <string name="select_faculty">Bitte wählen Sie eine Fakultät aus</string>
     <string name="confirm">Bestätigen</string>
     <string name="time_remaining_placeholder">Verbleibende Zeit bis zur Aktualisierung der Spieltools\n</string>
+    <string name="switch_to_dark">Sie befinden sich in einer dunklen Umgebung. Das Spiel im Dunkelmodus spielen?</string>
+    <string name="switch_to_bright">Sie befinden sich in einer hellen Umgebung. Spielen Sie das Spiel im hellen Modus?</string>
+    <string name="light_mode_switching">Umschalten des Lichtmodus</string>
+
 </resources>

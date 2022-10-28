@@ -220,11 +220,11 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                         Configuration.UI_MODE_NIGHT_MASK;
         if ((nightModeFlags == Configuration.UI_MODE_NIGHT_NO) && lightValue<50) {
             askIfChangeToDark = true;
-            questionInfo = "It seems that you are in a dark place. Do you want to play the game in dark mode?";
+            questionInfo = getString(R.string.switch_to_dark);
         }
         if ((nightModeFlags == Configuration.UI_MODE_NIGHT_YES) && lightValue>=50) {
             askIfChangeToBright = true;
-            questionInfo = "It seems that you are in a bright place. Do you want to play the game in bright mode?";
+            questionInfo = getString(R.string.switch_to_bright);
         }
 
         // The dialog box only appear if the user is in dark place and his phone is in bright mode;
@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                 }
             };
 
-            builder.setMessage(questionInfo).setPositiveButton("Yes", dialogClickListener)
+            builder.setTitle(getString(R.string.light_mode_switching)).setMessage(questionInfo).setPositiveButton("Yes", dialogClickListener)
                     .setNegativeButton("No", dialogClickListener).show();
         }
     }

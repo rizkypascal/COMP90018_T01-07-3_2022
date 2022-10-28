@@ -64,4 +64,7 @@
     <string name="select_subject">コースを選択</string>
     <string name="confirm">確認</string>
     <string name="time_remaining_placeholder">ゲーム ツールが更新されるまでの残り時間\n</string>
+    <string name="switch_to_dark">あなたは暗い環境にいます。 ダークモードでゲームをプレイしますか?</string>
+    <string name="switch_to_bright">あなたは明るい環境にいます。 ブライト モードでゲームをプレイしますか？</string>
+    <string name="light_mode_switching">ライトモード切り替え</string>
 </resources>

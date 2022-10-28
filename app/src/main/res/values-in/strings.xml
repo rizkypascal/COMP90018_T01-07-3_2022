@@ -64,4 +64,7 @@
     <string name="select_faculty">Silakan pilih fakultas</string>
     <string name="confirm">Mengonfirmasi</string>
     <string name="time_remaining_placeholder">Sisa waktu hingga alat permainan dikembalikan\n</string>
+    <string name="switch_to_dark">Anda berada di lingkungan yang gelap. Mainkan game dalam mode gelap?</string>
+    <string name="switch_to_bright">Anda berada di lingkungan yang cerah. Mainkan game dalam mode terang?</string>
+    <string name="light_mode_switching">Peralihan Mode Cahaya</string>
 </resources>

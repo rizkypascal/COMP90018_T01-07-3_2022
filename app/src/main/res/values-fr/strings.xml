@@ -64,4 +64,7 @@
     <string name="select_faculty">Sélectionnez la faculté</string>
     <string name="select_subject">" Sélectionnez le sujet"</string>
     <string name="time_remaining_placeholder">"Temps restant avant l'actualisation des outils de jeu"\n</string>
+    <string name="switch_to_dark">Vous êtes dans un environnement sombre. Jouer au jeu en mode sombre ?</string>
+    <string name="switch_to_bright">Vous êtes dans un environnement lumineux. Jouer au jeu en mode lumineux ?</string>
+    <string name="light_mode_switching">Commutation du mode d\'éclairage</string>
 </resources>

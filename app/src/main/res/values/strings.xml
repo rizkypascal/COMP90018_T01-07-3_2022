@@ -75,6 +75,9 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="confirmed_password">Confirm Password</string>
+    <string name="switch_to_dark">You are in dark environment. Play the game in dark mode?</string>
+    <string name="switch_to_bright">You are in bright environment. Play the game in bright mode?</string>
+    <string name="light_mode_switching">Light Mode Switching</string>
     <string name="week1">Week 1</string>
     <string name="week2">Week 2</string>
     <string name="week3">Week 3</string>
