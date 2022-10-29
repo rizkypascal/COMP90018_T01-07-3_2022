@@ -26,6 +26,7 @@ public class Monster extends View {
     private Boolean alive;
     private Rect imageBounds;
     private Drawable monster;
+    private Integer moveDirection;
 
     public Monster(Context context, Integer posX, Integer posY,
                    Integer size, int score, MonsterType monsterType) {
@@ -35,6 +36,7 @@ public class Monster extends View {
         this.score = score;
         this.size = size;
         this.alive = true;
+        this.moveDirection = 1;
         this.imageBounds = new Rect(posX-size,posY-size,posX+size, posY+size);
         switch (monsterType){
             case EXAM:
@@ -77,8 +79,20 @@ public class Monster extends View {
         direct.add(-1);
         // take a random element from list as direction
         Random rand = new Random();
-        int nextX = Math.round(velocityX *
-                direct.get(rand.nextInt(direct.size()))) + posX;
+//        int nextX = Math.round(velocityX *
+//                direct.get(rand.nextInt(direct.size()))) + posX;
+        Integer nextX = Math.round(velocityX * this.moveDirection) + posX;
+        Log.d("Board", "move: " + this.posX);
+        if (nextX >= screenX - this.size/2){
+            this.moveDirection = -1;
+        }
+        else if (nextX <= this.size/2){
+            this.moveDirection = 1;
+            this.posX = this.size/2;
+        }
+        else{
+            this.posX = nextX;
+        }
         int nextY = Math.round(velocityY *
                 direct.get(rand.nextInt(direct.size()))) + posY;
 

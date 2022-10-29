@@ -54,8 +54,8 @@ public class GameContext extends View implements Runnable{
 
     private final int initialBoards = 100;
     private final int widthRatio = 5;
-    private final float changeY = 22f;
-    private final float gravityY = 10f;
+    private final float changeY = 16f;
+    private final float gravityY = 8f;
     private final int lowerthreshold;
     private final int screenX, screenY;
 
@@ -181,7 +181,7 @@ public class GameContext extends View implements Runnable{
         //draw all monsters
         for (Monster monster : monsters){
             if (monster.getAlive()){
-                monster.move(1f, 1f, screenY, screenX);
+                monster.move(2f, 1f, screenY, screenX);
                 monster.draw(canvas);
             }
         }
