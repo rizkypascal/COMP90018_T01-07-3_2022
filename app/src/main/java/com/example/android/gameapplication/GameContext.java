@@ -164,6 +164,7 @@ public class GameContext extends View implements Runnable{
             if (jumper.getPosY() >= lowerthreshold){
                 board.move(0f, (float) jumper.getBoardMove());
             }
+            board.move(5f,0f);
 
             if (board.getPosY() > 0 & board.getPosY() < screenY){
                 board.draw(canvas);
@@ -355,7 +356,7 @@ public class GameContext extends View implements Runnable{
         firework(screenX/2, screenY/5);
         activity.constraintLayout.addView(firework);
         // save record to database
-        save_record();
+        //save_record();
         // show dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         String msg = getResources().getString(R.string.finish_game);

@@ -25,6 +25,7 @@ public class Board extends View
     Rect imageBounds; // jumper image is drawn based on this rectangle size
     protected Integer screenSize;
     protected String boardType;
+    protected Integer seed;
 
     public Board(Context context, Integer posX, Integer posY , Integer width,Integer screenSize,Integer imageID) {
         /*
@@ -43,6 +44,12 @@ public class Board extends View
         this.imageBounds = new Rect(posX-width/2,posY-this.height/2,posX+width/2, posY+this.height/2);
         this.boardDrawable.setBounds(imageBounds);
         this.moveDirection = 1;
+
+        Random rand =new Random();
+
+        seed = rand.nextInt(10);
+
+        Log.d("RAND",""+ seed);
     }
 
     /**
@@ -52,11 +59,8 @@ public class Board extends View
      */
     public void move(Float velocityX, Float velocityY)
     {
-        Random rand =new Random(25);
-        int i;
-        i=rand.nextInt(10);
 
-        if (i < 3){
+        if (this.seed <= 3){
             Integer nextX = Math.round(velocityX * this.moveDirection) + posX;
             Log.d("Board", "move: " + this.posX);
             if (nextX >= screenSize - this.width/2){
