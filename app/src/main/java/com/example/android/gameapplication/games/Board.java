@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 
+import java.util.Random;
+
 /**
  * @author Runzhe Hua
  * @version 01/10/2021
@@ -50,19 +52,25 @@ public class Board extends View
      */
     public void move(Float velocityX, Float velocityY)
     {
-        Integer nextX = Math.round(velocityX * this.moveDirection) + posX;
-        Log.d("Board", "move: " + this.posX);
-        if (nextX >= screenSize - this.width/2){
-            this.moveDirection = -1;
-        }
-        else if (nextX <= this.width/2){
-            this.moveDirection = 1;
-            this.posX = this.width/2;
-        }
-        else{
-            this.posX = nextX;
-        }
+        Random rand =new Random(25);
+        int i;
+        i=rand.nextInt(10);
 
+        if (i < 3){
+            Integer nextX = Math.round(velocityX * this.moveDirection) + posX;
+            Log.d("Board", "move: " + this.posX);
+            if (nextX >= screenSize - this.width/2){
+                this.moveDirection = -1;
+            }
+            else if (nextX <= this.width/2){
+                this.moveDirection = 1;
+                this.posX = this.width/2;
+            }
+            else{
+                this.posX = nextX;
+            }
+
+        }
         this.posY += Math.round(velocityY);
     }
 
