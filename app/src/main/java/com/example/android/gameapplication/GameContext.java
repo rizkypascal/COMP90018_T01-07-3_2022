@@ -54,8 +54,8 @@ public class GameContext extends View implements Runnable{
 
     private final int initialBoards = 100;
     private final int widthRatio = 5;
-    private final float changeY = 22f;
-    private final float gravityY = 10f;
+    private final float changeY = 16f;
+    private final float gravityY = 8f;
     private final int lowerthreshold;
     private final int screenX, screenY;
 
@@ -164,6 +164,7 @@ public class GameContext extends View implements Runnable{
             if (jumper.getPosY() >= lowerthreshold){
                 board.move(0f, (float) jumper.getBoardMove());
             }
+            board.move(5f,0f);
 
             if (board.getPosY() > 0 & board.getPosY() < screenY){
                 board.draw(canvas);
@@ -181,7 +182,7 @@ public class GameContext extends View implements Runnable{
         //draw all monsters
         for (Monster monster : monsters){
             if (monster.getAlive()){
-                monster.move(1f, 1f, screenY, screenX);
+                monster.move(2f, 1f, screenY, screenX);
                 monster.draw(canvas);
             }
         }
@@ -355,7 +356,7 @@ public class GameContext extends View implements Runnable{
         firework(screenX/2, screenY/5);
         activity.constraintLayout.addView(firework);
         // save record to database
-        save_record();
+        //save_record();
         // show dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         String msg = getResources().getString(R.string.finish_game);

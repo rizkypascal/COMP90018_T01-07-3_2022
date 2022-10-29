@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 
+import java.util.Random;
+
 /**
  * @author Runzhe Hua
  * @version 01/10/2021
@@ -23,6 +25,7 @@ public class Board extends View
     Rect imageBounds; // jumper image is drawn based on this rectangle size
     protected Integer screenSize;
     protected String boardType;
+    protected Integer seed;
 
     public Board(Context context, Integer posX, Integer posY , Integer width,Integer screenSize,Integer imageID) {
         /*
@@ -41,6 +44,12 @@ public class Board extends View
         this.imageBounds = new Rect(posX-width/2,posY-this.height/2,posX+width/2, posY+this.height/2);
         this.boardDrawable.setBounds(imageBounds);
         this.moveDirection = 1;
+
+        Random rand =new Random();
+
+        seed = rand.nextInt(10);
+
+        Log.d("RAND",""+ seed);
     }
 
     /**
@@ -50,19 +59,22 @@ public class Board extends View
      */
     public void move(Float velocityX, Float velocityY)
     {
-        Integer nextX = Math.round(velocityX * this.moveDirection) + posX;
-        Log.d("Board", "move: " + this.posX);
-        if (nextX >= screenSize - this.width/2){
-            this.moveDirection = -1;
-        }
-        else if (nextX <= this.width/2){
-            this.moveDirection = 1;
-            this.posX = this.width/2;
-        }
-        else{
-            this.posX = nextX;
-        }
 
+        if (this.seed <= 3){
+            Integer nextX = Math.round(velocityX * this.moveDirection) + posX;
+            Log.d("Board", "move: " + this.posX);
+            if (nextX >= screenSize - this.width/2){
+                this.moveDirection = -1;
+            }
+            else if (nextX <= this.width/2){
+                this.moveDirection = 1;
+                this.posX = this.width/2;
+            }
+            else{
+                this.posX = nextX;
+            }
+
+        }
         this.posY += Math.round(velocityY);
     }
 
