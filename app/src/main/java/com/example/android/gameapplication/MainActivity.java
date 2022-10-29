@@ -6,8 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,10 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 
-
-import com.example.android.gameapplication.database.Database;
-
-import com.example.android.gameapplication.broadcaster.GameToolsBroadcastReceiver;
+import com.example.android.gameapplication.broadcastreceiver.GameToolsBroadcastReceiver;
 
 import com.example.android.gameapplication.game_tools.GameTools;
 import com.example.android.gameapplication.databinding.ActivityMainBinding;
