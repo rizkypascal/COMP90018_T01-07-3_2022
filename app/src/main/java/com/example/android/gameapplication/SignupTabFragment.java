@@ -58,7 +58,7 @@ public class SignupTabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.signup_tab_fragment,container,false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_signup_tab,container,false);
 //        signInNameValue = view.findViewById(R.id.signInNameValue);
 //        signInPasswordValue = view.findViewById(R.id.signInPasswordValue);
         signUpNameValue = view.findViewById(R.id.signUpNameValue);

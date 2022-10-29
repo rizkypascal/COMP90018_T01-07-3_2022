@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.android.gameapplication.game_tools.GameTools;
 
@@ -169,7 +168,7 @@ public class GameFragment extends Fragment {
         }
         else {
             PopToast(getString(R.string.play_as_user)+user_name);
-            SelectBeforeGameStart selectFragment = new SelectBeforeGameStart();
+            SelectBeforeGameStartFragment selectFragment = new SelectBeforeGameStartFragment();
             activity.getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.layout_fragment, selectFragment)

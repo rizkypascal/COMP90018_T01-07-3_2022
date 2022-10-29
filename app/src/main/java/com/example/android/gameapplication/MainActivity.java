@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 
-import com.example.android.gameapplication.broadcastreceiver.GameToolsBroadcastReceiver;
+import com.example.android.gameapplication.broadcast_receiver.GameToolsBroadcastReceiver;
 
 import com.example.android.gameapplication.game_tools.GameTools;
 import com.example.android.gameapplication.databinding.ActivityMainBinding;
@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
         setContentView(R.layout.activity_main);
 
         Log.d("[Subscription]", "main activity create");
-
 
         // Setting for Navigation Bar
         navView = findViewById(R.id.nav_view);

@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".broadcastreceiver.GameToolsBroadcastReceiver" >
+        <receiver android:name=".broadcast_receiver.GameToolsBroadcastReceiver" >
         </receiver>
     </application>
 

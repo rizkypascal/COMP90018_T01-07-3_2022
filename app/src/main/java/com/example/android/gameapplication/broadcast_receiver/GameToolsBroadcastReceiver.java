@@ -1,4 +1,4 @@
-package com.example.android.gameapplication.broadcastreceiver;
+package com.example.android.gameapplication.broadcast_receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -58,7 +58,7 @@ public class SelectWeekFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment__select_week, container, false);
+        View view = inflater.inflate(R.layout.fragment_select_week, container, false);
         ArrayList<Button> weeks = new ArrayList<>();
 
         weeks.add(view.findViewById(R.id.button1));
@@ -133,7 +133,7 @@ public class SelectWeekFragment extends Fragment {
 
         }
         else{
-            SelectBeforeGameStart selectsubject = new SelectBeforeGameStart();
+            SelectBeforeGameStartFragment selectsubject = new SelectBeforeGameStartFragment();
             activity.getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.layout_fragment, selectsubject)

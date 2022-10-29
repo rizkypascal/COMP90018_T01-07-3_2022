@@ -58,7 +58,7 @@ public class LoginTabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.log_in_tab_fragment,container,false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_log_in_tab,container,false);
 
         signInNameValue = view.findViewById(R.id.signInNameValue);
         signInPasswordValue = view.findViewById(R.id.signInPasswordValue);

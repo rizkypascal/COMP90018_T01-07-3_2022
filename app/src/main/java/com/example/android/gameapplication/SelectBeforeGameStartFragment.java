@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 
-public class SelectBeforeGameStart extends Fragment {
+public class SelectBeforeGameStartFragment extends Fragment {
 
 
 //    private Unbinder unbinder;
