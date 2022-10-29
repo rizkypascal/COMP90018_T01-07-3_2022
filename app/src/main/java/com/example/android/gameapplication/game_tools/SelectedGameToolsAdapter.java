@@ -74,7 +74,7 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
          * if this adapter called from MainActivity
          * it modifies the fragment for selecting game tools
          */
-        if(activityName == "MainActivity") {
+        if(activityName.equals("MainActivity")) {
             gameToolsParams.setQuantity(gameToolsParams.getQuantity() + 1);
             fragment.updateTextQuantity(gameToolsParams);
             fragment.setTextItemsFull(R.string.empty_string);
