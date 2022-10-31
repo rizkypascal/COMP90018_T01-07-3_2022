@@ -34,10 +34,7 @@ import butterknife.Unbinder;
 public class UserFragment extends Fragment {
 
 
-    //private Unbinder unbinder;
-    //@BindView(R.id.signInButton)
     Button signInButton;
-    //@BindView(R.id.signUpButton)
     Button signUpButton;
 
     private EditText signInNameValue, signInPasswordValue, signUpNameValue, signUpPasswordValue0, signUpPasswordValue1;
@@ -122,14 +119,12 @@ public class UserFragment extends Fragment {
 
         database = new Database();
 
-        //TODO: XUEQING may need to re-initiate
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        System.out.println("hello world");
     }
 
     //@OnClick(R.id.signInButton)
@@ -161,7 +156,6 @@ public class UserFragment extends Fragment {
         }
     }
 
-    //@OnClick(R.id.signUpButton)
     void SignUpButtonOnClick(){
         Log.d("UserFragment", "signUpButton clicked.");
         String username_temp = signUpNameValue.getText().toString();
@@ -179,7 +173,6 @@ public class UserFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        //unbinder.unbind();
     }
 
     boolean CheckLogin(String user_name, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
