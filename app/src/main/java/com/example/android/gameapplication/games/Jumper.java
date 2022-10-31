@@ -114,14 +114,6 @@ public class Jumper extends View
         invalidate();
     }
 
-    /**
-     *
-     * @param status enum Status
-     */
-    public void changeStatus(Status status)
-    {
-
-    }
 
     /**
      *

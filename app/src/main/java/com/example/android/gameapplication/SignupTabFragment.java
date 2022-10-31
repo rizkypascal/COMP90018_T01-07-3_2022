@@ -31,10 +31,7 @@ import java.util.Objects;
  * @desc
  */
 public class SignupTabFragment extends Fragment {
-    //private Unbinder unbinder;
-    //@BindView(R.id.signInButton)
     Button signInButton;
-    //@BindView(R.id.signUpButton)
     Button signUpButton;
 
     private EditText signInNameValue, signInPasswordValue, signUpNameValue, signUpPasswordValue0, signUpPasswordValue1;
@@ -59,12 +56,9 @@ public class SignupTabFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.signup_tab_fragment,container,false);
-//        signInNameValue = view.findViewById(R.id.signInNameValue);
-//        signInPasswordValue = view.findViewById(R.id.signInPasswordValue);
         signUpNameValue = view.findViewById(R.id.signUpNameValue);
         signUpPasswordValue0 = view.findViewById(R.id.signUpPasswordValue0);
         signUpPasswordValue1 = view.findViewById(R.id.signUpPasswordValue1);
-        //signInButton = (Button) view.findViewById(R.id.signInButton);
         database = new Database();
         signUpButton = (Button) view.findViewById(R.id.signUpButton);
 
@@ -75,7 +69,6 @@ public class SignupTabFragment extends Fragment {
                 SignUpButtonOnClick();
             }
         });
-        //unbinder = ButterKnife.bind(this, view);
         activity = (MainActivity) getActivity();
         context = activity.getApplicationContext();
         if (user_name!="") {
@@ -133,7 +126,6 @@ public class SignupTabFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        //unbinder.unbind();
     }
 
     boolean CheckLogin(String user_name, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
