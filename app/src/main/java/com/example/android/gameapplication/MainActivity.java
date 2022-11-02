@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 
-import com.example.android.gameapplication.broadcast_receiver.GameToolsBroadcastReceiver;
+import com.example.android.gameapplication.broadcast_receivers.GameToolsBroadcastReceiver;
 
 import com.example.android.gameapplication.game_tools.GameTools;
 import com.example.android.gameapplication.databinding.ActivityMainBinding;
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
                         userFragment.fragmentReceiveMsg(user_name);
                     }
                     else{
-                        UserFragmentAfterLogin userFragment = new UserFragmentAfterLogin();
+                        UserAfterLoginFragment userFragment = new UserAfterLoginFragment();
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.layout_fragment, userFragment)

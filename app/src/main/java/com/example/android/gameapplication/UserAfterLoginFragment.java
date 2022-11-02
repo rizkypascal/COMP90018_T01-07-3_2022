@@ -8,20 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.example.android.gameapplication.database.Database;
+
+import com.example.android.gameapplication.databases.Database;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.android.gameapplication.list_content.ListAdapter;
-import com.example.android.gameapplication.list_content.ListTuple;
+import com.example.android.gameapplication.list_contents.ListAdapter;
+import com.example.android.gameapplication.list_contents.ListTuple;
 
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 
 
-public class UserFragmentAfterLogin extends Fragment {
+public class UserAfterLoginFragment extends Fragment {
 
     private ListView listView;
     private TextView textLoginInfo, userRank;
@@ -45,10 +45,10 @@ public class UserFragmentAfterLogin extends Fragment {
 
     public void fragmentReceiveMsg(String msg) {
         if (msg.startsWith("Faculty")){
-            Log.d("UserFragmentAfterLogin", ": "+msg);
+            Log.d("UserAfterLoginFragment", ": "+msg);
         }
         else {
-            Log.d("UserFragmentAfterLogin", "receive msg: "+msg);
+            Log.d("UserAfterLoginFragment", "receive msg: "+msg);
             user_name = msg;
         }
     }

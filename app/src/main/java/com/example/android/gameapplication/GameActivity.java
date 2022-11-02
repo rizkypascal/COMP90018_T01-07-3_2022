@@ -14,30 +14,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
-import com.example.android.gameapplication.database.Database;
+import com.example.android.gameapplication.databases.Database;
 import com.example.android.gameapplication.game_tools.GameTools;
-import com.example.android.gameapplication.games.Board;
-import com.example.android.gameapplication.games.CollisionUtils;
-import com.example.android.gameapplication.games.Jumper;
-import com.example.android.gameapplication.games.StaticBoard;
-import com.example.android.gameapplication.sensors.OrientationMessage;
-import com.example.android.gameapplication.sensors.OrientationSensor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
 

@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.android.gameapplication.database.Database;
+import com.example.android.gameapplication.databases.Database;
 import com.example.android.gameapplication.game_tools.GameTools;
 
 import java.io.Serializable;

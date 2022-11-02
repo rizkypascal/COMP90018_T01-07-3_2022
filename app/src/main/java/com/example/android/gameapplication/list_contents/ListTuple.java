@@ -1,4 +1,4 @@
-package com.example.android.gameapplication.list_content;
+package com.example.android.gameapplication.list_contents;
 
 
 public class ListTuple {

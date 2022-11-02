@@ -1,4 +1,4 @@
-package com.example.android.gameapplication.placeholder;
+package com.example.android.gameapplication.placeholders;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.android.gameapplication.database.Database;
+import com.example.android.gameapplication.databases.Database;
 import com.example.android.gameapplication.games.Board;
 import com.example.android.gameapplication.games.BombEffect;
 import com.example.android.gameapplication.games.Bullet;

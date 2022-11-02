@@ -3,7 +3,6 @@ package com.example.android.gameapplication;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.android.gameapplication.database.Database;
+import com.example.android.gameapplication.databases.Database;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.UnsupportedEncodingException;
@@ -90,7 +89,7 @@ public class LoginTabFragment extends Fragment {
                 mp.start();
                 user_name = username_temp;
                 sendMessages.iAmMSG(user_name);
-                UserFragmentAfterLogin userFragment = new UserFragmentAfterLogin();
+                UserAfterLoginFragment userFragment = new UserAfterLoginFragment();
                 activity.getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.layout_fragment, userFragment)

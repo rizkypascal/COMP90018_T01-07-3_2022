@@ -1,14 +1,12 @@
-package com.example.android.gameapplication.database;
+package com.example.android.gameapplication.databases;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.android.gameapplication.*;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.*;
