@@ -21,6 +21,7 @@ import com.example.android.gameapplication.database.Database;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
@@ -31,10 +32,7 @@ import java.util.Objects;
  * @desc
  */
 public class SignupTabFragment extends Fragment {
-    //private Unbinder unbinder;
-    //@BindView(R.id.signInButton)
     Button signInButton;
-    //@BindView(R.id.signUpButton)
     Button signUpButton;
 
     private EditText signInNameValue, signInPasswordValue, signUpNameValue, signUpPasswordValue0, signUpPasswordValue1;
@@ -54,20 +52,15 @@ public class SignupTabFragment extends Fragment {
     ViewPager viewPager;
     float v = 0;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_signup_tab,container,false);
-//        signInNameValue = view.findViewById(R.id.signInNameValue);
-//        signInPasswordValue = view.findViewById(R.id.signInPasswordValue);
         signUpNameValue = view.findViewById(R.id.signUpNameValue);
         signUpPasswordValue0 = view.findViewById(R.id.signUpPasswordValue0);
         signUpPasswordValue1 = view.findViewById(R.id.signUpPasswordValue1);
-        //signInButton = (Button) view.findViewById(R.id.signInButton);
         database = new Database();
         signUpButton = (Button) view.findViewById(R.id.signUpButton);
-
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,15 +68,11 @@ public class SignupTabFragment extends Fragment {
                 SignUpButtonOnClick();
             }
         });
-        //unbinder = ButterKnife.bind(this, view);
         activity = (MainActivity) getActivity();
         context = activity.getApplicationContext();
         if (user_name!="") {
             textLoginInfo.setText(getString(R.string.sign_in_as)+" "+user_name);
         }
-
-
-        //TODO: XUEQING may need to re-initiate
         return view;
     }
 
@@ -115,7 +104,6 @@ public class SignupTabFragment extends Fragment {
         }
     }
 
-    //@OnClick(R.id.signUpButton)
     void SignUpButtonOnClick(){
         Log.d("UserFragment", "signUpButton clicked.");
         String username_temp = signUpNameValue.getText().toString();
@@ -133,11 +121,9 @@ public class SignupTabFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        //unbinder.unbind();
     }
 
     boolean CheckLogin(String user_name, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        Log.d("UserFragment", "print out username+password: "+user_name+" "+password);
         if (user_name.length()==0){
             PopToast(getString(R.string.username_empty));
             return false;
@@ -148,12 +134,10 @@ public class SignupTabFragment extends Fragment {
         }
         else{
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            messageDigest.update(password.getBytes("UTF-8"));
+            messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
             String encodePassword = byte2Hex(messageDigest.digest());
-            Log.d("password", encodePassword+" "+password);
             if (database.UsernameMatchPassword(user_name, password)) {
                 PopToast(getString(R.string.login_as)+user_name);
-                Log.d("UserFragment","password username matches");
                 return true;
             }
             PopToast(getString(R.string.something_wrong));
@@ -181,9 +165,8 @@ public class SignupTabFragment extends Fragment {
         else{
             try{
                 MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-                messageDigest.update(password0.getBytes("UTF-8"));
+                messageDigest.update(password0.getBytes(StandardCharsets.UTF_8));
                 String encodePassword = byte2Hex(messageDigest.digest());
-                Log.d("password", encodePassword+" "+password0);
                 if (database.CheckAddNewAccount(user_name, password0)) {
                     PopToast(getString(R.string.sign_up_successful));
                     return true;
@@ -191,9 +174,6 @@ public class SignupTabFragment extends Fragment {
                 PopToast(getString(R.string.username_exists));
                 return false;
             } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-                return false;
-            } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
                 return false;
             }
@@ -229,7 +209,6 @@ public class SignupTabFragment extends Fragment {
     }
 
     public void fragmentReceiveMsg(String msg) {
-        Log.d("UserFragment", "receive msg: "+msg);
         user_name = msg;
     }
 }

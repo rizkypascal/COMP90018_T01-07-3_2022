@@ -32,10 +32,8 @@ public class UnionFragment extends Fragment {
     }
 
     public void fragmentReceiveMsg(String msg) {
-        Log.d("UnionFragment", "receive msg: "+msg);
         user_name = msg;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

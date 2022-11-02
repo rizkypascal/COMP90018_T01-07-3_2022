@@ -73,4 +73,5 @@
     <string name="finish_game">Selamat telah berhasil melewati minggu ini.</string>
     <string name="complete_game">" Anda telah menyelesaikan semua tugas selama seminggu. Tetap bekerja keras."</string>
     <string name="incomplete_game">" Sayangnya, ada beberapa tugas yang belum selesai. Mencoba yang terbaik."</string>
+    <string name="choose_week">Pilih minggu</string>
 </resources>

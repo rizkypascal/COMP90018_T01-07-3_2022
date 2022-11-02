@@ -26,7 +26,7 @@ public class ListAdapter extends ArrayAdapter<ListTuple> {
         }
     }
 
-    private int resourceId;
+    private final int resourceId;
 
     public ListAdapter(Context context, int resource, List<ListTuple> objects) {
         super(context, resource, objects);

@@ -1,19 +1,13 @@
 package com.example.android.gameapplication;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Movie;
-import android.media.Image;
 import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.android.gameapplication.database.Database;
@@ -29,7 +23,6 @@ import com.example.android.gameapplication.games.Status;
 import com.example.android.gameapplication.games.Monster;
 import com.example.android.gameapplication.sensors.OrientationMessage;
 import com.example.android.gameapplication.sensors.OrientationSensor;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,29 +36,36 @@ import java.util.Random;
 
 import pl.droidsonroids.gif.GifDrawable;
 
+/**
+ * @author Yuhan Gu
+ * @desc control the game interaction and UI display
+ */
+
 public class GameContext extends View implements Runnable{
 
-    private OrientationSensor orientationSensor;
-    private GameActivity activity;
+    private final OrientationSensor orientationSensor;
+    private final GameActivity activity;
     private Thread thread;
     private boolean isPlaying = true;
     private boolean isExit, isComplete = false;
     private int score = 0;
 
+    private final int lowerthreshold;
+    private final int screenX, screenY, bulletsize;
     private final int initialBoards = 100;
     private final int widthRatio = 5;
-    private final float changeY = 16f;
-    private final float gravityY = 8f;
-    private final int lowerthreshold;
-    private final int screenX, screenY;
+    private final float changeY = 22f;
+    private final float gravityY = 10f;
+    private final float copterY = 2 * changeY;
+    private final float rocketY = 3 * changeY;
 
-    private ArrayList<Board> boards;
-    private Jumper jumper;
-    private ArrayList<Monster> monsters = new ArrayList<>();
-    private ArrayList<Bullet> bullets = new ArrayList<>();
+    private final ArrayList<Board> boards;
+    private final Jumper jumper;
+    private final ArrayList<Monster> monsters = new ArrayList<>();
+    private final ArrayList<Bullet> bullets = new ArrayList<>();
     private BombEffect bomb;
     private FireworkEffect firework;
-    private Database database;
+    private final Database database;
 
     public GameContext(GameActivity activity, int screenX, int screenY, Database database) {
         super(activity);
@@ -75,8 +75,9 @@ public class GameContext extends View implements Runnable{
         EventBus.getDefault().register(this);
 
         this.activity = activity;
-        this.screenX = screenX; //1440
-        this.screenY = screenY;   //3040
+        this.screenX = screenX;
+        this.screenY = screenY;
+        this.bulletsize = screenX/20;
         this.database = database;
         this.lowerthreshold = screenY * 9 / 10;
 
@@ -84,27 +85,20 @@ public class GameContext extends View implements Runnable{
         int jumperY = screenY/7;
         int size = screenX/10;
 
-        // database = new Database();
-
         // random generate the boards for full screen
         this.boards = random_generate(screenY, screenX);
 
-//        int initBoardX = boards.get(0).getPosX();
-//        int initBoardY = boards.get(0).getPosY();
-//        Log.i("generate","initLoc"+initBoardX+"Y"+initBoardY);
         this.jumper = new Jumper(getContext(),jumperX,jumperY, jumperX,gravityY,
                 screenX, R.drawable.jumperone);
 
         if (activity.monsterInfo != null){
             for (Object s : activity.monsterInfo){
-                // s type: hashmap
                 generate_monster((HashMap) s, size);
-                //Log.i("i","monsterInfo: " + s.getClass().getSimpleName());
             }
         }
 
+        //some monsters for tourist
         if (activity.subject == null){
-            //some monsters for tourist
             Monster monster = new Monster(getContext(), screenX/5, screenY/7,
                     size, 10,MonsterType.EXAM);
             this.monsters.add(monster);
@@ -129,16 +123,15 @@ public class GameContext extends View implements Runnable{
         switch (event.getAction())
         {
             case MotionEvent.ACTION_UP:
-                bullets.add(jumper.shoot(getContext(),70));
+                bullets.add(jumper.shoot(getContext(),bulletsize));
                 break;
             case MotionEvent.ACTION_DOWN:
-                bullets.add(jumper.shoot(getContext(),70));
+                bullets.add(jumper.shoot(getContext(),bulletsize));
                 break;
             case MotionEvent.ACTION_MOVE:
-                bullets.add(jumper.shoot(getContext(),70));
+                bullets.add(jumper.shoot(getContext(),bulletsize));
                 break;
         }
-
         return false;
     }
 
@@ -149,18 +142,17 @@ public class GameContext extends View implements Runnable{
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         //all boards move down if the jumper's status is stayStill
         for (Board board : boards){
             // boards move down if jumper above 1/2 screen
             if (jumper.getStatus() == Status.stayStill){
                 board.move(0f, (float) jumper.getBoardMove());
             } else if (jumper.getStatus() == Status.onCopter){
-                board.move(0f,50f);
+                board.move(0f,copterY);
             } else if (jumper.getStatus() == Status.onRocket){
-                board.move(0f,80f);
+                board.move(0f,rocketY);
             }
-            // boards move ip if jumper below 9/10 screen
+            // boards move up if jumper below 9/10 screen
             if (jumper.getPosY() >= lowerthreshold){
                 board.move(0f, (float) jumper.getBoardMove());
             }
@@ -177,7 +169,6 @@ public class GameContext extends View implements Runnable{
         if(bomb != null){
             bomb.draw(canvas);
         }
-
 
         //draw all monsters
         for (Monster monster : monsters){
@@ -250,7 +241,6 @@ public class GameContext extends View implements Runnable{
 
 
             newboards.add(bar);
-//            Log.i(String.valueOf(bar.y),String.valueOf(bar.height));
             y -= bar.getBoardHeight()*3*(random.nextInt(2)+1);
             i += 1;
             lastX = bar.getPosX();
@@ -281,12 +271,8 @@ public class GameContext extends View implements Runnable{
         y = info.get("y");
         s = info.get("score");
         score = (int) ((int) 1 * Float.valueOf(s.toString()));
-        Log.i("i", "score: "+ score);
-
         posX = (int) ((int) screenX * Float.valueOf(x.toString()));
         posY = (int) ((int) screenY * Float.valueOf(y.toString()));
-//        Log.i("i", "x: "+ posX +" " + posY);
-//        Log.i("i", "type: "+ type.getClass().getSimpleName());
 
         Monster monster = new Monster(getContext(), posX, screenY - posY, size, (int) score,type);
         this.monsters.add(monster);
@@ -295,7 +281,6 @@ public class GameContext extends View implements Runnable{
     private void save_record(){
         database.updateScore(activity.getSubject(), activity.getWeek(),
                 activity.getUser_name(), String.valueOf(score));
-        //Log.i("i",""+activity.subject+ activity.week+activity.user_name+ String.valueOf(score));
     }
 
     private void checkStatus(){
@@ -319,9 +304,6 @@ public class GameContext extends View implements Runnable{
         }
     }
 
-    private void update () {
-
-    }
 
     /**
      * @author Changwen Li
@@ -330,7 +312,6 @@ public class GameContext extends View implements Runnable{
      * */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void orientationUpdate(OrientationMessage OrientationEvent) { // place to get sensor value from orientation
-        //Log.d("[Subscription]" , "Orientations: " + String.valueOf(OrientationEvent.getOrientations()[2]));
         Float moveX = 50*OrientationEvent.getOrientations()[2];
         jumper.move(moveX,gravityY,screenY/2, lowerthreshold);
 
@@ -356,7 +337,7 @@ public class GameContext extends View implements Runnable{
         firework(screenX/2, screenY/5);
         activity.constraintLayout.addView(firework);
         // save record to database
-        //save_record();
+        save_record();
         // show dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         String msg = getResources().getString(R.string.finish_game);
@@ -439,7 +420,7 @@ public class GameContext extends View implements Runnable{
         };
         cd.start();
 
-        bomb = new BombEffect(getContext(), 550, 1000,400, R.drawable.bomb);
+        bomb = new BombEffect(getContext(), screenX/3, screenY/3,screenX/3, R.drawable.bomb);
     }
 
     /**
@@ -457,7 +438,6 @@ public class GameContext extends View implements Runnable{
 
             @Override
             public void onFinish() {
-                Log.i("i","finish");
                 firework = null;
             }
         };
@@ -466,9 +446,4 @@ public class GameContext extends View implements Runnable{
                 screenX/2, R.drawable.fireworks);
     }
 
-    private void PopToast(String text, int duration){
-        Toast toast = Toast.makeText(getContext(), null, Toast.LENGTH_LONG);
-        toast.setText(text);
-        toast.show();
-    }
 }

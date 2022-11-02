@@ -30,7 +30,7 @@ public class SelectWeekFragment extends Fragment {
     private String mParam2;
     private GameFragment.SendMessages sendMessages;
     private String subject = "";
-    private Database database = new Database();
+    private final Database database = new Database();
 
     public SelectWeekFragment() {
         // Required empty public constructor
@@ -48,10 +48,8 @@ public class SelectWeekFragment extends Fragment {
 
     public void fragmentReceiveMsg(String msg) {
         if (msg.startsWith("Subject")){
-            Log.d("Fragment_selectWeek", " "+msg);
             subject = msg.substring(8);
         }
-
     }
 
 
@@ -83,17 +81,13 @@ public class SelectWeekFragment extends Fragment {
     }
 
     private void weekSelect(ArrayList<Button> weeks) {
-
-
-
         for (int i = 0; i < weeks.size(); i++) {
             final int finalI = i;
             weeks.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String msg = "week" + (finalI + 1);
-                    //Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
-                    play_Game(msg);
+                    playGame(msg);
                 }
             });
         }
@@ -101,10 +95,9 @@ public class SelectWeekFragment extends Fragment {
     }
 
 
-    public void play_Game(String week) {
+    public void playGame(String week) {
 
         if (!Objects.equals(subject, "")) {
-
             Bundle bundle = new Bundle();
             bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
             bundle.putString("week", week);
@@ -115,7 +108,6 @@ public class SelectWeekFragment extends Fragment {
             Intent intent = new Intent(context, GameActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
-
 
             // storing game tools quantity locally after game started
 

@@ -23,8 +23,8 @@ import java.util.List;
  */
 public class GameToolsAdapter extends RecyclerView.Adapter<GameToolsAdapter.ViewHolder> implements GameToolsClickListener {
 
-    private List<GameTools> gameTools;
-    private GameToolsFragment fragment;
+    private final List<GameTools> gameTools;
+    private final GameToolsFragment fragment;
 
     public GameToolsAdapter(List<GameTools> gameTools, GameToolsFragment fragment){
         this.gameTools = gameTools;

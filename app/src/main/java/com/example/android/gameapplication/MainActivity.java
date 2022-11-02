@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
 
         setContentView(R.layout.activity_main);
 
-        Log.d("[Subscription]", "main activity create");
-
         // Setting for Navigation Bar
         navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -116,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     }
 
     // Click listener for choosing different navigation tabs
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -176,23 +174,15 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
     // receive data form fragments
     @Override
     public void iAmMSG(String msg) {
-
-        if (msg.startsWith("Subject:")){
-            Log.d("UserFragment", ": "+msg);
-        }
-        else {
-            Log.d("UserFragment", "receive msg: "+msg);
+        if (!msg.startsWith("Subject:")){
             user_name = msg;
         }
     }
 
     @Override
     protected void onDestroy() {
-//        EventBus.getDefault().unregister(this);
-//        lightSensor.disableSensor();
         super.onDestroy();
     }
-
 
     /**
      * @author Changwen Li
@@ -207,8 +197,6 @@ public class MainActivity extends AppCompatActivity implements GameFragment.Send
         boolean askIfChangeToDark = false;
         boolean askIfChangeToBright = false;
         String questionInfo = "";
-        Log.d("[Subscription]", "Light: " + lightValue);
-        // Log.d("[Subscription]", String.valueOf(AppCompatDelegate.getDefaultNightMode()));
         int nightModeFlags =
                 this.getResources().getConfiguration().uiMode &
                         Configuration.UI_MODE_NIGHT_MASK;

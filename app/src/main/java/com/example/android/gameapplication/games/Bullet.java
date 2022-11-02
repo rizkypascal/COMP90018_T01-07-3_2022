@@ -17,9 +17,9 @@ public class Bullet extends View
 {
     private Integer posX;
     private Integer posY;
-    private Integer size;
-    private Drawable bullet;
-    private Rect imageBounds;
+    private final Integer size;
+    private final Drawable bullet;
+    private final Rect imageBounds;
 
     public Bullet(Context context,Integer posX, Integer posY, Integer size) {
         super(context);

@@ -23,8 +23,6 @@ import java.util.Objects;
 
 public class UserFragmentAfterLogin extends Fragment {
 
-
-    //    private Unbinder unbinder;
     private ListView listView;
     private TextView textLoginInfo, userRank;
     private Database db;
@@ -55,8 +53,6 @@ public class UserFragmentAfterLogin extends Fragment {
         }
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,18 +62,14 @@ public class UserFragmentAfterLogin extends Fragment {
         context = activity.getApplicationContext();
         db = new Database();
 
-        System.out.println("testoncreat");
-
         ListAdapter adapterPersonalScore = new ListAdapter(getActivity(), R.layout.list_instance, getPersonalScores(user_name));
         listView = view.findViewById(R.id.personal_score_list_view);
 
         listView.setAdapter(adapterPersonalScore);
         listView.setItemChecked(0,true);
 
-
         if (!Objects.equals(user_name, "")) {
             textLoginInfo.setText(getString(R.string.sign_in_as)+" "+user_name);
-
         }
 
         return view;
@@ -87,17 +79,10 @@ public class UserFragmentAfterLogin extends Fragment {
         return  getPersonalScoresFromDB(user_name);
     }
 
-
-
-
-
-
     private ArrayList<ListTuple> getPersonalScoresFromDB(String user_name) {
 
         ArrayList<ListTuple> personalScoreList = new ArrayList<>();
-        //String[] subjectList = {getString(R.string.subject1),getString(R.string.subject2)};
         String[] subjectList = {"subject1","subject2"};
-        //subjectList = new String[]{"subject1"};
 
         String grade;
 
@@ -128,15 +113,6 @@ public class UserFragmentAfterLogin extends Fragment {
             String sc = String.format(Locale.ENGLISH,"%4d",subjectScore);
             personalScoreList.add(new ListTuple(convertSubjectName(subjectName), sc  + " /100     " + grade ));
         }
-
-
-
-
-        //Log.d("UserFragmentAfterLogin", "getPersonalScoresFromDB: "+ user_name + " " + subject);
-        //for (int i = 1; i < 13; i++) {
-
-        //    personalScoreList.add(new ListTuple("week"+i, db.getScore(  subjectList[1],  "week"+i, user_name)));
-        //}
 
         return  personalScoreList;
     }

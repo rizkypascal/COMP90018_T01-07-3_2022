@@ -11,7 +11,7 @@ public class LightMessage {
         return mLight;
     }
 
-    private float[] mLight;
+    private final float[] mLight;
 
     /**
      * @author Changwen Li

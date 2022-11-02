@@ -10,7 +10,7 @@ import android.util.Log;
 import org.greenrobot.eventbus.EventBus;
 
 public class LightSensor implements SensorEventListener{
-    private Context mContext;
+    private final Context mContext;
     private SensorManager mSensorManager;
     private Sensor lightSensor;
     private float[] mLight;
@@ -72,7 +72,7 @@ public class LightSensor implements SensorEventListener{
             mLight = event.values;
 
         if (mLight != null) {
-            Log.v("[onSensorChanged]", ": Light lux" + String.valueOf(mLight[0]));
+            Log.v("[onSensorChanged]", ": Light lux" + mLight[0]);
             EventBus.getDefault().post(new LightMessage(mLight));
         }
     }

@@ -13,7 +13,7 @@ import org.greenrobot.eventbus.EventBus;
 
 public class OrientationSensor implements SensorEventListener {
 
-    private Context mContext;
+    private final Context mContext;
     private SensorManager mSensorManager;
     private Sensor accelerometer;
     private Sensor magnetometer;
@@ -86,14 +86,12 @@ public class OrientationSensor implements SensorEventListener {
             mGeomagnetic = event.values;
 
         if (mGravity != null && mGeomagnetic != null) {
-            float R[] = new float[9];
-            float I[] = new float[9];
+            float[] R = new float[9];
+            float[] I = new float[9];
             boolean success = SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic);
             if (success) {
-                float orientation[] = new float[3];
+                float[] orientation = new float[3];
                 SensorManager.getOrientation(R, orientation);
-//                Log.v("[onSensorChanged]", "Orientation values" + String.valueOf(orientation[0])+" "+
-//                        String.valueOf(orientation[1])+" "+String.valueOf(orientation[2]));
                 EventBus.getDefault().post(new OrientationMessage(orientation));
             }
         }

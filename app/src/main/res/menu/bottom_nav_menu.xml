@@ -16,9 +16,4 @@
         android:icon="@drawable/ic_in_game_tools"
         android:title="@string/game_tools" />
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_recycler"-->
-<!--        android:icon="@drawable/recycler_view_demo"-->
-<!--        android:title="Recycler View0" />-->
-
 </menu>

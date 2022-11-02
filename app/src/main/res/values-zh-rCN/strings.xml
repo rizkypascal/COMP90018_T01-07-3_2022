@@ -74,5 +74,6 @@
     <string name="finish_game">祝贺你度过了这一周。</string>
     <string name="complete_game">你已经完成了这一周的所有任务。 继续努力。</string>
     <string name="incomplete_game">不幸的是，还有一些未完成的任务。 尽你所能。</string>
+    <string name="choose_week">选择周</string>
 
 </resources>

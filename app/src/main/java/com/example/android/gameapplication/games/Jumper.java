@@ -29,13 +29,13 @@ public class Jumper extends View
     private Integer score; // can be stored in game activity instead
     private Boolean alive;
     private Integer radius; // size of jumper
-    private Integer radiusDefault;
+    private final Integer radiusDefault;
     private GifDrawable jumper; // image resource
     Rect imageBounds; // jumper image is drawn based on this rectangle size
     private Integer screenSize;
     private Integer boardMove;
     private Float flyMove;
-    private GifDrawable jumperDefault;
+    private final GifDrawable jumperDefault;
 
     public Jumper(Context context, Integer posX, Integer posY, Integer radius, Float speedY, Integer screenSize, Integer imageID) {
         super(context);
@@ -114,14 +114,6 @@ public class Jumper extends View
         invalidate();
     }
 
-    /**
-     *
-     * @param status enum Status
-     */
-    public void changeStatus(Status status)
-    {
-
-    }
 
     /**
      *

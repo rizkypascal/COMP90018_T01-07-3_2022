@@ -23,14 +23,12 @@ import java.util.Objects;
 
 public class SelectBeforeGameStartFragment extends Fragment {
 
-
-//    private Unbinder unbinder;
     private MainActivity activity;
     private Context context;
 
     private TextView textLoginInfo, userRank;
-    private String[] drapdown_Array1 = {"Arts", "Business and Economics", "Engineering and Information Technology"};
-    private String[] drapdown_Array2 = {""};
+    private final String[] dropdown_Array1 = {"Arts", "Business and Economics", "Engineering and Information Technology"};
+    private final String[] dropdown_Array2 = {""};
     private Spinner sp1;
     private Spinner sp2;
     private boolean isSpinnerFirst = true;
@@ -54,11 +52,7 @@ public class SelectBeforeGameStartFragment extends Fragment {
     }
 
     public void fragmentReceiveMsg(String msg) {
-        if (msg.startsWith("Faculty")){
-            Log.d("UserFragment", ": "+msg);
-        }
-        else {
-            Log.d("UserFragment", "receive msg: "+msg);
+        if (!msg.startsWith("Faculty")){
             user_name = msg;
         }
     }
@@ -95,9 +89,7 @@ public class SelectBeforeGameStartFragment extends Fragment {
                     }
                     activity.setSubject(this_subject);
                     subject = "Subject:" + this_subject;
-                    //Toast.makeText(getActivity(), "Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                    //sendMessages.iAmMSG("Faculty "+ sp1.getSelectedItem().toString() + " Subject "+sp2.getSelectedItem().toString());
-                    play_Game();
+                    playGame();
                 }else{
                     Toast.makeText(getActivity(), "Please select a subject", Toast.LENGTH_SHORT).show();
                 }
@@ -120,9 +112,8 @@ public class SelectBeforeGameStartFragment extends Fragment {
 
 
     private void initSpinner(View view) {
-
-        selAdapter1 = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, new ArrayList<String>(Arrays.asList(drapdown_Array1)));
-        selAdapter2 = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, new ArrayList<String>(Arrays.asList(drapdown_Array2)));
+        selAdapter1 = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, new ArrayList<String>(Arrays.asList(dropdown_Array1)));
+        selAdapter2 = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, new ArrayList<String>(Arrays.asList(dropdown_Array2)));
 
         selAdapter1.setDropDownViewResource(R.layout.dropdown);
         selAdapter2.setDropDownViewResource(R.layout.dropdown);
@@ -186,9 +177,6 @@ public class SelectBeforeGameStartFragment extends Fragment {
                     sp2.setSelection(i-1);
                 }
             }
-
-
-            //Toast.makeText(getActivity(), "You have selected " + adapterView.getItemAtPosition(i), Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -197,8 +185,7 @@ public class SelectBeforeGameStartFragment extends Fragment {
         }
     }
 
-    public void play_Game() {
-
+    public void playGame() {
         SelectWeekFragment selectWeek = new SelectWeekFragment();
         activity.getSupportFragmentManager()
                 .beginTransaction()
@@ -206,27 +193,6 @@ public class SelectBeforeGameStartFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
         selectWeek.fragmentReceiveMsg(subject);
-
-        //Bundle bundle = new Bundle();
-        //bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
-        //Intent intent = new Intent(context, GameActivity.class);
-        //intent.putExtras(bundle);
-        //startActivity(intent);
-
-
-        // storing game tools quantity locally after game started
-
-        //SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-        //SharedPreferences.Editor editor = sharedPref.edit();
-//
-        //if(activity.getGameTools() != null){
-        //    for(GameTools gameTools : activity.getGameTools()){
-        //        editor.putInt(gameTools.getCodeName(), gameTools.getQuantity());
-        //    }
-        //    editor.apply();
-        //}
-        ////reset the selected game tools box on the GameToolsFragment
-        //activity.setSelectedGameTools(new ArrayList<GameTools>());
     }
 
 

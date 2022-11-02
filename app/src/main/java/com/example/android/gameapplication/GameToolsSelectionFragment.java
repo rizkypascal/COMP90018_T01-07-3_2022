@@ -107,12 +107,7 @@ public class GameToolsSelectionFragment extends Fragment {
         gameTools.add(new FlyItems(GameToolsName.COPTER, sharedPref.getInt(String.valueOf(R.string.copter), toolDefaultQuantity), helicopter));
         gameTools.add(new FlyItems(GameToolsName.ROCKET, sharedPref.getInt(String.valueOf(R.string.rocket), toolDefaultQuantity), rocket));
         gameTools.add(new ClearMonsters(clearMonster,sharedPref.getInt(String.valueOf(R.string.clear_monsters), toolDefaultQuantity)));
-        /**
-         * uncomment code below to have unlimited tool quantity (start from 5)
-         */
-//        gameTools.add(new FlyItems(GameToolsName.COPTER, 5, helicopter));
-//        gameTools.add(new FlyItems(GameToolsName.ROCKET, 5,rocket));
-//        gameTools.add(new ClearMonsters(clearMonster, 5));
+
         return gameTools;
     }
 
@@ -209,7 +204,6 @@ public class GameToolsSelectionFragment extends Fragment {
         super.onSaveInstanceState(outState);
         /* If onDestroyView() is called first, we can use the previously savedState but we can't call saveState() anymore */
         /* If onSaveInstanceState() is called first, we don't have savedState, so we need to call saveState() */
-        /* => (?:) operator inevitable! */
         outState.putBundle("fulltext", (savedState != null) ? savedState : saveState());
     }
 }

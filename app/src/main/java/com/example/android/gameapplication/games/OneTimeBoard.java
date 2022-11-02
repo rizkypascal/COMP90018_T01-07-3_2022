@@ -32,7 +32,6 @@ public class OneTimeBoard extends Board{
         }
         else{
             this.setVisibility(View.GONE);
-            Log.d("OneTimeBoard", "isbroken: ");
         }
     }
 }

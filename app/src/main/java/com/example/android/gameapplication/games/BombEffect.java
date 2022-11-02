@@ -17,11 +17,11 @@ import pl.droidsonroids.gif.GifDrawable;
  */
 public class BombEffect extends View
 {
-    private Integer posX;
-    private Integer posY;
-    private Integer size;
-    private GifDrawable bomb;
-    private Rect imageBounds;
+    private final Integer posX;
+    private final Integer posY;
+    private final Integer size;
+    private final GifDrawable bomb;
+    private final Rect imageBounds;
 
     /*
      * @param context the context of the game

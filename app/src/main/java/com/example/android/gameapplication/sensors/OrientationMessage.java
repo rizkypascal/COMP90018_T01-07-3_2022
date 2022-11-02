@@ -10,7 +10,7 @@ public class OrientationMessage {
         return orientations;
     }
 
-    private float[] orientations;
+    private final float[] orientations;
 
     /**
      * @author Changwen Li

@@ -14,12 +14,12 @@ import pl.droidsonroids.gif.GifDrawable;
  */
 public class FireworkEffect extends View {
 
-    private Integer posX;
-    private Integer posY;
-    private Integer size;
+    private final Integer posX;
+    private final Integer posY;
+    private final Integer size;
     private boolean finish;
-    private GifDrawable bomb;
-    private Rect imageBounds;
+    private final GifDrawable bomb;
+    private final Rect imageBounds;
 
     public FireworkEffect(Context context, Integer posX, Integer posY, Integer size, Integer imageID) {
         super(context);

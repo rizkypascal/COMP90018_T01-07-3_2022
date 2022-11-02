@@ -21,6 +21,7 @@ import com.example.android.gameapplication.database.Database;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
@@ -32,10 +33,7 @@ import java.util.Objects;
  */
 public class LoginTabFragment extends Fragment {
 
-    //private Unbinder unbinder;
-    //@BindView(R.id.signInButton)
     Button signInButton;
-    //@BindView(R.id.signUpButton)
     Button signUpButton;
 
     private EditText signInNameValue, signInPasswordValue, signUpNameValue, signUpPasswordValue0, signUpPasswordValue1;
@@ -79,17 +77,12 @@ public class LoginTabFragment extends Fragment {
         if (user_name!="") {
             textLoginInfo.setText(getString(R.string.sign_in_as)+" "+user_name);
         }
-
-
-        //TODO: XUEQING may need to re-initiate
         return view;
     }
 
     void SignInButtonOnClick(){
-        Log.d("UserFragment", "signInButton clicked.");
         String username_temp = signInNameValue.getText().toString();
         String password_temp = signInPasswordValue.getText().toString();
-
 
         try {
             if (CheckLogin(username_temp, password_temp)){
@@ -115,10 +108,7 @@ public class LoginTabFragment extends Fragment {
         }
     }
 
-
-
     void SignUpButtonOnClick(){
-        Log.d("UserFragment", "signUpButton clicked.");
         String username_temp = signUpNameValue.getText().toString();
         String password_temp0 = signUpPasswordValue0.getText().toString();
         String password_temp1 = signUpPasswordValue1.getText().toString();
@@ -134,12 +124,10 @@ public class LoginTabFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        //unbinder.unbind();
     }
 
 
     boolean CheckLogin(String user_name, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        Log.d("UserFragment", "print out username+password: "+user_name+" "+password);
         if (user_name.length()==0){
             PopToast(getString(R.string.username_empty));
             return false;
@@ -150,16 +138,11 @@ public class LoginTabFragment extends Fragment {
         }
         else{
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            messageDigest.update(password.getBytes("UTF-8"));
+            messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
             String encodePassword = byte2Hex(messageDigest.digest());
-            Log.d("password", encodePassword+" "+password);
 
             if (database.UsernameMatchPassword(user_name, password)) {
                 PopToast(getString(R.string.login_as)+ " " +user_name);
-                Log.d("UserFragment","password username matches");
-
-                Log.i("i","database:" + database.getMonsters("subject1","week1"));
-
                 return true;
             }
             PopToast(getString(R.string.something_wrong));
@@ -187,9 +170,8 @@ public class LoginTabFragment extends Fragment {
         else{
             try{
                 MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-                messageDigest.update(password0.getBytes("UTF-8"));
+                messageDigest.update(password0.getBytes(StandardCharsets.UTF_8));
                 String encodePassword = byte2Hex(messageDigest.digest());
-                Log.d("password", encodePassword+" "+password0);
                 if (database.CheckAddNewAccount(user_name, password0)) {
                     PopToast(getString(R.string.sign_up_successful));
                     return true;
@@ -197,9 +179,6 @@ public class LoginTabFragment extends Fragment {
                 PopToast(getString(R.string.username_exists));
                 return false;
             } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-                return false;
-            } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
                 return false;
             }
@@ -235,7 +214,6 @@ public class LoginTabFragment extends Fragment {
     }
 
     public void fragmentReceiveMsg(String msg) {
-        Log.d("UserFragment", "receive msg: "+msg);
         user_name = msg;
     }
 }

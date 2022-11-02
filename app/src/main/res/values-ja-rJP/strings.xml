@@ -73,4 +73,5 @@
     <string name="finish_game">1 週間の達成おめでとうございます。</string>
     <string name="complete_game">今週のすべてのタスクを完了しました。 頑張ってください。</string>
     <string name="incomplete_game">" 残念ながら、未完成のタスクがいくつかあります。 あなたのベストを尽くす。"</string>
+    <string name="choose_week">週を選択</string>
 </resources>

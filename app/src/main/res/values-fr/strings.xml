@@ -73,4 +73,5 @@
     <string name="finish_game">Félicitations pour avoir passé la semaine.</string>
     <string name="complete_game">Vous avez terminé toutes les tâches de la semaine. Continue à travailler dur.</string>
     <string name="incomplete_game">" Malheureusement, il reste des tâches inachevées. Fais de ton mieux."</string>
+    <string name="choose_week">choisir la semaine</string>
 </resources>

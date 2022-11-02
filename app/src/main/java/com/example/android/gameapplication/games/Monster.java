@@ -22,9 +22,9 @@ public class Monster extends View {
     private Integer posX;
     private Integer posY;
     private Integer size;
-    private int score;
+    private final int score;
     private Boolean alive;
-    private Rect imageBounds;
+    private final Rect imageBounds;
     private Drawable monster;
     private Integer moveDirection;
 
@@ -79,10 +79,7 @@ public class Monster extends View {
         direct.add(-1);
         // take a random element from list as direction
         Random rand = new Random();
-//        int nextX = Math.round(velocityX *
-//                direct.get(rand.nextInt(direct.size()))) + posX;
         Integer nextX = Math.round(velocityX * this.moveDirection) + posX;
-        Log.d("Board", "move: " + this.posX);
         if (nextX >= screenX - this.size/2){
             this.moveDirection = -1;
         }

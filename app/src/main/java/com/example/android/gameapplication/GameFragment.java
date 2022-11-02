@@ -56,7 +56,6 @@ public class GameFragment extends Fragment {
     }
 
     public void fragmentReceiveMsg(String msg) {
-        Log.d("GameFragment", "receive msg: "+msg);
         user_name = msg;
     }
 
@@ -126,7 +125,6 @@ public class GameFragment extends Fragment {
             user_name = "";
             String message = getString(R.string.not_logged_in);
             textLoginInfo.setText(message);
-            Log.d("GameFragment", "send msg: "+user_name);
             sendMessages.iAmMSG(user_name);
             signInUpButton.setText("SIGN IN/UP");
         }
@@ -139,8 +137,6 @@ public class GameFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
             userFragment.fragmentReceiveMsg(user_name);
-            Log.d("GameFragment", "send msg: "+user_name);
-
             activity.navView.getMenu().findItem(R.id.navigation_user).setChecked(true);
         }
 
@@ -164,7 +160,7 @@ public class GameFragment extends Fragment {
     public void playGame(){
         if (user_name=="") {
             PopToast(getString(R.string.play_as_tourist));
-            play_Game_();
+            startGame();
         }
         else {
             PopToast(getString(R.string.play_as_user)+user_name);
@@ -180,7 +176,7 @@ public class GameFragment extends Fragment {
         //play_Game_();
     }
 
-    public void play_Game_() {
+    public void startGame() {
         Bundle bundle = new Bundle();
         bundle.putSerializable("gameTools", (Serializable) activity.getSelectedGameToolsGameTools());
         bundle.putString("week", "");

@@ -24,10 +24,10 @@ import java.util.List;
  */
 public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameToolsAdapter.ViewHolder> implements GameToolsClickListener {
 
-    private List<GameTools> gameTools;
-    private GameToolsSelectionFragment fragment;
-    private String activityName;
-    private GameContext gameContext;
+    private final List<GameTools> gameTools;
+    private final GameToolsSelectionFragment fragment;
+    private final String activityName;
+    private final GameContext gameContext;
 
     public SelectedGameToolsAdapter(List<GameTools> gameTools, GameToolsSelectionFragment fragment, String activityName, GameContext gameContext){
         this.gameTools = gameTools;
@@ -74,7 +74,7 @@ public class SelectedGameToolsAdapter extends RecyclerView.Adapter<SelectedGameT
          * if this adapter called from MainActivity
          * it modifies the fragment for selecting game tools
          */
-        if(activityName == "MainActivity") {
+        if(activityName.equals("MainActivity")) {
             gameToolsParams.setQuantity(gameToolsParams.getQuantity() + 1);
             fragment.updateTextQuantity(gameToolsParams);
             fragment.setTextItemsFull(R.string.empty_string);

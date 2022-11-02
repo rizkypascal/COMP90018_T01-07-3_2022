@@ -20,10 +20,7 @@ public final class CollisionUtils {
         Integer boardPosY = board.getPosY() - board.getBoardHeight()/2;
         if (jumperPosY >= boardPosY - 10 && jumperPosY <= boardPosY + 10)
         {
-            if(jumperPosX>= board.getXLeft() && jumperPosX<= board.getXRight())
-            {
-                return true;
-            }
+            return jumperPosX >= board.getXLeft() && jumperPosX <= board.getXRight();
         }
         return false;
 
@@ -41,10 +38,6 @@ public final class CollisionUtils {
         Integer bulletPosY = bullet.getPosY();
         Integer monsterPosX = monster.getPosX();
         Integer monsterPosY = monster.getPosY()+monster.getSize();
-        if(bulletPosX>=monsterPosX-monster.getSize()/2 && bulletPosX<=monsterPosX+monster.getSize() && bulletPosY<=monsterPosY)
-        {
-            return true;
-        }
-        return false;
+        return bulletPosX >= monsterPosX - monster.getSize() / 2 && bulletPosX <= monsterPosX + monster.getSize() && bulletPosY <= monsterPosY;
     }
 }

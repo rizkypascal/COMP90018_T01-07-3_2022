@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
  * @desc
  */
 public class LoginAdapter extends FragmentPagerAdapter {
-    private Context context;
+    private final Context context;
     int totalTabs;
 
     public LoginAdapter(@NonNull FragmentManager fm, Context context, int totalTabs) {

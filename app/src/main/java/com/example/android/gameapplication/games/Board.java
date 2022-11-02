@@ -48,8 +48,6 @@ public class Board extends View
         Random rand =new Random();
 
         seed = rand.nextInt(10);
-
-        Log.d("RAND",""+ seed);
     }
 
     /**
@@ -62,7 +60,6 @@ public class Board extends View
 
         if (this.seed <= 3){
             Integer nextX = Math.round(velocityX * this.moveDirection) + posX;
-            Log.d("Board", "move: " + this.posX);
             if (nextX >= screenSize - this.width/2){
                 this.moveDirection = -1;
             }
