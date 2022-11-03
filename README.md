@@ -203,10 +203,10 @@ Unimelb H1 Hopper is designed to boost the motivation and confidence level of th
 ```
 
 ## Technologies
-Backend and Database: Firebase
-Frontend: Native Android (Java)
-Sensors: Accelerometer, Magnetometer, Light
-Additions: Localization (6 languages), Data Encryption (SHA256), Background Job Scheduler (AlarmManager & BroadcastReceiver)
+* Backend and Database: Firebase
+* Frontend: Native Android (Java)
+* Sensors: Accelerometer, Magnetometer, Light
+* Additions: Localization (6 languages), Data Encryption (SHA256), Background Job Scheduler (AlarmManager & BroadcastReceiver)
 
 ## Project Build and Run
 ### Build Specifications
